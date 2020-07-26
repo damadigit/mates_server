@@ -1,0 +1,22 @@
+{
+  "name": "finadmin_server",
+  "version": "1.0.0",
+  "author": "Dama Digital",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon index.js",
+    "start": "node index.js",
+    "deploy": "now",
+    "deployProd": "now --public && now alias && now rm workcon_profile --safe --yes"
+  },
+  "dependencies": {
+    "apollo-server-koa": "^2.15.0",
+    "graphql": "^15.1.0",
+    "graphql-compose": "^7.18.1",
+    "graphql-compose-mongoose": "^7.3.8",
+    "mongoose": "^5.9.20",
+    "pluralize": "^8.0.0"
+  }
+}
