@@ -39,6 +39,7 @@ const FamilySchema = new Schema({
         remark: String,
         history: [String]
     },
+    photo: String,
     profession: String,
     isIncomeProvider: Boolean,
     monthlyIncome: Number,
@@ -86,7 +87,7 @@ const PlaceSchema = new Schema ({
 
 const StorySchema = new Schema ( {
     story: String,
-    governmentApproved: String,
+    governmentApproved: Boolean,
     photos: [FileSchema],
     files: [FileSchema]
 

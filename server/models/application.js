@@ -23,6 +23,7 @@ const ApplicationSchema = new Schema({
         remark: String,
         history: [String]
     },
+    photo: String,
     currentEducation: EducationSchema,
     previousEducations: [EducationSchema],
     families: [FamilySchema],

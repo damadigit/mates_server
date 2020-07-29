@@ -15,6 +15,7 @@ const RecordSchema = new Schema({
         default: true
     },
     name: String,
+    photo: String,
     fatherName: String,
     gFatherName: String,
     gender: String,
