@@ -1,8 +1,9 @@
 
 
+
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {EducationSchema, FamilySchema,StorySchema,PlaceSchema} = require('./schemas.js')
+const {EducationSchema, FamilySchema,StorySchema,PlaceSchema, AddressSchema} = require('./schemas.js')
 
 
 
@@ -18,6 +19,7 @@ const ApplicationSchema = new Schema({
     gFatherName: String,
     gender: String,
     birthDate: Date,
+    placeOfBirth: String,
     health: {
         generalCondition: String,
         remark: String,
@@ -30,6 +32,7 @@ const ApplicationSchema = new Schema({
     place: PlaceSchema,
     story: StorySchema,
     date: Date,
+    address: AddressSchema,
     status: {
         type: String,
         enum: ['Pending', 'Waiting', 'Rejected', 'Accepted'],

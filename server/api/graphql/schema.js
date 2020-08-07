@@ -22,7 +22,7 @@ const {ModelTC:ApplicationModelTC} = buildSchema('Application',schemaComposer)
 // );
 
 buildSchema('Record',schemaComposer);
-
+buildSchema('Visit',schemaComposer);
 
 
 // require('./schemas/profile')

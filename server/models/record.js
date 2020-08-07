@@ -2,7 +2,7 @@
 
 
 const mongoose = require('mongoose');
-const {EducationSchema, FamilySchema,StorySchema,PlaceSchema, SponsorSchema} = require('./schemas.js')
+const {EducationSchema, FamilySchema,StorySchema,PlaceSchema, SponsorSchema,AddressSchema} = require('./schemas.js')
 const Schema = mongoose.Schema;
 
 
@@ -10,6 +10,7 @@ const Schema = mongoose.Schema;
 const RecordSchema = new Schema({
     application: { type: Schema.Types.ObjectId, ref: 'Application' },
     registrationId: String,
+    homeId: String,
     official: {
         type:Boolean,
         default: true
@@ -20,6 +21,8 @@ const RecordSchema = new Schema({
     gFatherName: String,
     gender: String,
     birthDate: Date,
+    placeOfBirth: String,
+    address: AddressSchema,
     health: {
         generalCondition: String,
         remark: String,
@@ -44,13 +47,15 @@ const RecordSchema = new Schema({
 
 
 RecordSchema.pre('save', async function(next){
-    console.log(this)
+   // console.log(this)
+    this.homeId = this.registrationId
    if(this.application) {
        const Application = await mongoose.model('Application').findById(this.application);
        Application.status= "Accepted";
        await Application.save();
-       next()
+
    }
+   next()
 })
 
 module.exports = mongoose.model('Record', RecordSchema);

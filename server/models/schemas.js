@@ -11,6 +11,11 @@ const AddressSchema =  new Schema({
     woreda: String,
     houseNumber: String,
     locationText: String,
+    gps:{
+        latitude: String,
+        longitude: String,
+    },
+    photo:String,
     remark: String
 })
 const EducationSchema = new Schema({
@@ -22,7 +27,8 @@ const EducationSchema = new Schema({
     yearStart: Number,
     yearEnd: Number,
     active: Boolean,
-    distance: String
+    distance: Number,
+    fee: Number
 
 });
 
@@ -41,11 +47,14 @@ const FamilySchema = new Schema({
     },
     photo: String,
     profession: String,
+    workPlace: String,
     isIncomeProvider: Boolean,
     monthlyIncome: Number,
     currentEducation: EducationSchema,
     livingTogether: Boolean,
-    address: AddressSchema
+    notAlive: Boolean,
+    address: AddressSchema,
+
 
 
 })
@@ -80,17 +89,22 @@ const PlaceSchema = new Schema ({
         name: String,
         available: Boolean
     }],
-    photos: [FileSchema],
+    photo: String,
     remark: String,
 
 })
 
 const StorySchema = new Schema ( {
     story: String,
+    dream: String,
+    hobby: String,
     governmentApproved: Boolean,
     photos: [FileSchema],
     files: [FileSchema]
 
 })
 
-module.exports = {EducationSchema, FamilySchema,PlaceSchema,AddressSchema,StorySchema,SponsorSchema}
+
+
+
+module.exports = {EducationSchema, FamilySchema,PlaceSchema,AddressSchema,StorySchema,SponsorSchema, FileSchema}

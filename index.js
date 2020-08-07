@@ -3,7 +3,7 @@ const Koa = require('koa');
 const mongoose = require('mongoose');
 const { ApolloServer, gql } = require('apollo-server-koa');
 //console.log(process.env.MONGOLAB_URI)
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb+srv://finado:finadodo1!@cluster0.oufcv.mongodb.net/finadmin?retryWrites=true&w=majority', //'mongodb://127.0.0.1:27017/finadmin_db', //'mongodb://dama:yageruaga1!@ds237373.mlab.com:37373/yageruaga',
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://127.0.0.1:27017/finadmin_db', // 'mongodb+srv://finado:finadodo1!@cluster0.oufcv.mongodb.net/finadmin?retryWrites=true&w=majority', //'mongodb://127.0.0.1:27017/finadmin_db', //'mongodb://dama:yageruaga1!@ds237373.mlab.com:37373/yageruaga',
     { useNewUrlParser: true } );
 
 mongoose.connection.once('open', () => {
