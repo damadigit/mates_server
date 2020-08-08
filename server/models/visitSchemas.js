@@ -21,6 +21,8 @@ const ExpenseSchema = new Schema ( {
         {
         name: String,
 
+            remark:String,
+            lastFee: Number,
            fee: Number,
 
             usage: Number
@@ -31,6 +33,7 @@ const ExpenseSchema = new Schema ( {
         {
             name: String,
             usage: Number,
+            unit: String,
 
             unitPrice: Number,
 
