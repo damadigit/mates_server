@@ -21,6 +21,7 @@ const AddressSchema =  new Schema({
 const EducationSchema = new Schema({
     level: String,
     schoolName: String,
+    status: String,
     schoolType: String,
     isDistance: Boolean,
     grade: Number,
@@ -53,6 +54,11 @@ const FamilySchema = new Schema({
     currentEducation: EducationSchema,
     livingTogether: Boolean,
     notAlive: Boolean,
+    isFinadoContact:Boolean,
+    bankAccount: {
+        bankName:String,
+        accountNumber:String
+    },
     address: AddressSchema,
 
 
