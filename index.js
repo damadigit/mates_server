@@ -18,7 +18,7 @@ require('./server/models')();
 const port =  process.env.PORT || 40018;
 const schema = require('./server/api/graphql/schema');
 async function StartServer() {
-    const server = new ApolloServer({schema, introspection: true});
+    const server = new ApolloServer({schema,  playground: true, introspection: true});
 
     const app = new Koa();
 
