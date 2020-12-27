@@ -2,27 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/overtime.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/team.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/teamOrganizeRequest.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/user.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/finadmin_server.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/graphql/defaultSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/defaultSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/graphql/mongooseQL.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/mongooseQL.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/member.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/record.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/schemas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/schemas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/visit.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/visitSchemas.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,38 +75,60 @@
       <workItem from="1608621138408" duration="386000" />
       <workItem from="1608621735158" duration="20525000" />
       <workItem from="1608776426052" duration="9429000" />
-      <workItem from="1608900081705" duration="11656000" />
+      <workItem from="1608900081705" duration="13880000" />
     </task>
+    <task id="LOCAL-00001" summary="init-deploy">
+      <created>1609068186113</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1609068186113</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="init-deploy" />
+    <option name="LAST_COMMIT_MESSAGE" value="init-deploy" />
   </component>
   <component name="WindowStateProjectService">
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604224671850">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.690@0.0.1280.690" timestamp="1604224671850" />
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1609068184803">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1609068184803" />
     <state x="422" y="100" key="FileChooserDialogImpl" timestamp="1604225442315">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="422" y="100" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1604225442315" />
-    <state width="1236" height="166" key="GridCell.Tab.0.bottom" timestamp="1609067903103">
+    <state width="1236" height="166" key="GridCell.Tab.0.bottom" timestamp="1609068577695">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609067903103" />
-    <state width="1236" height="166" key="GridCell.Tab.0.center" timestamp="1609067903103">
+    <state width="1236" height="166" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609068577695" />
+    <state width="1236" height="166" key="GridCell.Tab.0.center" timestamp="1609068577695">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609067903103" />
-    <state width="1236" height="166" key="GridCell.Tab.0.left" timestamp="1609067903103">
+    <state width="1236" height="166" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609068577695" />
+    <state width="1236" height="166" key="GridCell.Tab.0.left" timestamp="1609068577695">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609067903103" />
-    <state width="1236" height="166" key="GridCell.Tab.0.right" timestamp="1609067903103">
+    <state width="1236" height="166" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609068577695" />
+    <state width="1236" height="166" key="GridCell.Tab.0.right" timestamp="1609068577695">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609067903103" />
+    <state width="1236" height="166" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609068577695" />
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1609068194685">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1609068194685" />
     <state x="439" y="247" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1609067899583">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
