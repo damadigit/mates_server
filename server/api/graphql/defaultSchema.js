@@ -1,5 +1,7 @@
+
+
 const mongoose = require('mongoose');
-module.exports = function (name) {
+module.exports = function (model) {
     const Model = mongoose.model(model);
    return composeWithMongoose(Model);
     //return ModelTC

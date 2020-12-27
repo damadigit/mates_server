@@ -1,28 +1,98 @@
-const { schemaComposer } = require('graphql-compose');
+
+const mongoose = require('mongoose');
+const { schemaComposer, toInputObjectType } = require('graphql-compose');
  const buildSchema  = require('./mongooseQL')
 
-const {ModelTC:ApplicationModelTC} = buildSchema('Application',schemaComposer)
+const {ModelTC:MemberModelTC} = buildSchema('Member',schemaComposer)
+const {ModelTC:TeamModelTC} = buildSchema('Team',schemaComposer)
+const  {ModelTC:UserModelTC} = buildSchema('User',schemaComposer)
+ buildSchema('OvertimeReport',schemaComposer)
+buildSchema('TeamOrganiseRequest',schemaComposer)
+MemberModelTC.addFields( {
+     fullName:
+         { // set `id` name for new field
+          type: 'String', // set type MongoID
+          resolve: (source) => `${source.name} ${source.fatherName}`, // write resolve method, which returns _id value for the current field
+          projection: { name: true, fatherName: true }, // add information, that need to reques _id field from database, when you request `id` field
+         },
+     age:
+         { // set `id` name for new field
+          type: 'Int', // set type MongoID
+          resolve: (source) => new Date().getFullYear() - new Date(source.birthDate).getFullYear(), // write resolve method, which returns _id value for the current field
+          projection: { birthDate: true }, // add information, that need to reques _id field from database, when you request `id` field
+         }
 
-// ApplicationModelTC.addFields( {
-//      fullName:
-//          { // set `id` name for new field
-//           type: 'String', // set type MongoID
-//           resolve: (source) => `${source.name} ${source.fatherName}`, // write resolve method, which returns _id value for the current field
-//           projection: { name: true, fatherName: true }, // add information, that need to reques _id field from database, when you request `id` field
-//          },
-//      age:
-//          { // set `id` name for new field
-//           type: 'Int', // set type MongoID
-//           resolve: (source) => new Date().getFullYear() - new Date(source.birthDate).getFullYear(), // write resolve method, which returns _id value for the current field
-//           projection: { birthDate: true }, // add information, that need to reques _id field from database, when you request `id` field
-//          }
-//
-//     }
-//
-// );
+    }
 
-buildSchema('Record',schemaComposer);
-buildSchema('Visit',schemaComposer);
+);
+
+
+
+TeamModelTC.setResolver('findMany', TeamModelTC.getResolver('findMany')
+    .addFilterArg({
+        name: 'codesIn',
+        type: '[String]',
+        query: (query, value, resolveParams) => {
+
+            query.code = {$in:value}
+        },
+    }) )
+
+
+const LoginInputTC = schemaComposer.createObjectTC({
+    name: 'UserLoginInput',
+    fields: {
+        userName: 'String!',
+        password: 'String!'
+    }
+});
+
+const LoggedInTC = schemaComposer.createObjectTC({
+        name: 'LoggedInData',
+        fields: {
+            token: 'String!',
+        }
+    }
+)
+
+
+UserModelTC.addResolver({
+    name: `login`,
+    kind: 'mutation',
+    type: LoggedInTC,
+    args: {input:toInputObjectType(LoginInputTC)},
+   // args: toInputObjectType(LoginInputTC),
+    resolve: async ({ source, args, context, info }) => {
+        // const user = await User.findOne(args.record).exec();
+        // if (!user) user = await User.create(args.record);
+        // console.log(args)
+        const User = mongoose.model("User")
+        const user = await User.findOne({userName:args.input.userName, password:args.input.password}).exec();
+       if(user!==null){
+           return {
+               token:user.token
+           }
+       }
+       else throw (new Error("Invalid Credentials"))
+    },
+});
+
+// OvertimeReportTC.addResolver({
+//     name:'getSummery',
+//     kind: 'query',
+//     type:
+// })
+
+
+schemaComposer.Query.addFields({
+    [`teams`]: TeamModelTC.getResolver('findMany'),
+})
+schemaComposer.Mutation.addFields({
+    [`login`]: UserModelTC.getResolver('login'),
+})
+
+// buildSchema('Record',schemaComposer);
+// buildSchema('Visit',schemaComposer);
 
 
 // require('./schemas/profile')

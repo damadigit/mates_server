@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/overtime.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/team.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/teamOrganizeRequest.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/finadmin_server.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/graphql/defaultSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/defaultSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/graphql/mongooseQL.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/mongooseQL.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/application.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/member.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/record.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/schemas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/schemas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/visit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/visitSchemas.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1jgPk1ss7JoAxaysYhwYuf2MTr3" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mates-ui" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="C:/Program Files/nodejs/node" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
+    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="" />
+      <created>1604222901766</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604222901766</updated>
+      <workItem from="1604222903705" duration="4086000" />
+      <workItem from="1604803568856" duration="3107000" />
+      <workItem from="1605115230656" duration="11000" />
+      <workItem from="1608515419716" duration="157000" />
+      <workItem from="1608515737855" duration="88000" />
+      <workItem from="1608515855982" duration="19000" />
+      <workItem from="1608620196806" duration="9000" />
+      <workItem from="1608620463124" duration="27000" />
+      <workItem from="1608620790981" duration="229000" />
+      <workItem from="1608621079752" duration="9000" />
+      <workItem from="1608621138408" duration="386000" />
+      <workItem from="1608621735158" duration="20525000" />
+      <workItem from="1608776426052" duration="9429000" />
+      <workItem from="1608900081705" duration="11656000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604224671850">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.690@0.0.1280.690" timestamp="1604224671850" />
+    <state x="422" y="100" key="FileChooserDialogImpl" timestamp="1604225442315">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="422" y="100" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1604225442315" />
+    <state width="1236" height="166" key="GridCell.Tab.0.bottom" timestamp="1609067903103">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state width="1236" height="166" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609067903103" />
+    <state width="1236" height="166" key="GridCell.Tab.0.center" timestamp="1609067903103">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state width="1236" height="166" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609067903103" />
+    <state width="1236" height="166" key="GridCell.Tab.0.left" timestamp="1609067903103">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state width="1236" height="166" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609067903103" />
+    <state width="1236" height="166" key="GridCell.Tab.0.right" timestamp="1609067903103">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state width="1236" height="166" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609067903103" />
+    <state x="439" y="247" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1609067899583">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="439" y="247" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.690@0.0.1280.690" timestamp="1609067899583" />
+  </component>
+</project>

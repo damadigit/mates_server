@@ -111,6 +111,20 @@ const StorySchema = new Schema ( {
 })
 
 
+const OvertimeRecordSchema = new Schema ( {
+    member: {
+        id: String,
+        fullName: String,
+        mateId:String,
+    },
+    afterWork: Number,
+    night:Number,
+    sunday: Number,
+    hollyDay: Number,
+    other: Number,
+    totalPayHours: Number,
+    temp:{}
 
+})
 
-module.exports = {EducationSchema, FamilySchema,PlaceSchema,AddressSchema,StorySchema,SponsorSchema, FileSchema}
+module.exports = {EducationSchema, FamilySchema,PlaceSchema,AddressSchema,StorySchema,SponsorSchema, FileSchema,OvertimeRecordSchema}

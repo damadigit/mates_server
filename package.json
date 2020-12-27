@@ -1,5 +1,5 @@
 {
-  "name": "finadmin_server",
+  "name": "mates_server",
   "version": "1.0.0",
   "author": "Dama Digital",
   "main": "index.js",
@@ -12,10 +12,15 @@
     "deployProd": "now --public && now alias && now rm workcon_profile --safe --yes"
   },
   "dependencies": {
+    "@koa/cors": "^3.1.0",
     "apollo-server-koa": "^2.15.0",
     "graphql": "^15.1.0",
     "graphql-compose": "^7.18.1",
     "graphql-compose-mongoose": "^7.3.8",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^10.0.0",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
     "mongoose": "^5.9.20",
     "pluralize": "^8.0.0"
   }

@@ -10,6 +10,7 @@ module.exports = function(name,schemaComposer ) {
 
 
     const Model = mongoose.model(name);
+
    const ModelTC= composeWithMongoose(Model);
 
 
@@ -42,12 +43,13 @@ module.exports = function(name,schemaComposer ) {
     }
     );
 
+
     schemaComposer.Query.addFields({
-        [name]: ModelTC.getResolver('findById'),
+        [name.toLowerCase()]: ModelTC.getResolver('findById'),
         [`byIds${name}`]: ModelTC.getResolver('findByIds'),
         [`one${name}`]: ModelTC.getResolver('findOne'),
-        [`all${pluralize(name)}`]: ModelTC.getResolver('findMany'),
-        [`_all${pluralize(name)}Meta`]: ModelTC.getResolver('allMeta'),
+        [`${pluralize(name).toLowerCase()}`]: ModelTC.getResolver('findMany'),
+        [`_${pluralize(name).toLowerCase()}Meta`]: ModelTC.getResolver('allMeta'),
         [`count${name}`]: ModelTC.getResolver('count'),
         [`connection${name}`]: ModelTC.getResolver('connection'),
         [`pagination${name}`]: ModelTC.getResolver('pagination'),
