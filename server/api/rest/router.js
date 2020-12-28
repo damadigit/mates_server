@@ -17,10 +17,12 @@ router.get('/otSummery', async(ctx, res) => {
         .map((record, id) => ({
             id,
             member: record[0].member,
-            afterWork: _.sumBy(record, 'afterWork'),
-            sunday: _.sumBy(record, 'sunday'),
-            night: _.sumBy(record, 'night'),
-            hollyDay: _.sumBy(record, 'hollyDay'),
+            mateId:record[0].member.mateId,
+            ["OT.afterWork"]: _.sumBy(record, 'afterWork'),
+            ["OT.sunday"]: _.sumBy(record, 'sunday'),
+            ["OT.night"]: _.sumBy(record, 'night'),
+            ["OT.hollyDay"]: _.sumBy(record, 'hollyDay'),
+            ["OT.other"]: _.sumBy(record, 'other'),
             totalPayHours: _.sumBy(record, 'totalPayHours'),
             children: record.length > 1 ? record : null
         }))
