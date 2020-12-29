@@ -126,5 +126,15 @@ const OvertimeRecordSchema = new Schema ( {
     temp:{}
 
 })
+const AbsenceRecordSchema = new Schema ( {
+    member: {
+        id: String,
+        fullName: String,
+        mateId:String,
+    },
+    leaveDays : Number,
+    absentDays: Number,
+    temp:{}
 
-module.exports = {EducationSchema, FamilySchema,PlaceSchema,AddressSchema,StorySchema,SponsorSchema, FileSchema,OvertimeRecordSchema}
+})
+module.exports = {EducationSchema, FamilySchema,PlaceSchema,AddressSchema,StorySchema,SponsorSchema, FileSchema,OvertimeRecordSchema, AbsenceRecordSchema}
