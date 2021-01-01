@@ -4,10 +4,11 @@ const bodyParser = require('koa-bodyparser');
 const cors = require('@koa/cors');
 const router = require('./server/api/rest/router');
 const mongoose = require('mongoose');
+require('dotenv').config()
 mongoose.Promise = global.Promise;
 const { ApolloServer, gql } = require('apollo-server-koa');
 //console.log(process.env.MONGOLAB_URI)
-mongoose.connect('mongodb+srv://admin:YXqFoshXrbND7pAy@cluster0.vx1t6.mongodb.net/mates_deweto?retryWrites=true&w=majority', //  'mongodb://127.0.0.1:27017/mates_db', //process.env.MONGOLAB_URI || 'mongodb+srv://finado:finadodo1!@cluster0.oufcv.mongodb.net/finadmin?retryWrites=true&w=majority', //'mongodb://127.0.0.1:27017/finadmin_db', //'mongodb://dama:yageruaga1!@ds237373.mlab.com:37373/yageruaga',
+mongoose.connect( process.env.MONGODB_URI  || 'mongodb://127.0.0.1:27017/mates_db',
     { useNewUrlParser: true } );
 
 mongoose.connection.once('open', () => {

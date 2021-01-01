@@ -4,6 +4,8 @@ const Schema = mongoose.Schema;
 const TeamOrganiseRequestSchema = new Schema({
    team: String,
    dateSubmitted: Date,
+   dateModified: Date,
+   dateCreated: Date,
    submittedBy: String,
    periodType: String,
    periodStartDate: Date,
@@ -20,7 +22,8 @@ const TeamOrganiseRequestSchema = new Schema({
       name:String,
       fatherName:String,
       gFatherName:String,
-      currentTeam: String
+      currentTeam: String,
+      oldTeam: String
 
    }]
 })
