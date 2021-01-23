@@ -8,7 +8,7 @@ require('dotenv').config()
 mongoose.Promise = global.Promise;
 const { ApolloServer, gql } = require('apollo-server-koa');
 //console.log(process.env.MONGOLAB_URI)
-mongoose.connect( process.env.MONGODB_URI  || 'mongodb://127.0.0.1:27017/mates_db',
+mongoose.connect( 'mongodb+srv://admin:YXqFoshXrbND7pAy@cluster0.vx1t6.mongodb.net/mates_deweto?retryWrites=true&w=majority' ,//process.env.MONGODB_URI  || 'mongodb://127.0.0.1:27017/mates_db',
     { useNewUrlParser: true } );
 
 mongoose.connection.once('open', () => {

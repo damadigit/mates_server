@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.env.production" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/overtimeDetail.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="Ot Detail 1">
+      <change afterPath="$PROJECT_DIR$/server/models/absenceDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/rest/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/overtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/overtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/member.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/schemas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/schemas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +33,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/models" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -51,6 +49,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Project\Workcon\mates\mates_server\server\models" />
       <recent name="D:\Project\Workcon\mates\mates_server" />
     </key>
   </component>
@@ -101,7 +100,7 @@
       <workItem from="1609376562120" duration="11148000" />
       <workItem from="1609908526721" duration="260000" />
       <workItem from="1610759949224" duration="15131000" />
-      <workItem from="1611333749893" duration="2235000" />
+      <workItem from="1611333749893" duration="7435000" />
     </task>
     <task id="LOCAL-00001" summary="init-deploy">
       <created>1609068186113</created>
@@ -152,7 +151,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609479009155</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Ot Detail 1">
+      <created>1611372974198</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1611372974198</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -167,41 +173,42 @@
     <MESSAGE value="ot-api-corrected" />
     <MESSAGE value="leave-absence added" />
     <MESSAGE value="added month input" />
-    <option name="LAST_COMMIT_MESSAGE" value="added month input" />
+    <MESSAGE value="Ot Detail 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ot Detail 1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604224671850">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.690@0.0.1280.690" timestamp="1604224671850" />
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1609479007295">
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1611376459617">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1609479007295" />
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1611376459617" />
     <state x="422" y="100" key="FileChooserDialogImpl" timestamp="1604225442315">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="422" y="100" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1604225442315" />
-    <state width="1236" height="166" key="GridCell.Tab.0.bottom" timestamp="1611366855956">
+    <state width="1236" height="166" key="GridCell.Tab.0.bottom" timestamp="1611375209755">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1611366855956" />
-    <state width="1236" height="166" key="GridCell.Tab.0.center" timestamp="1611366855955">
+    <state width="1236" height="166" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1611375209755" />
+    <state width="1236" height="166" key="GridCell.Tab.0.center" timestamp="1611375209755">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1611366855955" />
-    <state width="1236" height="166" key="GridCell.Tab.0.left" timestamp="1611366855955">
+    <state width="1236" height="166" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1611375209755" />
+    <state width="1236" height="166" key="GridCell.Tab.0.left" timestamp="1611375209755">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1611366855955" />
-    <state width="1236" height="166" key="GridCell.Tab.0.right" timestamp="1611366855956">
+    <state width="1236" height="166" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1611375209755" />
+    <state width="1236" height="166" key="GridCell.Tab.0.right" timestamp="1611375209755">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1611366855956" />
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1609479010736">
+    <state width="1236" height="166" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1611375209755" />
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1611373122747">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1609479010736" />
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1611373122747" />
     <state x="94" y="94" width="1093" height="502" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1609473022355">
       <screen x="0" y="0" width="1280" height="690" />
     </state>

@@ -10,7 +10,7 @@ const  {ModelTC:UserModelTC} = buildSchema('User',schemaComposer)
 buildSchema('AbsenceReport',schemaComposer)
 buildSchema('TeamOrganiseRequest',schemaComposer)
 buildSchema('OvertimeDetail',schemaComposer)
-
+buildSchema('AbsenceDetail',schemaComposer)
 MemberModelTC.addFields( {
      fullName:
          { // set `id` name for new field
