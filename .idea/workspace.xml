@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env.production" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/overtimeDetail.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api/rest/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/teamOrganizeRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/teamOrganizeRequest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/overtime.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/overtime.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/schemas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/schemas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +35,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mates-ui" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -46,6 +48,11 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Project\Workcon\mates\mates_server" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
@@ -91,7 +98,10 @@
       <workItem from="1609375953035" duration="38000" />
       <workItem from="1609376107342" duration="37000" />
       <workItem from="1609376483836" duration="56000" />
-      <workItem from="1609376562120" duration="7561000" />
+      <workItem from="1609376562120" duration="11148000" />
+      <workItem from="1609908526721" duration="260000" />
+      <workItem from="1610759949224" duration="15131000" />
+      <workItem from="1611333749893" duration="2235000" />
     </task>
     <task id="LOCAL-00001" summary="init-deploy">
       <created>1609068186113</created>
@@ -135,7 +145,14 @@
       <option name="project" value="LOCAL" />
       <updated>1609212632211</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="added month input">
+      <created>1609479009155</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1609479009155</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -149,41 +166,42 @@
     <MESSAGE value="playground" />
     <MESSAGE value="ot-api-corrected" />
     <MESSAGE value="leave-absence added" />
-    <option name="LAST_COMMIT_MESSAGE" value="leave-absence added" />
+    <MESSAGE value="added month input" />
+    <option name="LAST_COMMIT_MESSAGE" value="added month input" />
   </component>
   <component name="WindowStateProjectService">
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604224671850">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.690@0.0.1280.690" timestamp="1604224671850" />
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1609212631195">
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1609479007295">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1609212631195" />
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1609479007295" />
     <state x="422" y="100" key="FileChooserDialogImpl" timestamp="1604225442315">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="422" y="100" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1604225442315" />
-    <state width="1236" height="166" key="GridCell.Tab.0.bottom" timestamp="1609473032049">
+    <state width="1236" height="166" key="GridCell.Tab.0.bottom" timestamp="1611366855956">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1609473032049" />
-    <state width="1236" height="166" key="GridCell.Tab.0.center" timestamp="1609473032048">
+    <state width="1236" height="166" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1611366855956" />
+    <state width="1236" height="166" key="GridCell.Tab.0.center" timestamp="1611366855955">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1609473032048" />
-    <state width="1236" height="166" key="GridCell.Tab.0.left" timestamp="1609473032048">
+    <state width="1236" height="166" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1611366855955" />
+    <state width="1236" height="166" key="GridCell.Tab.0.left" timestamp="1611366855955">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1609473032048" />
-    <state width="1236" height="166" key="GridCell.Tab.0.right" timestamp="1609473032048">
+    <state width="1236" height="166" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1611366855955" />
+    <state width="1236" height="166" key="GridCell.Tab.0.right" timestamp="1611366855956">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="166" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1609473032048" />
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1609212637355">
+    <state width="1236" height="166" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1611366855956" />
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1609479010736">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1609212637355" />
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1609479010736" />
     <state x="94" y="94" width="1093" height="502" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1609473022355">
       <screen x="0" y="0" width="1280" height="690" />
     </state>

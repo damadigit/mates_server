@@ -46,4 +46,36 @@ router.get('/otSummery', async(ctx, res) => {
     //ctx.body = otRecords
 })
 
+router.get('/teamSummery', async(ctx, res) => {
+    //const Model = mongoose.model('OvertimeReport')
+    //console.log(ctx.model('OvertimeReport'))
+    const reports =  await ctx.model('TeamOrganiseRequest').find({$or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
+
+    const data = _.flatten(reports ? reports.map(r => r.members.map(rec => ({ ...rec, requestedTeam: r.team }))) : [])
+
+    const result=  _(data)
+        .groupBy(x => x.id)
+        .map((record, id) => ({
+            id,
+            fullName: record[0].fullName,
+            mateId: record[0].mateId,
+            currentTeam: record[0].currentTeam,
+            team: record[0].requestedTeam,
+            teamChange: record[0].requestedTeam !== record[0].currentTeam,
+            children: record.length > 1 ? record : null
+        }))
+        .value()
+
+    //  console.log(result, 're')
+    ctx.body = result
+
+    //ctx.body = otRecords
+})
+
+router.get('/members', async(ctx, res) => {
+    const members =  await ctx.model('Member').find().lean().exec()
+
+    ctx.body = members.map(r=>({...r,team:r.currentTeam}))
+})
+
 module.exports = router
