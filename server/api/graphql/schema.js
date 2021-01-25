@@ -9,13 +9,13 @@ const  {ModelTC:UserModelTC} = buildSchema('User',schemaComposer)
  buildSchema('OvertimeReport',schemaComposer)
 buildSchema('AbsenceReport',schemaComposer)
 buildSchema('TeamOrganiseRequest',schemaComposer)
-buildSchema('OvertimeDetail',schemaComposer)
+const {ModelTC:OvertimeDetailModelTC} = buildSchema('OvertimeDetail',schemaComposer)
 buildSchema('AbsenceDetail',schemaComposer)
 MemberModelTC.addFields( {
      fullName:
          { // set `id` name for new field
           type: 'String', // set type MongoID
-          resolve: (source) => `${source.name} ${source.fatherName}`, // write resolve method, which returns _id value for the current field
+          resolve: (source) => `${source.name||''} ${source.fatherName||''}`, // write resolve method, which returns _id value for the current field
           projection: { name: true, fatherName: true }, // add information, that need to reques _id field from database, when you request `id` field
          },
      age:
@@ -40,6 +40,16 @@ TeamModelTC.setResolver('findMany', TeamModelTC.getResolver('findMany')
             query.code = {$in:value}
         },
     }) )
+
+// OvertimeDetailModelTC.setResolver('updateMany', OvertimeDetailModelTC.getResolver('updateMany')
+//     .addFilterArg({
+//         name: 'ids',
+//         type: '[String]',
+//         query: (query, value, resolveParams) => {
+//
+//             query._id = {$in:value}
+//         },
+//     }) )
 
 
 const LoginInputTC = schemaComposer.createObjectTC({

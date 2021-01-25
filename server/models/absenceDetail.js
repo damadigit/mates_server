@@ -3,6 +3,11 @@ const {OvertimeRecordSchema} = require("./schemas");
 const Schema = mongoose.Schema;
 
 const AbsenceDetailSchema = new Schema({
+    status: {
+        type: String,
+        enum : ['onProgress','ready','approved'],
+        default: 'onProgress'
+    },
     currentTeam: String,
     modifiedDate: Date,
     createdDate: Date,
