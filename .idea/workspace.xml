@@ -2,10 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/server/models/memberJoinRequest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/memberJoinRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberJoinRequest.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +97,7 @@
       <workItem from="1610759949224" duration="15131000" />
       <workItem from="1611333749893" duration="10045000" />
       <workItem from="1611558396813" duration="5066000" />
-      <workItem from="1611623770134" duration="3921000" />
+      <workItem from="1611623770134" duration="8377000" />
     </task>
     <task id="LOCAL-00001" summary="init-deploy">
       <created>1609068186113</created>
@@ -171,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1611581118332</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="new member join beta">
+      <created>1611637662413</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1611637662413</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,17 +193,18 @@
     <MESSAGE value="added month input" />
     <MESSAGE value="Ot Detail 1" />
     <MESSAGE value="confirm button" />
-    <option name="LAST_COMMIT_MESSAGE" value="confirm button" />
+    <MESSAGE value="new member join beta" />
+    <option name="LAST_COMMIT_MESSAGE" value="new member join beta" />
   </component>
   <component name="WindowStateProjectService">
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1604224671850">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="97" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1280.690@0.0.1280.690" timestamp="1604224671850" />
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1611581116752">
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1611637661033">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1611581116752" />
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1611637661033" />
     <state x="422" y="100" key="FileChooserDialogImpl" timestamp="1604225442315">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
@@ -219,10 +225,10 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state width="1236" height="166" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1611626278881" />
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1611581219849">
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1611637665130">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1611581219849" />
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1611637665130" />
     <state x="94" y="94" width="1093" height="502" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1609473022355">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
@@ -235,17 +241,5 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="439" y="247" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.690@0.0.1280.690" timestamp="1609067899583" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/index.js</url>
-          <line>11</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

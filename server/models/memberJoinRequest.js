@@ -22,12 +22,13 @@ const MemberJoinRequestSchema = new Schema({
 })
 
 MemberJoinRequestSchema.pre('save', async function(next){
-    // console.log(this)
+   //  console.log(this)
 
 
-        const month = moment(this.startDate).format('yyyy-MM-DD')
+        const month = moment(this.startDate).startOf('month').format('yyyy-MM-DD')
         const OrganizeRequest = await mongoose.model('TeamOrganiseRequest').findOne({periodType: 'month', team: this.team, periodStartDate: month})
-        if(OrganizeRequest)
+    //console.log(OrganizeRequest)
+    if(OrganizeRequest)
         {
             OrganizeRequest.members = [...OrganizeRequest.members, this.member]
             OrganizeRequest.status= "ready";
