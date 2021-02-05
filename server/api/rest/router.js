@@ -1,6 +1,7 @@
 const moment = require("moment");
 const _  = require("lodash");
 const Router = require('koa-router');
+
 const router = new Router({ prefix: '/api' });
 router.get('/', (ctx, next) => {
     ctx.body = 'Hello World!';
@@ -8,7 +9,8 @@ router.get('/', (ctx, next) => {
 router.get('/otSummery', async(ctx, res) => {
     //const Model = mongoose.model('OvertimeReport')
     //console.log(ctx.model('OvertimeReport'))
-    const otRecords =  await ctx.model('OvertimeReport').find({$or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
+    const {period='month', startDate} = ctx.request.query
+    const otRecords =  await ctx.model('OvertimeReport').find({period, startDate, $or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
     const absenceRecords =  await ctx.model('AbsenceReport').find({$or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
 
     const data = _.flatten(otRecords.map(r => r.records.map(rec => ({ ...rec, id: rec._id, currentTeam: r.currentTeam }))))
@@ -49,7 +51,9 @@ router.get('/otSummery', async(ctx, res) => {
 router.get('/teamSummery', async(ctx, res) => {
     //const Model = mongoose.model('OvertimeReport')
     //console.log(ctx.model('OvertimeReport'))
-    const reports =  await ctx.model('TeamOrganiseRequest').find({$or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
+    const {period='month', startDate} = ctx.request.query
+
+    const reports =  await ctx.model('TeamOrganiseRequest').find({periodType:period,periodStartDate:startDate,$or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
 
     const data = _.flatten(reports ? reports.map(r => r.members.map(rec => ({ ...rec, requestedTeam: r.team }))) : [])
 

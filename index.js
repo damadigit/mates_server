@@ -4,10 +4,10 @@ const bodyParser = require('koa-bodyparser');
 const cors = require('@koa/cors');
 const router = require('./server/api/rest/router');
 const mongoose = require('mongoose');
-require('dotenv').config()
+// require('dotenv').config()
 mongoose.Promise = global.Promise;
 const { ApolloServer, gql } = require('apollo-server-koa');
-//console.log(process.env.MONGOLAB_URI)
+console.log(process.env.MONGODB_URI)
 mongoose.connect( process.env.MONGODB_URI  || 'mongodb://127.0.0.1:27017/mates_db',
     { useNewUrlParser: true } );
 

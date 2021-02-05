@@ -8,7 +8,10 @@ const OvertimeDetailSchema = new Schema({
         enum : ['onProgress','ready','approved'],
         default: 'onProgress'
     },
-    currentTeam: String,
+    currentTeam: {
+        type: String,
+        index: true
+    },
     modifiedDate: Date,
     createdDate: Date,
     startDate: Date,
