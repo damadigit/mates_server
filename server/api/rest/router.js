@@ -10,8 +10,11 @@ router.get('/otSummery', async(ctx, res) => {
     //const Model = mongoose.model('OvertimeReport')
     //console.log(ctx.model('OvertimeReport'))
     const {period='month', startDate} = ctx.request.query
-    const otRecords =  await ctx.model('OvertimeReport').find({period, startDate, $or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
-    const absenceRecords =  await ctx.model('AbsenceReport').find({$or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
+    console.log(startDate)
+    const date = moment.utc(startDate).toDate()
+    const otRecords =  await ctx.model('OvertimeReport').find({periodType:period, startDate: date,$or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
+    console.log(otRecords)
+    const absenceRecords =  await ctx.model('AbsenceReport').find({periodType:period, startDate: date,$or: [{ status: "ready" }, { status: "approved" }] }).lean().exec()
 
     const data = _.flatten(otRecords.map(r => r.records.map(rec => ({ ...rec, id: rec._id, currentTeam: r.currentTeam }))))
 

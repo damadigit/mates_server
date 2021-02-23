@@ -16,14 +16,37 @@ const TeamOrganiseRequestSchema = new Schema({
       default: 'onProgress'
    },
    members: [{
-      id: String,
+      id:String,
       fullName:String,
       mateId:String,
       name:String,
       fatherName:String,
       gFatherName:String,
       currentTeam: String,
-      oldTeam: String
+      startDate: Date,
+      endDate: Date,
+      duration: Number,
+      period: String,
+      jobTitle: String,
+      remark: String,
+      earning: {
+         salary: Number,
+         wadge: Number,
+         benefits: [{
+            type:String,
+            name:String,
+            value:Number
+         }]
+      },
+      employmentType: {
+         type: String,
+         enum : ['Casual','Contract','FullTime'],
+        },
+      joinType: {
+         type: String,
+         enum : ['Transfer','ReEmployment','Employment'],
+        }
+
 
    }]
 })

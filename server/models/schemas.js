@@ -155,4 +155,7 @@ const AbsenceRecordSchema = new Schema ( {
     details:[AbsenceDetailSchema]
 
 })
+
+
+
 module.exports = {EducationSchema, FamilySchema,PlaceSchema,AddressSchema,StorySchema,SponsorSchema, FileSchema,OvertimeRecordSchema, AbsenceRecordSchema}

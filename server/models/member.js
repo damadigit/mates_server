@@ -39,7 +39,9 @@ const MemberSchema = new Schema({
     currentTeam: String,
     employmentType: String,
     startDate: Date,
-    contractEndDate:Date,
+    endDate:Date,
+    duration: Number,
+    period: String,
     position:String,
     citizenShip:String,
     leaveInfo: {
@@ -49,6 +51,22 @@ const MemberSchema = new Schema({
 
     },
     Address: AddressSchema,
+    jobTitle: String,
+    earning: {
+        salary: Number,
+        wadge: Number,
+        benefits: [{
+            type:String,
+            name:String,
+            value:Number
+        }]
+    },
+    joinType: {
+        type: String,
+        enum : ['Transfer','ReEmployment','Employment'],
+        default: 'Transfer'
+    },
+
 
 
 
