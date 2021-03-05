@@ -14,7 +14,10 @@ const OvertimeDetailSchema = new Schema({
     },
     modifiedDate: Date,
     createdDate: Date,
-    startDate: Date,
+    startDate: {
+        type: Date,
+        index: true,
+    },
     endDate: Date,
     hrs: Number,
     days: Number,
