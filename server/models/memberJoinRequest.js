@@ -21,6 +21,7 @@ const MemberJoinRequestSchema = new Schema({
     period: String,
     jobTitle: String,
     remark: String,
+    extraOT: Number,
     earning: {
         salary: Number,
         wadge: Number,
@@ -44,6 +45,13 @@ MemberJoinRequestSchema.pre('save', async function(next){
    member.fullName = `${this.name||''} ${this.fatherName||''}`
    // console.log(member)
     member.id = this.memberId || this._id
+
+    const startDate = moment.utc(member.startDate||'1990/1/1')
+    const endDate = moment.utc(member.endDate)
+    const sd = moment.max(startDate,moment(this.startDate).startOf('month'))
+    const ed = moment.min(endDate,moment(this.startDate).endOf('month'))
+
+    member.daysWorked = ed.diff(sd,'days') + 2
      const month = moment(this.startDate).startOf('month').format('yyyy-MM-DD')
         const OrganizeRequest = await mongoose.model('TeamOrganiseRequest').findOne({periodType: 'month', team: this.team, periodStartDate: month})
     //console.log(OrganizeRequest)

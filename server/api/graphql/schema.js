@@ -11,7 +11,7 @@ buildSchema('AbsenceReport',schemaComposer)
 buildSchema('TeamOrganiseRequest',schemaComposer)
 
 buildSchema('MemberJoinRequest',schemaComposer)
-
+buildSchema('MemberLeftRequest',schemaComposer)
 const {ModelTC:OvertimeDetailModelTC} = buildSchema('OvertimeDetail',schemaComposer)
 buildSchema('AbsenceDetail',schemaComposer)
 MemberModelTC.addFields( {

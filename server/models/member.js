@@ -44,6 +44,7 @@ const MemberSchema = new Schema({
     period: String,
     position:String,
     citizenShip:String,
+    extraOT: Number,
     leaveInfo: {
         remainingDays:Number,
         daysTaken:Number,

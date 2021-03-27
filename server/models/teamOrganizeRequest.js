@@ -29,6 +29,7 @@ const TeamOrganiseRequestSchema = new Schema({
       period: String,
       jobTitle: String,
       remark: String,
+      extraOT: Number,
       earning: {
          salary: Number,
          wadge: Number,
@@ -45,7 +46,10 @@ const TeamOrganiseRequestSchema = new Schema({
       joinType: {
          type: String,
          enum : ['Transfer','ReEmployment','Employment'],
-        }
+        },
+      daysWorked: Number,
+      left: String,
+      oldTeam: String
 
 
    }]
