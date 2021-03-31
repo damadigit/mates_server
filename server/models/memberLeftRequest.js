@@ -21,6 +21,7 @@ MemberLeftRequestSchema.pre('save', async function(next){
             // console.log(this.memberId,OrganizeRequest.members)
             const member  = OrganizeRequest.members.find(m=>m.id===this.memberId)
             member.left = this._id;
+            member.status = 'removed'
             member.endDate = this.endDate
          const startDate = moment.utc(member.startDate||'1990/1/1')
             const endDate = moment.utc(member.endDate)
@@ -28,7 +29,7 @@ MemberLeftRequestSchema.pre('save', async function(next){
             const ed = moment.min(endDate,moment(this.endDate).endOf('month'))
 
             member.daysWorked = ed.diff(sd,'days') + 2
-            console.log(member.daysWorked, endDate)
+            //console.log(member.daysWorked, endDate)
             OrganizeRequest.status= "ready";
             await OrganizeRequest.save();
         }

@@ -17,6 +17,7 @@ const TeamOrganiseRequestSchema = new Schema({
    },
    members: [{
       id:String,
+      status:String,
       fullName:String,
       mateId:String,
       name:String,
@@ -34,7 +35,7 @@ const TeamOrganiseRequestSchema = new Schema({
          salary: Number,
          wadge: Number,
          benefits: [{
-            type:String,
+            benefitType:String,
             name:String,
             value:Number
          }]
@@ -42,10 +43,12 @@ const TeamOrganiseRequestSchema = new Schema({
       employmentType: {
          type: String,
          enum : ['Casual','Contract','FullTime'],
+         default : 'FullTime'
         },
       joinType: {
          type: String,
          enum : ['Transfer','ReEmployment','Employment'],
+         default : 'Transfer'
         },
       daysWorked: Number,
       left: String,

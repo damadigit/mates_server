@@ -57,7 +57,7 @@ const MemberSchema = new Schema({
         salary: Number,
         wadge: Number,
         benefits: [{
-            type:String,
+            benefitType:String,
             name:String,
             value:Number
         }]
