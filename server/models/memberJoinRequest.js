@@ -44,7 +44,7 @@ MemberJoinRequestSchema.pre('save', async function(next){
     const member = {...this.toObject()}
    member.fullName = `${this.name||''} ${this.fatherName||''}`
    // console.log(member)
-    member.id = this.memberId || "00"
+    member.id = this.memberId || this._id
     if(!this.memberId) {
         member.status = "new"
     }
