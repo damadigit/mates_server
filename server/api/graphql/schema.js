@@ -14,6 +14,8 @@ buildSchema('MemberJoinRequest',schemaComposer)
 buildSchema('MemberLeftRequest',schemaComposer)
 const {ModelTC:OvertimeDetailModelTC} = buildSchema('OvertimeDetail',schemaComposer)
 buildSchema('AbsenceDetail',schemaComposer)
+
+const  {ModelTC:TimesheetModelTC}  = buildSchema('Timesheet',schemaComposer)
 MemberModelTC.addFields( {
      fullName:
          { // set `id` name for new field
@@ -93,6 +95,43 @@ UserModelTC.addResolver({
     },
 });
 
+
+const BulkWriteInputTC = schemaComposer.createObjectTC({
+    name: 'BulkWriteInput',
+    fields: {
+        op: 'String!',
+    }
+});
+
+const BulkWriteTC = schemaComposer.createObjectTC({
+        name: 'BulkWriteResponse',
+        fields: {
+            status: 'String!',
+        }
+    }
+)
+
+
+
+TimesheetModelTC.addResolver({
+    name: `bulkWrite`,
+    kind: 'mutation',
+    type: BulkWriteTC,
+    args: {input:toInputObjectType(BulkWriteInputTC)},
+    // args: toInputObjectType(LoginInputTC),
+    resolve: async ({ source, args, context, info }) => {
+        // const user = await User.findOne(args.record).exec();
+        // if (!user) user = await User.create(args.record);
+        // console.log(args)
+        const Timesheet = mongoose.model("Timesheet")
+         const res= await Timesheet.bulkWrite(JSON.parse(args.input.op))
+        // throw (new Error("Invalid Credentials"))
+    },
+});
+
+
+
+
 // OvertimeReportTC.addResolver({
 //     name:'getSummery',
 //     kind: 'query',
@@ -105,6 +144,10 @@ schemaComposer.Query.addFields({
 })
 schemaComposer.Mutation.addFields({
     [`login`]: UserModelTC.getResolver('login'),
+})
+
+schemaComposer.Mutation.addFields({
+    [`bulkWrite`]: TimesheetModelTC.getResolver('bulkWrite'),
 })
 
 // buildSchema('Record',schemaComposer);
