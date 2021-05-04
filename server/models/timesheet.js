@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const TimesheetSchema = new Schema({
     code: {
         type: String,
-        unique:true,
+       // unique:true,
         index: true,
     },
     member: {
@@ -22,10 +22,19 @@ const TimesheetSchema = new Schema({
         enum : ['onProgress','ready','approved'],
         default: 'onProgress'
     },
-    currentTeam: String,
+    duration: Number, // used for leave
+    currentTeam: {
+        type: String,
+        index: true,
+    },
     teams:[String],
-    state:String, //absent leave work
+    state:String, //absent leave present
     remark:String,
+    source: {
+        type: String,
+        enum : ['manual','tik'],
+        default: 'manual'
+    },
     overtime: {
         otType:String,
         hrs: Number,

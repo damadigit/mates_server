@@ -100,4 +100,31 @@ router.get('/members', async(ctx, res) => {
     ctx.body = members.map(r=>({...r,team:r.currentTeam}))
 })
 
+router.post('/timesheet', async(ctx, res) => {
+   const {date,source,team,mateId} = ctx.request.body
+    const d = moment(date)
+    console.log(mateId)
+    const member = await ctx.model('Member').findOne({mateId}).exec()
+
+
+    if(member)
+    //const teamData = await ctx.model('Team').findOne({where:{code:}})
+    {
+        console.log(member)
+        const timesheet = {
+            member: _.pick(member, ['id', 'fullName', 'mateId', 'employmentType']),
+            source: source || 'tik',
+            code: `${d.format('DD/MM/YY')}$${member.id}`,
+            state: d.get('day') !== 0 ? 'present' : 'rest',
+            currentTeam: team,
+            date
+        }
+        await ctx.model('Timesheet').create(timesheet)
+        ctx.body = timesheet
+    }
+    else {
+        ctx.throw(404)
+    }
+})
+
 module.exports = router

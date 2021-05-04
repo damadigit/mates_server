@@ -68,6 +68,12 @@ const MemberSchema = new Schema({
         default: 'Transfer'
     },
 
+    status: {
+        type: String,
+        enum : ['Active','Terminated','Retired', 'Laid Off'],
+        default: 'Active'
+    },
+
 
 
 

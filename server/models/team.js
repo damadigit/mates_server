@@ -6,6 +6,11 @@ const TeamSchema = new Schema({
     name: String,
     benefits: {
         transportAllowance: Boolean
-    }
+    },
+    status: {
+        type: String,
+        enum : ['Active','Dissolved','Hold'],
+        default: 'Active'
+    },
 })
 module.exports = mongoose.model('Team', TeamSchema);

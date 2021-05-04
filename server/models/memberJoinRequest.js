@@ -67,7 +67,7 @@ MemberJoinRequestSchema.pre('save', async function(next){
    const dates = enumerateDaysBetweenDates(sd,ed)
     const timesheet = []
     dates.map(d => {
-          timesheet.push({ member: _.pick(member, ['id', 'fullName', 'mateId', 'employmentType']), code: `${d.format('DD/MM/YY')}$${member.id}$${this.team}`, date: d, state:d.get('day') !== 0 ? 'present': 'rest', currentTeam:this.team })
+          timesheet.push({ member: _.pick(member, ['id', 'fullName', 'mateId', 'employmentType']), code: `${d.format('DD/MM/YY')}$${member.id}`, date: d, state:d.get('day') !== 0 ? 'present': 'rest', currentTeam:this.team })
     })
     //console.log(timesheet)
     await mongoose.model('Timesheet').insertMany(timesheet)
