@@ -1,8 +1,87 @@
 const moment = require("moment");
 const _  = require("lodash");
 const Router = require('koa-router');
+const {postCatchelMessage} = require("../CatchelApi");
 
 const router = new Router({ prefix: '/api' });
+
+function timesheetGroupedByMemberTeam(timesheets) {
+    return _(timesheets)
+        .groupBy(x => `${x.member.id}$${x.currentTeam}`)
+        .map((records, key) => {
+            const absentDays = records.filter(r => r.state && r.state.toLowerCase() === 'absent').length
+            const leaveDays = records.filter(r => r.state && r.state.toLowerCase() === 'leave').reduce((sum, cv) => sum + (cv.duration ? cv.duration / 8 : 1), 0)
+            const presentDays = records.filter(r => r.state && (r.state.toLowerCase() === 'present' || r.state.toLowerCase() === 'rest')).length
+            const overtimes = _.mapValues(_.groupBy(records.filter(r => r.overtime).map(r => r.overtime), 'otType'), ots => _.sumBy(ots, 'hrs'))
+            return {
+                id: records[0].member.id,
+                name: records[0].member.fullName,
+                member: records[0].member,
+                currentTeam: records[0].currentTeam,
+                absentDays: absentDays || undefined,
+                leaveDays: leaveDays || undefined,
+                payableDays: (presentDays + Math.ceil(leaveDays)) || undefined,
+                //  overtimes: _.map(_.groupBy(records.filter(r => r.overtime).map(r => r.overtime), 'otType'), (o, otType) => { return { otType, hrs: _.sumBy(o, 'hrs') } })
+                overtimes
+
+            }
+        })
+        .value()
+}
+function groupedByMemberTimesheet(timesheets,momentTimesheet, members) {
+   const records =  _(timesheetGroupedByMemberTeam(timesheets))
+        .groupBy(x => x.member.id)
+        .map((records, memberId) => {
+            const overtimes = {}
+            const items = records.map(r => r.overtimes)
+            _.each(items, function(item) {
+                _.each(['Afterwork', 'Sunday', 'Night', 'HollyDay', 'Other'], function(type) {
+                    overtimes[type] = (overtimes[type] || 0) + (item[type] || 0)
+                })
+            })
+
+            const timesheetAtDate = momentTimesheet.find(t=>t.member.id===records[0].member.id)
+            const member =  members.find(m=>m._id==records[0].member.id)
+           // console.log(members)
+            return {
+                id: records[0].member.id,
+                fullName: records[0].member.fullName,
+                mateId: member.mateId,
+                member,
+                status: member&&member.status,
+                team: timesheetAtDate && timesheetAtDate.currentTeam,
+                currentTeam: records.length === 1 && records[0].currentTeam,
+                leaveDays: _.sumBy(records, 'leaveDays') || undefined,
+                absentDays: _.sumBy(records, 'absentDays') || undefined,
+                payableDays: _.sumBy(records, 'payableDays') || undefined,
+                overtimes: _.mapValues(overtimes, o => o || undefined),
+                //children: records.length>1 && records.map(r=>({...r,name:r.currentTeam, id:r.id+r.currentTeam}))
+            }
+        })
+        .value();
+
+   const ids = records.map(r=>r.id);
+   //console.log(ids)
+  //  console.log(ids.includes('5fe1ceea3ea8ac275c66fc1e'))
+   const idle = members.filter(m=>m.status==="Active"&&!ids.includes(m._id.toString())).map(m=>({
+       id: m._id,
+       member:m,
+       fullName: m.fullName,
+       status: 'idle',
+       overtimes: {}
+   }))
+    //return idle;
+   const inActive =  members.filter(m=>m.status!=='Active').map(m=>({
+       id: m._id,
+       fullName: m.fullName,
+       member:m,
+       status: 'inActive',
+       overtimes: {}
+   }))
+   return records.concat(idle).concat(inActive)
+
+}
+
 router.get('/', (ctx, next) => {
     ctx.body = 'Hello World!';
 });
@@ -95,15 +174,27 @@ router.get('/teamSummery', async(ctx, res) => {
 })
 
 router.get('/members', async(ctx, res) => {
-    const members =  await ctx.model('Member').find().lean().exec()
-
+    const members =  await ctx.model('Member').find({status:'Active'}).lean().exec()
     ctx.body = members.map(r=>({...r,team:r.currentTeam}))
+})
+
+
+router.get('/timesheet',async (ctx,res)=>{
+    const {atDate,startDate, endDate} = ctx.request.query
+    // const date = new Date(atDate)
+    const timesheetInPeriod = await ctx.model('Timesheet').find({ date: { $gte: new Date(startDate), $lte:new Date(endDate)} }).exec()
+    const timesheetAtDate = await ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec()
+    const members = await ctx.model('Member').find().select('_id name fatherName gFatherName fullName mateId earning employmentType status').exec();
+  // console.log(members)
+    // const members = await  ctx.model('Timesheet')
+   // console.log(timesheetAtDate)
+    ctx.body = groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members )
 })
 
 router.post('/timesheet', async(ctx, res) => {
    const {date,source,team,mateId} = ctx.request.body
     const d = moment(date)
-    console.log(mateId)
+   // console.log(mateId)
     const member = await ctx.model('Member').findOne({mateId}).exec()
 
 
@@ -126,5 +217,42 @@ router.post('/timesheet', async(ctx, res) => {
         ctx.throw(404)
     }
 })
+
+router.post('/checkContractDateAndNotify', async (ctx,res)=>{
+    const {days=3} = ctx.request.body
+  //  const days = 5
+
+    const startDate = moment().format('YYYY-MM-DD')
+ const endDate  = moment().add(days, 'days').format('YYYY-MM-DD')
+    const members =  await ctx.model('Member').find({ endDate: { $gte: startDate, $lte:endDate} })
+  if(members.length) {
+      const names = members.map(m => m.fullName).join('\r\n')
+      const users = await ctx.model('User').find({roles: {$in: ["HRAdmin", "HROfficer"]}}).exec()
+      const body = `Contact of ${members.length} members is about to expire in ${days} days
+    \`${names}\``
+      //console.log(body)
+      const messagePromises = users.map(u => {
+          const message = {
+              to: u.phoneNumber,
+              email: u.email,
+              body,
+              methods: ['TELEGRAM', 'EMAIL'],
+              from: "Mates HCM",
+              senderEmail:"catchel@truwrk.com",
+              subject: 'Contact is about to Expire'
+          }
+          return postCatchelMessage(message)
+      })
+
+      const messageRes = await Promise.all(messagePromises)
+      // console.log(messageRes)
+      ctx.body = messageRes.map(r => r.data)
+  }
+  else {
+      ctx.body = {message: `No Contact expires in ${days} days`}
+  }
+
+})
+
 
 module.exports = router

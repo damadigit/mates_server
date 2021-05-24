@@ -7,6 +7,8 @@ const UserSchema = new Schema({
     token: String,
     name:String,
     fatherName:String,
+    phoneNumber: String,
+    email: String,
     roles: [String],
     teams: [String]
 })

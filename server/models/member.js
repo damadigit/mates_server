@@ -32,18 +32,24 @@ const MemberSchema = new Schema({
     },
     tinNo:String,
     pensionNo:String,
-    bankAccount: {
-        bankName:String,
-        accountNumber:String
-    },
+    bankAccounts: [{
+        type:{type:String},
+        value: String
+    }],
+    joinTeam: String,
     currentTeam: String,
-    employmentType: String,
+    employmentType: {
+        type: String,
+        enum : ['Casual','Contract','FullTime'],
+        default: 'FullTime'
+    },
     startDate: Date,
     endDate:Date,
     duration: Number,
     period: String,
     position:String,
-    citizenShip:String,
+    joinRemark: String,
+    citizenship:String,
     extraOT: Number,
     leaveInfo: {
         remainingDays:Number,
@@ -51,13 +57,17 @@ const MemberSchema = new Schema({
         totalDaysTaken:Number,
 
     },
-    Address: AddressSchema,
+    address: AddressSchema,
     jobTitle: String,
     earning: {
-        salary: Number,
-        wadge: Number,
-        benefits: [{
-            benefitType:String,
+        rate: Number,
+        period: {
+            type: String,
+            enum : ['day','week','month'],
+            default: 'month'
+        },
+        additionalEarnings: [{
+            type:{type:String},
             name:String,
             value:Number
         }]
@@ -65,14 +75,17 @@ const MemberSchema = new Schema({
     joinType: {
         type: String,
         enum : ['Transfer','ReEmployment','Employment'],
-        default: 'Transfer'
+        default: 'Employment'
     },
-
+    martialStatus: String,
     status: {
         type: String,
-        enum : ['Active','Terminated','Retired', 'Laid Off'],
+        enum : ['Active','Resigned', 'ContractEnded', 'Terminated','Retired', 'LaidOff'],
         default: 'Active'
     },
+    annualLeaveBalance: Number,
+    motherName: String,
+    joinRequests: [ { type: Schema.Types.ObjectId, ref: 'MemberJoinRequest' }],
 
 
 
@@ -81,8 +94,20 @@ const MemberSchema = new Schema({
 
 
 
-});
+}, {timestamps:true});
 
 // ApplicationSchema.
+
+MemberSchema.virtual('fullName').
+get(function() { return `${this.name||''} ${this.fatherName||''} ${this.gFatherName||''}`; }).
+set(function(v) {
+    // `v` is the value being set, so use the value to set
+    // `firstName` and `lastName`.
+    const name = v.substring(0, v.indexOf(' '));
+    const fatherName = v.substring(v.indexOf(' ') + 1);
+    const gFatherName = v.substring(v.indexOf(' ') + 2);
+    this.set({ name, fatherName, gFatherName });
+});
+
 
 module.exports = mongoose.model('Member', MemberSchema);

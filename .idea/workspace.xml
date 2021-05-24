@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
+    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="timesheet report">
+      <change afterPath="$PROJECT_DIR$/server/api/CatchelApi.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/api/payrollService.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/inbox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/models/template.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/api/rest/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/member.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/memberJoinRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberJoinRequest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/team.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/team.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/memberLeftRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberLeftRequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/schemas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/schemas.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/timesheet.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/timesheet.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +41,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/models" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/api" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -48,6 +57,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Project\Workcon\mates\mates_server\server\api" />
       <recent name="D:\Project\Workcon\mates\mates_server\server\models" />
       <recent name="D:\Project\Workcon\mates\mates_server" />
     </key>
@@ -126,7 +136,17 @@
       <workItem from="1619309825711" duration="10420000" />
       <workItem from="1619398175168" duration="3340000" />
       <workItem from="1619489037475" duration="16509000" />
-      <workItem from="1620022669621" duration="7459000" />
+      <workItem from="1620022669621" duration="9932000" />
+      <workItem from="1620263817270" duration="3033000" />
+      <workItem from="1620278389392" duration="94000" />
+      <workItem from="1620955994702" duration="3559000" />
+      <workItem from="1621037008280" duration="2963000" />
+      <workItem from="1621227397747" duration="1334000" />
+      <workItem from="1621244974582" duration="1002000" />
+      <workItem from="1621252782082" duration="750000" />
+      <workItem from="1621301563301" duration="20796000" />
+      <workItem from="1621576576072" duration="29610000" />
+      <workItem from="1621822515621" duration="11439000" />
     </task>
     <task id="LOCAL-00001" summary="init-deploy">
       <created>1609068186113</created>
@@ -268,11 +288,28 @@
       <option name="project" value="LOCAL" />
       <updated>1619415196600</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="timesheet report">
+      <created>1620108529912</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1620108529912</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
@@ -291,41 +328,42 @@
     <MESSAGE value="march release" />
     <MESSAGE value="fix new id on casusal" />
     <MESSAGE value="timesheet feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="timesheet feature" />
+    <MESSAGE value="timesheet report" />
+    <option name="LAST_COMMIT_MESSAGE" value="timesheet report" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1619415195723">
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1621643981965">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1619415195723" />
-    <state width="1236" height="156" key="GridCell.Tab.0.bottom" timestamp="1620108465390">
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1621643981965" />
+    <state width="1236" height="156" key="GridCell.Tab.0.bottom" timestamp="1621792413883">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="156" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1620108465390" />
-    <state width="1236" height="156" key="GridCell.Tab.0.center" timestamp="1620108465389">
+    <state width="1236" height="156" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1621792413883" />
+    <state width="1236" height="156" key="GridCell.Tab.0.center" timestamp="1621792413883">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="156" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1620108465389" />
-    <state width="1236" height="156" key="GridCell.Tab.0.left" timestamp="1620108465389">
+    <state width="1236" height="156" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1621792413883" />
+    <state width="1236" height="156" key="GridCell.Tab.0.left" timestamp="1621792413882">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="156" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1620108465389" />
-    <state width="1236" height="156" key="GridCell.Tab.0.right" timestamp="1620108465390">
+    <state width="1236" height="156" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1621792413882" />
+    <state width="1236" height="156" key="GridCell.Tab.0.right" timestamp="1621792413883">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="156" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1620108465390" />
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1619415198241">
+    <state width="1236" height="156" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1621792413883" />
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1620108531444">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1619415198241" />
-    <state x="349" y="78" width="582" height="534" key="find.popup" timestamp="1620107157857">
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1620108531444" />
+    <state x="349" y="78" width="582" height="534" key="find.popup" timestamp="1621496009070">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="349" y="78" width="582" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1620107157857" />
-    <state x="298" y="154" key="run.anything.popup" timestamp="1620104510226">
+    <state x="349" y="78" width="582" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1621496009070" />
+    <state x="298" y="154" key="run.anything.popup" timestamp="1620120541948">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="298" y="154" key="run.anything.popup/0.0.1280.690@0.0.1280.690" timestamp="1620104510226" />
+    <state x="298" y="154" key="run.anything.popup/0.0.1280.690@0.0.1280.690" timestamp="1620120541948" />
     <state x="303" y="11" width="672" height="678" key="search.everywhere.popup" timestamp="1613448800743">
       <screen x="0" y="0" width="1280" height="690" />
     </state>

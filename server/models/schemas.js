@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const AddressSchema =  new Schema({
-    phones: [{
-        phoneType:String,
-        number:String
+    phones:[{
+        type:{type:String},
+        value: String
     }],
     email: String,
     city: String,
@@ -15,7 +15,6 @@ const AddressSchema =  new Schema({
         latitude: String,
         longitude: String,
     },
-    photo:String,
     remark: String
 })
 const EducationSchema = new Schema({

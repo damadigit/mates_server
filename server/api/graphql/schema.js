@@ -1,5 +1,6 @@
 
 const mongoose = require('mongoose');
+const _ = require('lodash')
 const { schemaComposer, toInputObjectType } = require('graphql-compose');
  const buildSchema  = require('./mongooseQL')
 
@@ -9,20 +10,22 @@ const  {ModelTC:UserModelTC} = buildSchema('User',schemaComposer)
  buildSchema('OvertimeReport',schemaComposer)
 buildSchema('AbsenceReport',schemaComposer)
 buildSchema('TeamOrganiseRequest',schemaComposer)
+buildSchema('Template',schemaComposer)
 
-buildSchema('MemberJoinRequest',schemaComposer)
-buildSchema('MemberLeftRequest',schemaComposer)
+
+const {ModelTC:MemberJoinRequestTC} = buildSchema('MemberJoinRequest',schemaComposer)
+const {ModelTC:MemberLeftRequestTC} = buildSchema('MemberLeftRequest',schemaComposer)
 const {ModelTC:OvertimeDetailModelTC} = buildSchema('OvertimeDetail',schemaComposer)
 buildSchema('AbsenceDetail',schemaComposer)
 
 const  {ModelTC:TimesheetModelTC}  = buildSchema('Timesheet',schemaComposer)
 MemberModelTC.addFields( {
-     fullName:
-         { // set `id` name for new field
-          type: 'String', // set type MongoID
-          resolve: (source) => `${source.name||''} ${source.fatherName||''}`, // write resolve method, which returns _id value for the current field
-          projection: { name: true, fatherName: true }, // add information, that need to reques _id field from database, when you request `id` field
-         },
+     fullName:'String',
+         // { // set `id` name for new field
+         //  type: 'String', // set type MongoID
+         //  resolve: (source) => `${source.name||''} ${source.fatherName||''}`, // write resolve method, which returns _id value for the current field
+         //  projection: { name: true, fatherName: true }, // add information, that need to reques _id field from database, when you request `id` field
+         // },
      age:
          { // set `id` name for new field
           type: 'Int', // set type MongoID
@@ -95,6 +98,112 @@ UserModelTC.addResolver({
     },
 });
 
+const ApproveMemberJoinTC = schemaComposer.createObjectTC({
+    name: 'ApproveMemberJoin',
+    fields: {
+        _id: 'String!',
+        addMember: 'Boolean!',
+        addPayroll: 'Boolean!',
+
+    }
+});
+
+const ApproveMemberLeftTC = schemaComposer.createObjectTC({
+    name: 'ApproveMemberLeft',
+    fields: {
+        _id: 'String!',
+        setInactive: 'Boolean!',
+        removeFromPayroll: 'Boolean!',
+
+    }
+});
+
+MemberJoinRequestTC.addResolver({
+    name: `approve`,
+    kind: 'mutation',
+    type: MemberJoinRequestTC,
+    args: {input:toInputObjectType(ApproveMemberJoinTC)},
+    // args: toInputObjectType(LoginInputTC),
+    resolve: async ({ source, args, context, info }) => {
+        const {_id, addMember, addPayroll} = args.input
+        const Model = mongoose.model("MemberJoinRequest")
+        const request = await Model.findOne({_id}).exec()
+        if(request.requestStatus!=="Approved")
+        {
+            request.requestStatus= 'Approved'
+
+            if(addMember)
+            {
+                const member = _.omit(request, ['memberId', '_id', 'joinLetter', 'requestStatus'])
+                member.joinRequests = (member.joinRequests||[]).push(request._id);
+                if(!request.memberId)
+              {
+
+                    // console.log(member)
+
+                    const res = await mongoose.model('Member').create(member)
+
+                     request.memberId = res._id
+                } else
+                {
+                    const res = await mongoose.model('Member').findByIdAndUpdate(request.memberId,member)
+                }
+
+            }
+            if(addPayroll) {
+                /// add to payroll
+
+            }
+
+           return  await request.save();
+        }
+
+
+
+
+    },
+});
+
+
+MemberLeftRequestTC.addResolver({
+    name: `approve`,
+    kind: 'mutation',
+    type: MemberLeftRequestTC,
+    args: {input:toInputObjectType(ApproveMemberLeftTC)},
+    // args: toInputObjectType(LoginInputTC),
+    resolve: async ({ source, args, context, info }) => {
+        const {_id, setInactive, removeFromPayroll} = args.input
+        const Model = mongoose.model("MemberLeftRequest")
+        const request = await Model.findOne({_id}).exec()
+        if(request.requestStatus!=="Approved")
+        {
+            request.requestStatus= 'Approved'
+
+            if(setInactive)
+            {
+                /// create a member
+                const member = await mongoose.model('Member').findOne({_id: request.member.id}).exec();
+                // console.log(member)
+                if(member)
+                {
+                    member.status = request.reasonType
+                }
+                await member.save();
+
+            }
+            if(removeFromPayroll) {
+                /// remove from payroll
+
+            }
+
+            return  await request.save();
+        }
+
+
+
+
+    },
+});
 
 const BulkWriteInputTC = schemaComposer.createObjectTC({
     name: 'BulkWriteInput',
@@ -144,11 +253,18 @@ schemaComposer.Query.addFields({
 })
 schemaComposer.Mutation.addFields({
     [`login`]: UserModelTC.getResolver('login'),
+    [`bulkWrite`]: TimesheetModelTC.getResolver('bulkWrite'),
+    [`approveMemberJoin`]: MemberJoinRequestTC.getResolver('approve'),
+    [`approveMemberLeft`]: MemberLeftRequestTC.getResolver('approve'),
 })
 
-schemaComposer.Mutation.addFields({
-    [`bulkWrite`]: TimesheetModelTC.getResolver('bulkWrite'),
-})
+// schemaComposer.Mutation.addFields({
+//
+// })
+//
+// schemaComposer.Mutation.addFields({
+//
+// })
 
 // buildSchema('Record',schemaComposer);
 // buildSchema('Visit',schemaComposer);
