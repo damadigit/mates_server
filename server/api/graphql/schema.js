@@ -135,7 +135,9 @@ MemberJoinRequestTC.addResolver({
             if(addMember)
             {
                 const member = _.omit(request, ['memberId', '_id', 'joinLetter', 'requestStatus'])
-                member.joinRequests = (member.joinRequests||[]).push(request._id);
+
+                member.joinRequests = [...(member.joinRequests||[]),request._id]
+              //  console.log( member.joinRequests)
                 if(!request.memberId)
               {
 
@@ -150,8 +152,8 @@ MemberJoinRequestTC.addResolver({
                 }
 
             }
-            if(addPayroll) {
-                /// add to payroll
+            if(!addPayroll) {
+               request.payrollStatus = 'Avoided'
 
             }
 
@@ -191,9 +193,8 @@ MemberLeftRequestTC.addResolver({
                 await member.save();
 
             }
-            if(removeFromPayroll) {
-                /// remove from payroll
-
+            if(!removeFromPayroll) {
+                    request.payrollStatus = 'Avoided'
             }
 
             return  await request.save();

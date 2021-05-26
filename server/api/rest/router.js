@@ -41,14 +41,14 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members) {
             })
 
             const timesheetAtDate = momentTimesheet.find(t=>t.member.id===records[0].member.id)
-            const member =  members.find(m=>m._id==records[0].member.id)
+         //   const member =  members.find(m=>m._id==records[0].member.id)
            // console.log(members)
             return {
                 id: records[0].member.id,
                 fullName: records[0].member.fullName,
-                mateId: member.mateId,
-                member,
-                status: member&&member.status,
+                mateId: records[0].member.mateId,
+                member:records[0].member,
+                status: 'Active',
                 team: timesheetAtDate && timesheetAtDate.currentTeam,
                 currentTeam: records.length === 1 && records[0].currentTeam,
                 leaveDays: _.sumBy(records, 'leaveDays') || undefined,
@@ -63,22 +63,25 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members) {
    const ids = records.map(r=>r.id);
    //console.log(ids)
   //  console.log(ids.includes('5fe1ceea3ea8ac275c66fc1e'))
-   const idle = members.filter(m=>m.status==="Active"&&!ids.includes(m._id.toString())).map(m=>({
+   const idle = members.filter(m=>!ids.includes(m._id.toString())).map(m=>({
        id: m._id,
        member:m,
+       mateId: m.mateId,
        fullName: m.fullName,
-       status: 'idle',
+       team: 'Idle',
+       payableDays: 0,
        overtimes: {}
    }))
     //return idle;
-   const inActive =  members.filter(m=>m.status!=='Active').map(m=>({
-       id: m._id,
-       fullName: m.fullName,
-       member:m,
-       status: 'inActive',
-       overtimes: {}
-   }))
-   return records.concat(idle).concat(inActive)
+   // const inActive =  members.filter(m=>m.status!=='Active').map(m=>({
+   //     id: m._id,
+   //     fullName: m.fullName,
+   //     mateId: m.mateId,
+   //     member:m,
+   //     status: 'inActive',
+   //     overtimes: {}
+   // }))
+   return records.concat(idle) //.concat(inActive)
 
 }
 
@@ -184,12 +187,21 @@ router.get('/timesheet',async (ctx,res)=>{
     // const date = new Date(atDate)
     const timesheetInPeriod = await ctx.model('Timesheet').find({ date: { $gte: new Date(startDate), $lte:new Date(endDate)} }).exec()
     const timesheetAtDate = await ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec()
-    const members = await ctx.model('Member').find().select('_id name fatherName gFatherName fullName mateId earning employmentType status').exec();
+    const members = await ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType').exec();
   // console.log(members)
     // const members = await  ctx.model('Timesheet')
    // console.log(timesheetAtDate)
     ctx.body = groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members )
 })
+
+router.get('/payrollMembers',async (ctx,res)=>{
+
+   const newMembers = await ctx.model('MemberJoinRequest').find({requestStatus:'Approved', payrollStatus:'Pending'}).exec();
+    const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', payrollStatus:'Pending'}).exec();
+    ctx.body = {newMembers,inactiveMembers}
+})
+
+
 
 router.post('/timesheet', async(ctx, res) => {
    const {date,source,team,mateId} = ctx.request.body
@@ -228,7 +240,7 @@ router.post('/checkContractDateAndNotify', async (ctx,res)=>{
   if(members.length) {
       const names = members.map(m => m.fullName).join('\r\n')
       const users = await ctx.model('User').find({roles: {$in: ["HRAdmin", "HROfficer"]}}).exec()
-      const body = `Contact of ${members.length} members is about to expire in ${days} days
+      const body = `Contract of ${members.length} members is about to expire in ${days} days
     \`${names}\``
       //console.log(body)
       const messagePromises = users.map(u => {

@@ -86,13 +86,11 @@ const MemberSchema = new Schema({
     annualLeaveBalance: Number,
     motherName: String,
     joinRequests: [ { type: Schema.Types.ObjectId, ref: 'MemberJoinRequest' }],
-
-
-
-
-
-
-
+    payrollStatus:  {
+        type:String,
+        enum : ['Pending','Applied','Avoided'],
+        default: 'Pending'
+    },
 
 }, {timestamps:true});
 

@@ -49,7 +49,12 @@ const MemberLeftRequestSchema = new Schema({
         enum : ['Pending','Approved','Rejected'],
         default: 'Pending'
     },
-   })
+    payrollStatus:  {
+        type:String,
+        enum : ['Pending','Applied','Avoided'],
+        default: 'Pending'
+    },
+   },{timestamps:true})
 
 
 

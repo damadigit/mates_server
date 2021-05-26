@@ -62,7 +62,13 @@ const MemberJoinRequestSchema = new Schema({
     tinNo: String,
     pensionNo:String,
     motherName: String,
-    joinLetter: String
+    joinLetter: String,
+    payrollStatus:  {
+        type:String,
+        enum : ['Pending','Applied','Avoided'],
+        default: 'Pending'
+    },
+
 },{    timestamps: true})
 
 const enumerateDaysBetweenDates = function(startDate, endDate) {
