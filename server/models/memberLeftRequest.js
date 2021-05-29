@@ -32,7 +32,7 @@ const MemberLeftRequestSchema = new Schema({
     severancePay: Number,
     reasonType: {
         type: String,
-        enum : ['Resigned', 'ContractEnded', 'Terminated','Retired', 'LaidOff'],
+        enum : ['Resigned', 'ContractEnded', 'Dismissed','Retired', 'LaidOff'],
         default: 'ContractEnded'
     },
     leftType: {

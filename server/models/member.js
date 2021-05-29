@@ -40,8 +40,14 @@ const MemberSchema = new Schema({
     currentTeam: String,
     employmentType: {
         type: String,
-        enum : ['Casual','Contract','FullTime'],
+        enum : ['Casual','PartTime','FullTime'],
+        index: true,
         default: 'FullTime'
+    },
+    contractType: {
+        type: String,
+        enum : ['FixedTerm','Permanent','Piecework'],
+        default: 'FixedTerm'
     },
     startDate: Date,
     endDate:Date,
@@ -80,7 +86,7 @@ const MemberSchema = new Schema({
     martialStatus: String,
     status: {
         type: String,
-        enum : ['Active','Resigned', 'ContractEnded', 'Terminated','Retired', 'LaidOff'],
+        enum : ['Active','Resigned', 'ContractEnded', 'Dismissed','Retired', 'LaidOff'],
         default: 'Active'
     },
     annualLeaveBalance: Number,

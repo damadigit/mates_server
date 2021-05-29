@@ -5,7 +5,7 @@ const {postCatchelMessage} = require("../CatchelApi");
 
 const router = new Router({ prefix: '/api' });
 
-function timesheetGroupedByMemberTeam(timesheets) {
+function timesheetGroupedByMemberTeam(timesheets,teams) {
     return _(timesheets)
         .groupBy(x => `${x.member.id}$${x.currentTeam}`)
         .map((records, key) => {
@@ -13,6 +13,13 @@ function timesheetGroupedByMemberTeam(timesheets) {
             const leaveDays = records.filter(r => r.state && r.state.toLowerCase() === 'leave').reduce((sum, cv) => sum + (cv.duration ? cv.duration / 8 : 1), 0)
             const presentDays = records.filter(r => r.state && (r.state.toLowerCase() === 'present' || r.state.toLowerCase() === 'rest')).length
             const overtimes = _.mapValues(_.groupBy(records.filter(r => r.overtime).map(r => r.overtime), 'otType'), ots => _.sumBy(ots, 'hrs'))
+            let transportPayableDays = 0
+            const team = teams.find(t => t.code === records[0].currentTeam)
+            if (team && team.benefits && team.benefits.transportAllowance) {
+                const decimalPart = leaveDays - Math.floor(leaveDays)
+                transportPayableDays += (presentDays +  Math.ceil(decimalPart))
+            }
+
             return {
                 id: records[0].member.id,
                 name: records[0].member.fullName,
@@ -21,6 +28,7 @@ function timesheetGroupedByMemberTeam(timesheets) {
                 absentDays: absentDays || undefined,
                 leaveDays: leaveDays || undefined,
                 payableDays: (presentDays + Math.ceil(leaveDays)) || undefined,
+                transportPayableDays,
                 //  overtimes: _.map(_.groupBy(records.filter(r => r.overtime).map(r => r.overtime), 'otType'), (o, otType) => { return { otType, hrs: _.sumBy(o, 'hrs') } })
                 overtimes
 
@@ -28,8 +36,8 @@ function timesheetGroupedByMemberTeam(timesheets) {
         })
         .value()
 }
-function groupedByMemberTimesheet(timesheets,momentTimesheet, members) {
-   const records =  _(timesheetGroupedByMemberTeam(timesheets))
+function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams) {
+   const records =  _(timesheetGroupedByMemberTeam(timesheets, teams))
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
             const overtimes = {}
@@ -47,13 +55,14 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members) {
                 id: records[0].member.id,
                 fullName: records[0].member.fullName,
                 mateId: records[0].member.mateId,
-                member:records[0].member,
+                member: members.find(m=>m._id==records[0].member.id),
                 status: 'Active',
                 team: timesheetAtDate && timesheetAtDate.currentTeam,
                 currentTeam: records.length === 1 && records[0].currentTeam,
                 leaveDays: _.sumBy(records, 'leaveDays') || undefined,
                 absentDays: _.sumBy(records, 'absentDays') || undefined,
                 payableDays: _.sumBy(records, 'payableDays') || undefined,
+                transportPayableDays: _.sumBy(records, 'transportPayableDays') || 0,
                 overtimes: _.mapValues(overtimes, o => o || undefined),
                 //children: records.length>1 && records.map(r=>({...r,name:r.currentTeam, id:r.id+r.currentTeam}))
             }
@@ -184,20 +193,21 @@ router.get('/members', async(ctx, res) => {
 
 router.get('/timesheet',async (ctx,res)=>{
     const {atDate,startDate, endDate} = ctx.request.query
-    // const date = new Date(atDate)
+
     const timesheetInPeriod = await ctx.model('Timesheet').find({ date: { $gte: new Date(startDate), $lte:new Date(endDate)} }).exec()
-    const timesheetAtDate = await ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec()
+    const timesheetAtDate = await ctx.model('Timesheet').find({ date: { $gte: moment(new Date(atDate)).startOf('day'), $lte: new moment(new Date(atDate)).endOf('day')} }).exec()
     const members = await ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType').exec();
+    const teams = await ctx.model('Team').find({}).exec()
   // console.log(members)
     // const members = await  ctx.model('Timesheet')
    // console.log(timesheetAtDate)
-    ctx.body = groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members )
+    ctx.body = groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams )
 })
 
 router.get('/payrollMembers',async (ctx,res)=>{
 
-   const newMembers = await ctx.model('MemberJoinRequest').find({requestStatus:'Approved', payrollStatus:'Pending'}).exec();
-    const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', payrollStatus:'Pending'}).exec();
+   const newMembers = await ctx.model('MemberJoinRequest').find({requestStatus:'Approved', joinType:{$ne:'Transfer'}, payrollStatus:'Pending'}).exec();
+    const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', leftType:'EndEmployment', payrollStatus:'Pending'}).exec();
     ctx.body = {newMembers,inactiveMembers}
 })
 
@@ -265,6 +275,42 @@ router.post('/checkContractDateAndNotify', async (ctx,res)=>{
   }
 
 })
+router.post('/acknowledgePayroll', async (ctx,res)=> {
+    const {newMembers,inactiveMembers} = ctx.request.body
+    if(newMembers&&newMembers.length)
+    {
+        const updates = newMembers.map(n=>({
+            updateOne:{
+                filter: { _id: n._id },
+                update: {payrollStatus:n.payrollStatus}
+            }
+        }))
 
+        await ctx.model('MemberJoinRequest').bulkWrite(updates)
 
-module.exports = router
+    }
+
+    if(inactiveMembers&&inactiveMembers.length)
+    {
+        const updates = inactiveMembers.map(n=>({
+            updateOne:{
+                filter: { _id: n._id },
+                update: {payrollStatus:n.payrollStatus}
+            }
+        }))
+
+        await ctx.model('MemberLeftRequest').bulkWrite(updates)
+        const memberUpdate = inactiveMembers.map(n=>({
+            updateOne:{
+                filter: { _id: n.memberId },
+                update: {payrollStatus:n.payrollStatus}
+            }
+        }))
+        await ctx.model('Member').bulkWrite(memberUpdate)
+    }
+
+    ctx.body = {status:'done'}
+
+})
+
+    module.exports = router

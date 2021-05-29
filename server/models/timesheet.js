@@ -28,7 +28,8 @@ const TimesheetSchema = new Schema({
         index: true,
     },
     teams:[String],
-    state:String, //absent leave present sickLeave
+    state:String, //absent leave present
+    subState: String, //sickLeave
     remark:String,
     source: {
         type: String,

@@ -68,7 +68,11 @@ const MemberJoinRequestSchema = new Schema({
         enum : ['Pending','Applied','Avoided'],
         default: 'Pending'
     },
-
+    contractType: {
+        type: String,
+        enum : ['FixedTerm','Permanent','Piecework'],
+        default: 'FixedTerm'
+    },
 },{    timestamps: true})
 
 const enumerateDaysBetweenDates = function(startDate, endDate) {
