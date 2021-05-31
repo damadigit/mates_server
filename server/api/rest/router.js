@@ -1,6 +1,9 @@
+
+
 const moment = require("moment");
 const _  = require("lodash");
 const Router = require('koa-router');
+const {getFinalHours} = require("../tikService");
 const {postCatchelMessage} = require("../CatchelApi");
 
 const router = new Router({ prefix: '/api' });
@@ -101,9 +104,9 @@ router.get('/otSummery', async(ctx, res) => {
     //const Model = mongoose.model('OvertimeReport')r
     //console.log(ctx.model('OvertimeReport'))
     const {period='month', startDate} = ctx.request.query
-    console.log(startDate)
+    //console.log(startDate)
     const date = moment.utc(startDate).toDate()
-    console.log(moment.utc(startDate).format('MMMM/DD/yyyy'))
+    //console.log(moment.utc(startDate).format('MMMM/DD/yyyy'))
     const filedRecords =  await ctx.model('OvertimeReport').find({periodType:period, startDate: date,$or: [ { status: "approved" }] }).lean().exec()
    const members = await ctx.model('Member').find().exec()
     const withExtraOt = {
@@ -194,14 +197,34 @@ router.get('/members', async(ctx, res) => {
 router.get('/timesheet',async (ctx,res)=>{
     const {atDate,startDate, endDate} = ctx.request.query
 
-    const timesheetInPeriod = await ctx.model('Timesheet').find({ date: { $gte: new Date(startDate), $lte:new Date(endDate)} }).exec()
-    const timesheetAtDate = await ctx.model('Timesheet').find({ date: { $gte: moment(new Date(atDate)).startOf('day'), $lte: new moment(new Date(atDate)).endOf('day')} }).exec()
-    const members = await ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType').exec();
-    const teams = await ctx.model('Team').find({}).exec()
-  // console.log(members)
+
+    // const timesheetInPeriod =  ctx.model('Timesheet').find({ date: { $gte: new Date(startDate), $lte:new Date(endDate)} }).exec()
+    // const timesheetAtDate =  ctx.model('Timesheet').find({ date: { $gte: moment(new Date(atDate)).startOf('day'), $lte: new moment(new Date(atDate)).endOf('day')} }).exec()
+    // const members =  ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType').exec();
+    // const teams =  ctx.model('Team').find({}).exec()
+
+    const calls = [
+        ctx.model('Timesheet').find({ date: { $gte: new Date(startDate), $lte:new Date(endDate)} }).exec(),
+        ctx.model('Timesheet').find({ date: { $gte: moment(new Date(atDate)).startOf('day'), $lte: new moment(new Date(atDate)).endOf('day')} }).exec(),
+        ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType').exec(),
+        ctx.model('Team').find({}).exec()
+    ]
+    const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
+    const {data:hours} = await  getFinalHours({startDate, endDate})
+   // console.log(hours)
     // const members = await  ctx.model('Timesheet')
-   // console.log(timesheetAtDate)
-    ctx.body = groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams )
+    // console.log(timesheetAtDate)
+    const groupedTimesheet =  groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams )
+
+    groupedTimesheet.map(m=>{
+        const hour = hours.find(h=>h.mateId.toLowerCase()===m.mateId.toLowerCase())
+        if (hour) {
+            m.hoursWorked = +hour.adustedFullPayHours.toFixed(2)
+        }
+        return m
+    })
+    ctx.body = groupedTimesheet
+
 })
 
 router.get('/payrollMembers',async (ctx,res)=>{

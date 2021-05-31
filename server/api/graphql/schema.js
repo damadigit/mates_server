@@ -134,7 +134,7 @@ MemberJoinRequestTC.addResolver({
 
             if(addMember)
             {
-                const member = _.omit(request, ['memberId', '_id', 'joinLetter', 'requestStatus'])
+                const member = _.omit(request, ['memberId', '_id', 'joinLetter', 'requestStatus' , 'requestDate'])
 
                 member.joinRequests = [...(member.joinRequests||[]),request._id]
               //  console.log( member.joinRequests)

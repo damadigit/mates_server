@@ -7,6 +7,7 @@ const TeamSchema = new Schema({
     benefits: {
         transportAllowance: Boolean
     },
+    tikService: Boolean,
     status: {
         type: String,
         enum : ['Active','Dissolved','Hold'],

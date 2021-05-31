@@ -21,6 +21,10 @@ const MemberJoinRequestSchema = new Schema({
         enum : ['Casual','Contract','FullTime'],
         default: 'FullTime'
     },
+    requestDate: {
+        type: Date,
+        default: new Date()
+    },
     startDate: Date,
     endDate: Date,
     duration: Number,
@@ -87,7 +91,7 @@ const enumerateDaysBetweenDates = function(startDate, endDate) {
 
 MemberJoinRequestSchema.pre('save', async function(next){
 
-    if(this.team)
+    if(this.joinTeam)
      {
         this.fullName = `${this.name || ''} ${this.fatherName || ''}`
         const member = {...this.toObject()}
@@ -100,10 +104,11 @@ MemberJoinRequestSchema.pre('save', async function(next){
 
         const startDate = moment.utc(member.startDate || '1990/1/1')
         const endDate = moment.utc(member.endDate)
-        const sd = moment.max(startDate, moment(this.startDate).startOf('month'))
-        const ed = moment.min(endDate, moment(this.startDate).endOf('month').add(1, 'day'))
+        const sd = moment.max(startDate, moment(this.requestDate).startOf('month'))
+        const ed = moment.min(endDate, moment(this.requestDate).endOf('month').add(1, 'day'))
 
         const dates = enumerateDaysBetweenDates(sd, ed)
+         //console.log(sd,ed)
         const timesheet = []
         dates.map(d => {
             timesheet.push({
@@ -111,7 +116,7 @@ MemberJoinRequestSchema.pre('save', async function(next){
                 code: `${d.format('DD/MM/YY')}$${member.id}`,
                 date: d,
                 state: d.get('day') !== 0 ? 'present' : 'rest',
-                currentTeam: this.team
+                currentTeam: this.joinTeam
             })
         })
         //console.log(timesheet)
