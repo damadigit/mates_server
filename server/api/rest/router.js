@@ -91,7 +91,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
         })
         .value();
 
-   const ids = records.map(r=>r.id);
+   const ids = records.map(r=>r.id.toString());
    //console.log(ids)
   //  console.log(ids.includes('5fe1ceea3ea8ac275c66fc1e'))
    const idle = members.filter(m=>m.status==="Active"&&!ids.includes(m._id.toString())).map(m=>({
@@ -227,7 +227,7 @@ console.log(moment(endDate).endOf('day'))
     const calls = [
         ctx.model('Timesheet').find({ date: { $gte: moment(startDate).startOf('day'), $lte:moment(endDate).endOf('day')} }).exec(),
         ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec(),
-        ctx.model('Member').find({}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT').exec(),
+        ctx.model('Member').find({}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT status').exec(),
         ctx.model('Team').find({}).exec()
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
