@@ -57,10 +57,13 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
             const timesheetAtDate = momentTimesheet.find(t=>t.member.id===records[0].member.id)
          //   const member =  members.find(m=>m._id==records[0].member.id)
            // console.log(members)
-            const member = members.find(m=>m._id==records[0].member.id)
+            const member = members.find(m=>m._id.toString()===records[0].member.id.toString())
 
+            if(!member) {
+                console.log(records)
+            }
 
-            if(member.extraOT) {
+            else if(member.extraOT) {
 
 
                const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')):otPayableTeams.includes(records[0].currentTeam)?+days-(records[0].leaveDays||0)-(records[0].absentDays||0):0
@@ -219,6 +222,7 @@ router.get('/timesheet',async (ctx,res)=>{
     // const members =  ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType').exec();
     // const teams =  ctx.model('Team').find({}).exec()
 console.log(moment(endDate).endOf('day'))
+    console.log(moment(startDate).startOf('day'))
     const calls = [
         ctx.model('Timesheet').find({ date: { $gte: moment(startDate).startOf('day'), $lte:moment(endDate).endOf('day')} }).exec(),
         ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec(),
