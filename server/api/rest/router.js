@@ -39,7 +39,7 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
         })
         .value()
 }
-function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams) {
+function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, startDate) {
    const records =  _(timesheetGroupedByMemberTeam(timesheets, teams))
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
@@ -51,15 +51,27 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams) {
                 })
             })
 
+
+
             const timesheetAtDate = momentTimesheet.find(t=>t.member.id===records[0].member.id)
          //   const member =  members.find(m=>m._id==records[0].member.id)
            // console.log(members)
+            const member = members.find(m=>m._id==records[0].member.id)
+
+
+            if(member.extraOT) {
+                const otPayableTeams = teams.filter(t=>t.benefits.extraOTAllowance).map(t=>t.code)
+               const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')):otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth()-records[0].leaveDays-records[0].absentDays:0
+
+                //const otPayableDays =  _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')) //:otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth():0
+                overtimes.Other = member.extraOT * otPayableDays / moment(startDate).daysInMonth()
+            }
             return {
                 id: records[0].member.id,
-                fullName: records[0].member.fullName,
-                mateId: records[0].member.mateId,
-                member: members.find(m=>m._id==records[0].member.id),
-                status: 'Active',
+                fullName: member.fullName,
+                mateId: member.mateId,
+                member,
+                status: member.status,
                 team: timesheetAtDate && timesheetAtDate.currentTeam,
                 currentTeam: records.length === 1 && records[0].currentTeam,
                 leaveDays: _.sumBy(records, 'leaveDays') || undefined,
@@ -206,7 +218,7 @@ router.get('/timesheet',async (ctx,res)=>{
     const calls = [
         ctx.model('Timesheet').find({ date: { $gte: new Date(startDate), $lte:new Date(endDate)} }).exec(),
         ctx.model('Timesheet').find({ date: { $gte: moment(new Date(atDate)).startOf('day'), $lte: new moment(new Date(atDate)).endOf('day')} }).exec(),
-        ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType').exec(),
+        ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT').exec(),
         ctx.model('Team').find({}).exec()
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
@@ -234,6 +246,10 @@ router.get('/payrollMembers',async (ctx,res)=>{
     ctx.body = {newMembers,inactiveMembers}
 })
 
+router.post('/syncIndex', async (ctx,res)=>{
+    const {model} = ctx.request.body
+   ctx.body = await ctx.model(model).syncIndexes()
+})
 
 
 router.post('/timesheet', async(ctx, res) => {
@@ -246,7 +262,7 @@ router.post('/timesheet', async(ctx, res) => {
     if(member)
     //const teamData = await ctx.model('Team').findOne({where:{code:}})
     {
-        console.log(member)
+       // console.log(member)
         const timesheet = {
             member: _.pick(member, ['id', 'fullName', 'mateId', 'employmentType']),
             source: source || 'tik',

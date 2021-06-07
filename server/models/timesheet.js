@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const TimesheetSchema = new Schema({
     code: {
         type: String,
-       // unique:true,
+        unique: false,
         index: true,
     },
     member: {

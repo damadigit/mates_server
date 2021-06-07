@@ -5,7 +5,8 @@ const TeamSchema = new Schema({
     code: String,
     name: String,
     benefits: {
-        transportAllowance: Boolean
+        transportAllowance: Boolean,
+        extraOTAllowance: Boolean,
     },
     tikService: Boolean,
     status: {
