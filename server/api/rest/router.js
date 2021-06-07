@@ -226,7 +226,7 @@ console.log(moment(endDate).endOf('day'))
     const calls = [
         ctx.model('Timesheet').find({ date: { $gte: moment(startDate).startOf('day'), $lte:moment(endDate).endOf('day')} }).exec(),
         ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec(),
-        ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT').exec(),
+        ctx.model('Member').find({}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT').exec(),
         ctx.model('Team').find({}).exec()
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
