@@ -39,7 +39,7 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
         })
         .value()
 }
-function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, startDate) {
+function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, days) {
    const records =  _(timesheetGroupedByMemberTeam(timesheets, teams))
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
@@ -61,10 +61,10 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, st
 
             if(member.extraOT) {
                 const otPayableTeams = teams.filter(t=>t.benefits.extraOTAllowance).map(t=>t.code)
-               const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')):otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth()-records[0].leaveDays-records[0].absentDays:0
+               const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')):otPayableTeams.includes(records[0].currentTeam)?days-records[0].leaveDays-records[0].absentDays:0
 
                 //const otPayableDays =  _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')) //:otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth():0
-                overtimes.Other = member.extraOT * otPayableDays / moment(startDate).daysInMonth()
+                overtimes.Other = member.extraOT * otPayableDays / days
             }
             return {
                 id: records[0].member.id,
@@ -226,7 +226,7 @@ router.get('/timesheet',async (ctx,res)=>{
    // console.log(hours)
     // const members = await  ctx.model('Timesheet')
     // console.log(timesheetAtDate)
-    const groupedTimesheet =  groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams )
+    const groupedTimesheet =  groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams, moment(endDate).diff(moment(startDate))+1 )
 
     groupedTimesheet.map(m=>{
         const hour = hours.find(h=>h.mateId.toLowerCase()===m.mateId.toLowerCase())
