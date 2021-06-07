@@ -66,10 +66,11 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
             else if(member.extraOT) {
 
 
-               const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')):otPayableTeams.includes(records[0].currentTeam)?+days-(records[0].leaveDays||0)-(records[0].absentDays||0):0
+               const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam)), 'payableDays'):otPayableTeams.includes(records[0].currentTeam)?+days-(records[0].leaveDays||0)-(records[0].absentDays||0):0
 
                 //const otPayableDays =  _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')) //:otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth():0
                 overtimes.Other = +(member.extraOT * otPayableDays / days).toFixed(2)
+
 
             }
             return {
