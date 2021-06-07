@@ -93,7 +93,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
    const ids = records.map(r=>r.id);
    //console.log(ids)
   //  console.log(ids.includes('5fe1ceea3ea8ac275c66fc1e'))
-   const idle = members.filter(m=>!ids.includes(m._id.toString())).map(m=>({
+   const idle = members.filter(m=>m.status==="Active"&&!ids.includes(m._id.toString())).map(m=>({
        id: m._id,
        member:m,
        mateId: m.mateId,
