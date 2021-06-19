@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env.development" beforeDir="false" afterPath="$PROJECT_DIR$/.env.development" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/rest/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/memberJoinRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberJoinRequest.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +30,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../tik/tik-iclock-node" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -139,7 +141,10 @@
       <workItem from="1622429235755" duration="12158000" />
       <workItem from="1622521709919" duration="4547000" />
       <workItem from="1622678953126" duration="620000" />
-      <workItem from="1623029598606" duration="9503000" />
+      <workItem from="1623029598606" duration="10247000" />
+      <workItem from="1623064731771" duration="1969000" />
+      <workItem from="1623172569089" duration="45000" />
+      <workItem from="1624077706245" duration="978000" />
     </task>
     <task id="LOCAL-00001" summary="init-deploy">
       <created>1609068186113</created>
@@ -372,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623042624231</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="updates idel fix">
+      <created>1623043678965</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1623043678965</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -391,7 +403,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="init-deploy" />
     <MESSAGE value="change-database" />
     <MESSAGE value="playground" />
     <MESSAGE value="ot-api-corrected" />
@@ -416,33 +427,38 @@
     <MESSAGE value="updates start and end time fix timezone" />
     <MESSAGE value="updates active members idel" />
     <MESSAGE value="updates ot fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="updates ot fix" />
+    <MESSAGE value="updates idel fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="updates idel fix" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1623042620144">
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1623043677290">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1623042620144" />
-    <state width="1236" height="156" key="GridCell.Tab.0.bottom" timestamp="1623036014789">
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1623043677290" />
+    <state x="422" y="100" key="FileChooserDialogImpl" timestamp="1623172615009">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="156" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1623036014789" />
-    <state width="1236" height="156" key="GridCell.Tab.0.center" timestamp="1623036014789">
+    <state x="422" y="100" key="FileChooserDialogImpl/0.0.1280.690@0.0.1280.690" timestamp="1623172615009" />
+    <state width="1236" height="156" key="GridCell.Tab.0.bottom" timestamp="1624078711001">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="156" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1623036014789" />
-    <state width="1236" height="156" key="GridCell.Tab.0.left" timestamp="1623036014788">
+    <state width="1236" height="156" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1624078711000" />
+    <state width="1236" height="156" key="GridCell.Tab.0.center" timestamp="1624078711000">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="156" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1623036014788" />
-    <state width="1236" height="156" key="GridCell.Tab.0.right" timestamp="1623036014789">
+    <state width="1236" height="156" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1624078711000" />
+    <state width="1236" height="156" key="GridCell.Tab.0.left" timestamp="1624078711000">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="1236" height="156" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1623036014789" />
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1623042626821">
+    <state width="1236" height="156" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1624078711000" />
+    <state width="1236" height="156" key="GridCell.Tab.0.right" timestamp="1624078711000">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1623042626821" />
+    <state width="1236" height="156" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1624078711000" />
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2" timestamp="1623043680366">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="234" y="78" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1623043680366" />
     <state x="349" y="78" width="582" height="534" key="find.popup" timestamp="1623031485638">
       <screen x="0" y="0" width="1280" height="690" />
     </state>

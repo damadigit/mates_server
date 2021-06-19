@@ -67,6 +67,7 @@ const MemberJoinRequestSchema = new Schema({
     pensionNo:String,
     motherName: String,
     joinLetter: String,
+    remark: String,
     payrollStatus:  {
         type:String,
         enum : ['Pending','Applied','Avoided'],
