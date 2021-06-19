@@ -92,7 +92,7 @@ const enumerateDaysBetweenDates = function(startDate, endDate) {
 
 MemberJoinRequestSchema.pre('save', async function(next){
 
-    if(this.joinTeam)
+    if(this.joinTeam&&this.isNew)
      {
         this.fullName = `${this.name || ''} ${this.fatherName || ''}`
         const member = {...this.toObject()}
