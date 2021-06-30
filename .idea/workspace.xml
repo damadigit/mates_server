@@ -19,12 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/graphql/mongooseQL.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/mongooseQL.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
-    </list>
+    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -165,7 +160,7 @@
       <workItem from="1624077706245" duration="3208000" />
       <workItem from="1624762248991" duration="5168000" />
       <workItem from="1624865984575" duration="687000" />
-      <workItem from="1625062926330" duration="697000" />
+      <workItem from="1625062926330" duration="1053000" />
     </task>
     <task id="LOCAL-00001" summary="init-deploy">
       <created>1609068186113</created>
@@ -426,7 +421,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624765369617</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="fix member not found (timesheet vs new member)">
+      <created>1625063945133</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1625063945133</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
