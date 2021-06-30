@@ -43,6 +43,16 @@ module.exports = function(name,schemaComposer ) {
             },
         })
 
+    ModelTC.getResolver('removeMany')
+        .addFilterArg({
+            name: '_ids',
+            type: '[String]',
+            query: (query, value, resolveParams) => {
+
+                query._id = {$in:value}
+            },
+        })
+
 
     ModelTC.addFields( {
         id:
