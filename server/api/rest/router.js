@@ -14,13 +14,15 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
         .map((records, key) => {
             const absentDays = records.filter(r => r.state && r.state.toLowerCase() === 'absent').length
             const leaveDays = records.filter(r => r.state && r.state.toLowerCase() === 'leave').reduce((sum, cv) => sum + (cv.duration ? cv.duration / 8 : 1), 0)
-            const presentDays = records.filter(r => r.state && (r.state.toLowerCase() === 'present' || r.state.toLowerCase() === 'rest')).length
+            const presentDays = records.filter(r => r.state && (r.state.toLowerCase() === 'present')).length
+            // const restDays = records.filter(r => r.state && (r.state.toLowerCase() === 'rest').length;
             const overtimes = _.mapValues(_.groupBy(records.filter(r => r.overtime).map(r => r.overtime), 'otType'), ots => _.sumBy(ots, 'hrs'))
             let transportPayableDays = 0
             const team = teams.find(t => t.code === records[0].currentTeam)
             if (team && team.benefits && team.benefits.transportAllowance) {
                 const decimalPart = leaveDays - Math.floor(leaveDays)
-                transportPayableDays += (presentDays +  Math.ceil(decimalPart))
+                    const defaultRestDays = 5;
+                transportPayableDays += defaultRestDays + (presentDays +  Math.ceil(decimalPart))
             }
 
             return {
