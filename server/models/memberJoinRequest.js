@@ -21,6 +21,10 @@ const MemberJoinRequestSchema = new Schema({
         enum : ['Casual','Contract','FullTime'],
         default: 'FullTime'
     },
+    payMonth:  {
+        type: Date,
+        default: moment().startOf('month').toDate()
+    },
     requestDate: {
         type: Date,
         default: new Date()
@@ -92,10 +96,12 @@ const enumerateDaysBetweenDates = function(startDate, endDate) {
 
 MemberJoinRequestSchema.pre('save', async function(next){
 
-    if(this.joinTeam&&this.isNew)
+    console.log(this)
+    if(this.joinTeam)
      {
         this.fullName = `${this.name || ''} ${this.fatherName || ''}`
         const member = {...this.toObject()}
+       // console.log(member)
         member.fullName = `${this.name || ''} ${this.fatherName || ''}`
         // console.log(member)
         member.id = this.memberId || this._id
@@ -105,8 +111,8 @@ MemberJoinRequestSchema.pre('save', async function(next){
 
         const startDate = moment.utc(member.startDate || '1990/1/1')
         const endDate = moment.utc(member.endDate)
-        const sd = moment.max(startDate, moment(this.requestDate).startOf('month'))
-        const ed = moment.min(endDate, moment(this.requestDate).endOf('month').add(1, 'day'))
+        const sd = moment.max(startDate, moment(this.payMonth).startOf('month'))
+        const ed = moment.min(endDate, moment(this.payMonth).endOf('month').add(1, 'day'))
 
         const dates = enumerateDaysBetweenDates(sd, ed)
          //console.log(sd,ed)
@@ -120,7 +126,8 @@ MemberJoinRequestSchema.pre('save', async function(next){
                 currentTeam: this.joinTeam
             })
         })
-        //console.log(timesheet)
+
+        console.log(timesheet)
         await mongoose.model('Timesheet').insertMany(timesheet)
     }
     //
