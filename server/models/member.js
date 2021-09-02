@@ -56,7 +56,10 @@ const MemberSchema = new Schema({
     position:String,
     joinRemark: String,
     citizenship:String,
-    extraOT: Number,
+    extraOT: {
+        type: Number,
+        index: true
+    },
     leaveInfo: {
         remainingDays:Number,
         daysTaken:Number,

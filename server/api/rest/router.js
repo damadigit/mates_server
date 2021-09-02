@@ -46,7 +46,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
    const records =  _(timesheetGroupedByMemberTeam(timesheets, teams))
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
-            const overtimes = {}
+            let overtimes = {}
             const items = records.map(r => r.overtimes)
             _.each(items, function(item) {
                 _.each(['Afterwork', 'Sunday', 'Night', 'HollyDay', 'Other'], function(type) {
@@ -71,8 +71,12 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
                const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam)), 'payableDays'):otPayableTeams.includes(records[0].currentTeam)?+days-(records[0].leaveDays||0)-(records[0].absentDays||0):0
 
                 //const otPayableDays =  _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')) //:otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth():0
-                overtimes.Other = +(member.extraOT * otPayableDays / days).toFixed(2)
-
+              if(member.extraOT<72) {
+                  overtimes.Other = +(member.extraOT * otPayableDays / days).toFixed(2)
+              }
+              else {
+                  overtimes = {Other:+(member.extraOT * otPayableDays / days).toFixed(2)}
+              }
 
             }
             return {
