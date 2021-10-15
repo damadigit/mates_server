@@ -68,9 +68,9 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
             else if(member.extraOT) {
 
 
-               const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam)), 'payableDays'):otPayableTeams.includes(records[0].currentTeam)?+days-(records[0].leaveDays||0)-(records[0].absentDays||0):0
 
-                //const otPayableDays =  _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')) //:otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth():0
+               const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam)), 'payableDays'):otPayableTeams.includes(records[0].currentTeam)?+days-(records[0].leaveDays||0)-(records[0].absentDays||0):0
+                           //const otPayableDays =  _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')) //:otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth():0
               if(member.extraOT<72) {
                   overtimes.Other = +(member.extraOT * otPayableDays / days).toFixed(2)
               }
@@ -228,8 +228,8 @@ router.get('/timesheet',async (ctx,res)=>{
     // const timesheetAtDate =  ctx.model('Timesheet').find({ date: { $gte: moment(new Date(atDate)).startOf('day'), $lte: new moment(new Date(atDate)).endOf('day')} }).exec()
     // const members =  ctx.model('Member').find({status: 'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType').exec();
     // const teams =  ctx.model('Team').find({}).exec()
-console.log(moment(endDate).endOf('day'))
-    console.log(moment(startDate).startOf('day'))
+// console.log(moment(endDate).endOf('day'))
+//     console.log(moment(startDate).startOf('day'))
     const calls = [
         ctx.model('Timesheet').find({ date: { $gte: moment(startDate).startOf('day'), $lte:moment(endDate).endOf('day')} }).exec(),
         ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec(),
@@ -238,7 +238,7 @@ console.log(moment(endDate).endOf('day'))
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
     const {data:hours} = await  getFinalHours({startDate, endDate})
-   // console.log(hours)
+   console.log(hours)
     // const members = await  ctx.model('Timesheet')
     // console.log(timesheetAtDate)
     const groupedTimesheet =  groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams, moment(endDate).diff(moment(startDate),'days')+1 )
