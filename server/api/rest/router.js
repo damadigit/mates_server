@@ -16,7 +16,7 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
             const leaveDays = records.filter(r => r.state && r.state.toLowerCase() === 'leave').reduce((sum, cv) => sum + (cv.duration ? cv.duration / 8 : 1), 0)
             const presentDays = records.filter(r => r.state && (r.state.toLowerCase() === 'present')).length
             // const restDays = records.filter(r => r.state && (r.state.toLowerCase() === 'rest').length;
-            const overtimes = _.mapValues(_.groupBy(records.filter(r => r.overtime).map(r => r.overtime), 'otType'), ots => _.sumBy(ots, 'hrs'))
+            const overtimes = _.mapValues(_.groupBy(records.filter(r => r.overtime&&(r.state && (r.state.toLowerCase() === 'present'))).map(r => r.overtime), 'otType'), ots => _.sumBy(ots, 'hrs'))
             let transportPayableDays = 0
             const team = teams.find(t => t.code === records[0].currentTeam)
             if (team && team.benefits && team.benefits.transportAllowance) {
@@ -47,7 +47,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
             let overtimes = {}
-            const items = records.filter(r=>(r.state && (r.state.toLowerCase() === 'present'))).map(r =>r.overtimes)
+            const items = records.map(r =>r.overtimes)
             _.each(items, function(item) {
                 _.each(['Afterwork', 'Sunday', 'Night', 'HollyDay', 'Other'], function(type) {
                     overtimes[type] = (overtimes[type] || 0) + (item[type] || 0)
