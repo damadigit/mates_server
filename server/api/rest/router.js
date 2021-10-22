@@ -47,7 +47,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
             let overtimes = {}
-            const items = records.map(r => (r.state && (r.state.toLowerCase() === 'present'))&&r.overtimes)
+            const items = records.filter(r=>(r.state && (r.state.toLowerCase() === 'present'))).map(r =>r.overtimes)
             _.each(items, function(item) {
                 _.each(['Afterwork', 'Sunday', 'Night', 'HollyDay', 'Other'], function(type) {
                     overtimes[type] = (overtimes[type] || 0) + (item[type] || 0)
