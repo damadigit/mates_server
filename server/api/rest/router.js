@@ -47,7 +47,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
             let overtimes = {}
-            const items = records.map(r => r.overtimes)
+            const items = records.map(r => (r.state && (r.state.toLowerCase() === 'present'))&&r.overtimes)
             _.each(items, function(item) {
                 _.each(['Afterwork', 'Sunday', 'Night', 'HollyDay', 'Other'], function(type) {
                     overtimes[type] = (overtimes[type] || 0) + (item[type] || 0)
@@ -62,7 +62,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
             const member = members.find(m=>m.mateId.toString().replace(/\s+/g, '')===records[0].member.mateId.toString().replace(/\s+/g, ''))
 
             if(!member) {
-                console.log(records)
+                console.log(records[0])
             }
 
             else if(member.extraOT) {
@@ -238,7 +238,7 @@ router.get('/timesheet',async (ctx,res)=>{
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
     const {data:hours} = await  getFinalHours({startDate, endDate})
-   console.log(hours)
+   // console.log(hours)
     // const members = await  ctx.model('Timesheet')
     // console.log(timesheetAtDate)
     const groupedTimesheet =  groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams, moment(endDate).diff(moment(startDate),'days')+1 )

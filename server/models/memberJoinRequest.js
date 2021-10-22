@@ -96,7 +96,7 @@ const enumerateDaysBetweenDates = function(startDate, endDate) {
 
 MemberJoinRequestSchema.pre('save', async function(next){
 
-    console.log(this)
+    // console.log(this)
     if(this.joinTeam)
      {
         this.fullName = `${this.name || ''} ${this.fatherName || ''}`
@@ -127,7 +127,7 @@ MemberJoinRequestSchema.pre('save', async function(next){
             })
         })
 
-        console.log(timesheet)
+        // console.log(timesheet)
         await mongoose.model('Timesheet').insertMany(timesheet)
     }
     //
