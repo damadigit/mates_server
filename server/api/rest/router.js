@@ -59,10 +59,11 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
             const timesheetAtDate = momentTimesheet.find(t=>t.member.id===records[0].member.id)
          //   const member =  members.find(m=>m._id==records[0].member.id)
            // console.log(members)
-            const member = members.find(m=>m.mateId.toString().replace(/\s+/g, '')===records[0].member.mateId.toString().replace(/\s+/g, ''))
+            let member = members.find(m=>m.mateId.toString().replace(/\s+/g, '')===records[0].member.mateId.toString().replace(/\s+/g, ''))
 
             if(!member) {
                 console.log(records[0])
+                member= {}
             }
 
             else if(member.extraOT) {
@@ -81,7 +82,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
             }
             return {
                 id: records[0].member.id,
-                fullName: member.fullName,
+                fullName:member && member.fullName,
                 mateId: member.mateId,
                 member,
                 status: member.status,
