@@ -63,7 +63,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
 
             if(!member) {
                 console.log(records[0])
-                member= {}
+                member= {mateId:''}
             }
 
             else if(member.extraOT) {
