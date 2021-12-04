@@ -6,7 +6,7 @@ const service = axios.create({
     headers: {'x-company': 'DEWETO'}
 });
 
- const getFinalHours = ({startDate, endDate, fillRest=true, maxHours=196, month, year}) => service.get('/hours', { params: { startDate, endDate, fillRest, maxHours, month, year }})
+ const getFinalHours = ({startDate, endDate}) => service.get('/timeSheets', { params: { startDate, endDate }})
 module.exports = {
     getFinalHours
 }

@@ -238,16 +238,22 @@ router.get('/timesheet',async (ctx,res)=>{
         ctx.model('Team').find({}).exec()
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
-    const {data:hours} = await  getFinalHours({startDate, endDate})
+    const {data:hours=[]} = await  getFinalHours({startDate, endDate})
+    // const hours =[]
    // console.log(hours)
     // const members = await  ctx.model('Timesheet')
     // console.log(timesheetAtDate)
     const groupedTimesheet =  groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams, moment(endDate).diff(moment(startDate),'days')+1 )
 
     groupedTimesheet.map(m=>{
-        const hour = hours.find(h=>h.mateId.toLowerCase()===m.mateId.toLowerCase())
-        if (hour) {
-            m.hoursWorked = +hour.adustedFullPayHours.toFixed(2)
+        const   d = hours.find(h=>h.mateId.toLowerCase()===m.mateId.toLowerCase())
+        if (d) {
+            // m.hoursWorked = +hour.adustedFullPayHours.toFixed(2)
+            m.monthlyHours = d.fullExpectedHrs.toFixed(2)
+            m.actualHoursWorked=d.workHrs.toFixed(2)
+            m.hoursWorked=(d.adjustedFullPayHours||d.fullPayHours||d.payHrs||0).toFixed(2)
+
+            // m.timeData = hour
         }
         return m
     })
