@@ -23,7 +23,7 @@ const MemberLeftRequestSchema = new Schema({
             default: 'Transfer'
         },
     },
-    effectiveDate: Date,
+        effectiveDate: Date,
     lastWorkDate: Date,
     noticeDate: Date,
     leaveCompensation: Number,

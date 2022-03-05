@@ -8,21 +8,45 @@ const {postCatchelMessage} = require("../CatchelApi");
 
 const router = new Router({ prefix: '/api' });
 
+const enumerateDaysBetweenDates = function (startDate, endDate) {
+    const now = moment(startDate); const dates = []
+
+    while (now.isSameOrBefore(endDate)) {
+        dates.push({date:moment(now),isRest:now.weekday()===0})
+        now.add(1, 'days')
+    }
+    return dates
+}
+
+
 function timesheetGroupedByMemberTeam(timesheets,teams) {
     return _(timesheets)
         .groupBy(x => `${x.member.id}$${x.currentTeam}`)
-        .map((records, key) => {
+        .map((r, key) => {
+            const records = _.sortBy(r,'date')
+            const present = records.filter(r => r.state && (r.state.toLowerCase() === 'present'))
+            const presentAndLeave = records.filter(r => r.state && (r.state.toLowerCase() === 'present'||r.state.toLowerCase() === 'leave'))
+            let restDays = 0
+            if(presentAndLeave&&presentAndLeave.length>2) {
+                const startDate = presentAndLeave[0].date
+                const endDate = presentAndLeave[presentAndLeave.length -1]&&presentAndLeave[presentAndLeave.length - 1].date
+
+                restDays =  (startDate && endDate && enumerateDaysBetweenDates(startDate,endDate).filter(d=>d.isRest).length)||0
+                // if(key.includes("5fe92da7e9803400176992b8")){
+                //     console.log("ddd",present,startDate,endDate,restDays)
+                // }
+            }
             const absentDays = records.filter(r => r.state && r.state.toLowerCase() === 'absent').length
             const leaveDays = records.filter(r => r.state && r.state.toLowerCase() === 'leave').reduce((sum, cv) => sum + (cv.duration ? cv.duration / 8 : 1), 0)
-            const presentDays = records.filter(r => r.state && (r.state.toLowerCase() === 'present')).length
+            const presentDays = present.length
             // const restDays = records.filter(r => r.state && (r.state.toLowerCase() === 'rest').length;
             const overtimes = _.mapValues(_.groupBy(records.filter(r => r.overtime&&(r.state && (r.state.toLowerCase() === 'present'))).map(r => r.overtime), 'otType'), ots => _.sumBy(ots, 'hrs'))
             let transportPayableDays = 0
             const team = teams.find(t => t.code === records[0].currentTeam)
             if (team && team.benefits && team.benefits.transportAllowance) {
-                const decimalPart = leaveDays - Math.floor(leaveDays)
-                    const defaultRestDays = 5;
-                transportPayableDays += defaultRestDays + (presentDays +  Math.ceil(decimalPart))
+                const decimalPart = leaveDays - Math.floor(+leaveDays)
+                    // const defaultRestDays = 5;
+                transportPayableDays += restDays + (presentDays +  Math.ceil(decimalPart))
             }
 
             return {
@@ -35,7 +59,8 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
                 payableDays: (presentDays + Math.ceil(leaveDays)) || undefined,
                 transportPayableDays,
                 //  overtimes: _.map(_.groupBy(records.filter(r => r.overtime).map(r => r.overtime), 'otType'), (o, otType) => { return { otType, hrs: _.sumBy(o, 'hrs') } })
-                overtimes
+                overtimes,
+                restDays
 
             }
         })
@@ -238,8 +263,8 @@ router.get('/timesheet',async (ctx,res)=>{
         ctx.model('Team').find({}).exec()
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
-    const {data:hours=[]} = await  getFinalHours({startDate, endDate})
-    // const hours =[]
+    // const {data:hours=[]} = await  getFinalHours({startDate, endDate})
+    const hours =[]
    // console.log(hours)
     // const members = await  ctx.model('Timesheet')
     // console.log(timesheetAtDate)
@@ -249,9 +274,9 @@ router.get('/timesheet',async (ctx,res)=>{
         const   d = hours.find(h=>h.mateId.toLowerCase()===m.mateId.toLowerCase())
         if (d) {
             // m.hoursWorked = +hour.adustedFullPayHours.toFixed(2)
-            m.monthlyHours = d.fullExpectedHrs.toFixed(2)
-            m.actualHoursWorked=d.workHrs.toFixed(2)
-            m.hoursWorked=(d.adjustedFullPayHours||d.fullPayHours||d.payHrs||0).toFixed(2)
+            m.monthlyHours = +d.fullExpectedHrs.toFixed(2)
+            m.actualHoursWorked=+d.workHrs.toFixed(2)
+            m.hoursWorked=+(d.adjustedFullPayHours||d.fullPayHours||d.payHrs||0).toFixed(2)
 
             // m.timeData = hour
         }
