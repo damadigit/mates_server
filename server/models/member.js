@@ -60,6 +60,7 @@ const MemberSchema = new Schema({
         type: Number,
         index: true
     },
+    fullTransport:Boolean,
     leaveInfo: {
         remainingDays:Number,
         daysTaken:Number,
@@ -89,7 +90,7 @@ const MemberSchema = new Schema({
     martialStatus: String,
     status: {
         type: String,
-        enum : ['Active','Resigned', 'ContractEnded', 'Dismissed','Retired', 'LaidOff'],
+        enum : ['Active','Resigned', 'ContractEnded', 'Dismissed','Retired', 'LaidOff', 'Excluded'],
         default: 'Active'
     },
     annualLeaveBalance: Number,

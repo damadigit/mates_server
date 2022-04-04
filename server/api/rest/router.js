@@ -37,6 +37,7 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
                 // }
             }
             const absentDays = records.filter(r => r.state && r.state.toLowerCase() === 'absent').length
+            const recordedRestDays = records.filter(r => r.state && r.state.toLowerCase() === 'rest').length
             const leaveDays = records.filter(r => r.state && r.state.toLowerCase() === 'leave').reduce((sum, cv) => sum + (cv.duration ? cv.duration / 8 : 1), 0)
             const presentDays = present.length
             // const restDays = records.filter(r => r.state && (r.state.toLowerCase() === 'rest').length;
@@ -46,7 +47,9 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
             if (team && team.benefits && team.benefits.transportAllowance) {
                 const decimalPart = leaveDays - Math.floor(+leaveDays)
                     // const defaultRestDays = 5;
-                transportPayableDays += restDays + (presentDays +  Math.ceil(decimalPart))
+
+                transportPayableDays += restDays + (presentDays +  Math.ceil(decimalPart)) - recordedRestDays
+
             }
 
             return {
@@ -72,39 +75,50 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
             let overtimes = {}
-            const items = records.map(r =>r.overtimes)
-            _.each(items, function(item) {
-                _.each(['Afterwork', 'Sunday', 'Night', 'HollyDay', 'Other'], function(type) {
+            const items = records.map(r => r.overtimes)
+            _.each(items, function (item) {
+                _.each(['Afterwork', 'Sunday', 'Night', 'HollyDay', 'Other'], function (type) {
                     overtimes[type] = (overtimes[type] || 0) + (item[type] || 0)
                 })
             })
 
+            let  transportPayableDays = _.sumBy(records, 'transportPayableDays') || 0
+
+            const timesheetAtDate = momentTimesheet.find(t => t.member.id === records[0].member.id)
+            //   const member =  members.find(m=>m._id==records[0].member.id)
+            // console.log(members)
+            let member = members.find(m => m.mateId.toString().replace(/\s+/g, '') === records[0].member.mateId.toString().replace(/\s+/g, ''))
+
+            if (!member) {
+                // console.log(records[0])
+                member = {mateId: ''}
+            } else
+            {
+                // if(member.mateId==="yosefe.ayenew@deweto"){
+                //     console.log("xxx",member)
+                // }
+                if (member.extraOT) {
 
 
-            const timesheetAtDate = momentTimesheet.find(t=>t.member.id===records[0].member.id)
-         //   const member =  members.find(m=>m._id==records[0].member.id)
-           // console.log(members)
-            let member = members.find(m=>m.mateId.toString().replace(/\s+/g, '')===records[0].member.mateId.toString().replace(/\s+/g, ''))
+                const otPayableDays = records.length > 1 ? _.sumBy(records.filter(r => otPayableTeams.includes(r.currentTeam)), 'payableDays') + _.sumBy(records.filter(r => otPayableTeams.includes(r.currentTeam)), 'restDays') : otPayableTeams.includes(records[0].currentTeam) ? +days - (records[0].leaveDays || 0) - (records[0].absentDays || 0) : 0
+                //const otPayableDays =  _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')) //:otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth():0
+                if (member.extraOT < 72) {
+                    overtimes.Other = +(member.extraOT * otPayableDays / days).toFixed(2)
+                } else {
+                    if (records.length > 1) {
+                        console.log(records)
+                    }
+                    console.log({otPayableDays, id: member.mateId, length: records.length})
+                    overtimes = {Other: +(member.extraOT * otPayableDays / days).toFixed(2)}
+                }
 
-            if(!member) {
-                console.log(records[0])
-                member= {mateId:''}
             }
+                if(member.fullTransport){
 
-            else if(member.extraOT) {
+                          transportPayableDays = -1
 
-
-
-               const otPayableDays = records.length>1? _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam)), 'payableDays'):otPayableTeams.includes(records[0].currentTeam)?+days-(records[0].leaveDays||0)-(records[0].absentDays||0):0
-                           //const otPayableDays =  _.sumBy(records.filter(r=>otPayableTeams.includes(r.currentTeam), 'payableDays')) //:otPayableTeams.includes(records[0].currentTeam)?moment(startDate).daysInMonth():0
-              if(member.extraOT<72) {
-                  overtimes.Other = +(member.extraOT * otPayableDays / days).toFixed(2)
-              }
-              else {
-                  overtimes = {Other:+(member.extraOT * otPayableDays / days).toFixed(2)}
-              }
-
-            }
+                }
+        }
             return {
                 id: records[0].member.id,
                 fullName:member && member.fullName,
@@ -116,7 +130,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
                 leaveDays: _.sumBy(records, 'leaveDays') || undefined,
                 absentDays: _.sumBy(records, 'absentDays') || undefined,
                 payableDays: _.sumBy(records, 'payableDays') || undefined,
-                transportPayableDays: _.sumBy(records, 'transportPayableDays') || 0,
+                transportPayableDays,
                 overtimes: _.mapValues(overtimes, o => o || undefined),
                 //children: records.length>1 && records.map(r=>({...r,name:r.currentTeam, id:r.id+r.currentTeam}))
             }
@@ -126,7 +140,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
    const ids = records.map(r=>r.id.toString());
    //console.log(ids)
   //  console.log(ids.includes('5fe1ceea3ea8ac275c66fc1e'))
-   const idle = members.filter(m=>m.status==="Active"&&!ids.includes(m._id.toString())).map(m=>({
+   const idle = members.filter(m=>m.status==="Active"&&!ids.includes(m._id.toString())&&m.employmentType!=="Casual").map(m=>({
        id: m._id,
        member:m,
        mateId: m.mateId,
@@ -259,7 +273,7 @@ router.get('/timesheet',async (ctx,res)=>{
     const calls = [
         ctx.model('Timesheet').find({ date: { $gte: moment(startDate).startOf('day'), $lte:moment(endDate).endOf('day')} }).exec(),
         ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec(),
-        ctx.model('Member').find({}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT status').exec(),
+        ctx.model('Member').find({}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT status fullTransport').exec(),
         ctx.model('Team').find({}).exec()
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
@@ -287,9 +301,10 @@ router.get('/timesheet',async (ctx,res)=>{
 })
 
 router.get('/payrollMembers',async (ctx,res)=>{
+    const {startDate,endDate} = ctx.request.query
 
-   const newMembers = await ctx.model('MemberJoinRequest').find({requestStatus:'Approved', joinType:{$ne:'Transfer'}, payrollStatus:'Pending'}).exec();
-    const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', leftType:'EndEmployment', payrollStatus:'Pending'}).exec();
+   const newMembers = await ctx.model('MemberJoinRequest').find({joinType: {$in: ["Employment", "ReEmployment"]},requestStatus:'Approved', payrollStatus:'Pending', startDate:{$gte:moment(startDate).add(-5,'days')}, endDate:{$gte:startDate} }).exec();
+    const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', leftType:'EndEmployment', payrollStatus:'Pending', effectiveDate:{$gte:moment(startDate).add(-5,'days'),$lte:moment(endDate).add(5,'days')}, }).exec();
     ctx.body = {newMembers,inactiveMembers}
 })
 
