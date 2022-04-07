@@ -47,9 +47,12 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
             if (team && team.benefits && team.benefits.transportAllowance) {
                 const decimalPart = leaveDays - Math.floor(+leaveDays)
                     // const defaultRestDays = 5;
+                if(records[0].member.mateId==="getenet.gebreyes@deweto") {
+                    console.log({restDays,presentDays,recordedRestDays})
+                }
 
-                transportPayableDays += restDays + (presentDays +  Math.ceil(decimalPart)) - recordedRestDays
-
+                transportPayableDays += restDays + (presentDays +  Math.ceil(decimalPart)) //- recordedRestDays
+                console.log({name:records[0].member.fullName,restDays,presentDays,recordedRestDays})
             }
 
             return {
