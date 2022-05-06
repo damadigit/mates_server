@@ -38,6 +38,8 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
             }
             const absentDays = records.filter(r => r.state && r.state.toLowerCase() === 'absent').length
             const recordedRestDays = records.filter(r => r.state && r.state.toLowerCase() === 'rest').length
+            // const recordedOffDays= records.filter(r => r.state && r.state.toLowerCase() === 'rest' && moment(r.date)).length
+            //
             const leaveDays = records.filter(r => r.state && r.state.toLowerCase() === 'leave').reduce((sum, cv) => sum + (cv.duration ? cv.duration / 8 : 1), 0)
             const presentDays = present.length
             // const restDays = records.filter(r => r.state && (r.state.toLowerCase() === 'rest').length;
@@ -47,12 +49,14 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
             if (team && team.benefits && team.benefits.transportAllowance) {
                 const decimalPart = leaveDays - Math.floor(+leaveDays)
                     // const defaultRestDays = 5;
-                if(records[0].member.mateId==="getenet.gebreyes@deweto") {
-                    console.log({restDays,presentDays,recordedRestDays})
-                }
 
-                transportPayableDays += restDays + (presentDays +  Math.ceil(decimalPart)) //- recordedRestDays
-                console.log({name:records[0].member.fullName,restDays,presentDays,recordedRestDays})
+
+                transportPayableDays += restDays + (presentDays +  Math.ceil(decimalPart)) + 1 //hollyDay //- recordedRestDays
+                // console.log({name:records[0].member.fullName,restDays,presentDays,recordedRestDays})
+
+                // if(records[0].member.mateId==="ashu@deweto") {
+                //     console.log({restDays,presentDays,recordedRestDays, transportPayableDays, leaveDays})
+                // }
             }
 
             return {
@@ -109,9 +113,9 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
                     overtimes.Other = +(member.extraOT * otPayableDays / days).toFixed(2)
                 } else {
                     if (records.length > 1) {
-                        console.log(records)
+                        // console.log(records)
                     }
-                    console.log({otPayableDays, id: member.mateId, length: records.length})
+                    // console.log({otPayableDays, id: member.mateId, length: records.length})
                     overtimes = {Other: +(member.extraOT * otPayableDays / days).toFixed(2)}
                 }
 
