@@ -12,6 +12,7 @@ const MemberSchema = new Schema({
         unique:true
     },
     name: String,
+    orgId:String,
     fatherName: String,
     gFatherName: String,
     gender: String,

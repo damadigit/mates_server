@@ -27,6 +27,7 @@ const MemberJoinRequestSchema = new Schema({
     },
     requestDate: {
         type: Date,
+        index: true,
         default: new Date()
     },
     startDate: Date,
@@ -96,8 +97,8 @@ const enumerateDaysBetweenDates = function(startDate, endDate) {
 
 MemberJoinRequestSchema.pre('save', async function(next){
 
-    // console.log(this)
-    if(this.joinTeam)
+    console.log(this)
+    if(this.joinTeam&&this.requestStatus==="Approved")
      {
         this.fullName = `${this.name || ''} ${this.fatherName || ''}`
         const member = {...this.toObject()}
