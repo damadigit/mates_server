@@ -208,14 +208,11 @@
       <workItem from="1670051113766" duration="1330000" />
       <workItem from="1675932499319" duration="3506000" />
       <workItem from="1680543972310" duration="646000" />
-      <workItem from="1685354158534" duration="7358000" />
-    </task>
-    <task id="LOCAL-00006" summary="leave-absence added">
-      <created>1609212632211</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1609212632211</updated>
+      <workItem from="1685354158534" duration="9743000" />
+      <workItem from="1685513225491" duration="1718000" />
+      <workItem from="1685608424959" duration="1417000" />
+      <workItem from="1685994736258" duration="3375000" />
+      <workItem from="1686036050883" duration="4546000" />
     </task>
     <task id="LOCAL-00007" summary="added month input">
       <created>1609479009155</created>
@@ -553,7 +550,14 @@
       <option name="project" value="LOCAL" />
       <updated>1651825456056</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="new hire requests approval before they are on timesheet">
+      <created>1685435777468</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1685435777469</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -584,7 +588,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="timesheet feature" />
     <MESSAGE value="timesheet report" />
     <MESSAGE value="week 0 done" />
     <MESSAGE value="payday integration 1" />
@@ -609,9 +612,14 @@
     <MESSAGE value="fullTransport" />
     <MESSAGE value="fix transport Days" />
     <MESSAGE value="hack tansport days hollyday" />
-    <option name="LAST_COMMIT_MESSAGE" value="hack tansport days hollyday" />
+    <MESSAGE value="new hire requests approval before they are on timesheet" />
+    <option name="LAST_COMMIT_MESSAGE" value="new hire requests approval before they are on timesheet" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1685435776361">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1685435776361" />
     <state width="618" height="156" key="GridCell.Tab.0.bottom" timestamp="1685354354381">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
@@ -628,9 +636,17 @@
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state width="618" height="156" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1685354354381" />
+    <state x="234" y="65" key="Vcs.Push.Dialog.v2" timestamp="1685437186583">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="234" y="65" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1685437186583" />
     <state x="350" y="78" width="581" height="534" key="find.popup" timestamp="1685435138714">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="350" y="78" width="581" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1685435138714" />
+    <state x="430" y="237" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1685437180346">
+      <screen x="0" y="0" width="1280" height="690" />
+    </state>
+    <state x="430" y="237" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.690@0.0.1280.690" timestamp="1685437180346" />
   </component>
 </project>

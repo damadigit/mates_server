@@ -97,7 +97,7 @@ const enumerateDaysBetweenDates = function(startDate, endDate) {
 
 MemberJoinRequestSchema.pre('save', async function(next){
 
-    console.log(this)
+    // console.log(this)
     if(this.joinTeam&&this.requestStatus==="Approved")
      {
         this.fullName = `${this.name || ''} ${this.fatherName || ''}`
