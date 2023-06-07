@@ -91,7 +91,7 @@ const MemberSchema = new Schema({
     martialStatus: String,
     status: {
         type: String,
-        enum : ['Active','Resigned', 'ContractEnded', 'Dismissed','Retired', 'LaidOff', 'Excluded'],
+        enum : ['Active','Resigned', 'ContractEnded', 'Dismissed','Retired', 'LaidOff', 'Excluded','Exempt'],
         default: 'Active'
     },
     annualLeaveBalance: Number,

@@ -22,7 +22,6 @@
     <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/member.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/memberJoinRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberJoinRequest.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,6 +212,9 @@
       <workItem from="1685608424959" duration="1417000" />
       <workItem from="1685994736258" duration="3375000" />
       <workItem from="1686036050883" duration="4546000" />
+      <workItem from="1686120095875" duration="289000" />
+      <workItem from="1686120917392" duration="776000" />
+      <workItem from="1686127787016" duration="3020000" />
     </task>
     <task id="LOCAL-00007" summary="added month input">
       <created>1609479009155</created>
