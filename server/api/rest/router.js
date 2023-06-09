@@ -3,6 +3,7 @@
 const moment = require("moment");
 const _  = require("lodash");
 const Router = require('koa-router');
+const {getWorkCloseDays} = require("../KeyValueApi");
 const {getFinalHours} = require("../tikService");
 const {postCatchelMessage} = require("../CatchelApi");
 
@@ -24,20 +25,22 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
         .groupBy(x => `${x.member.id}$${x.currentTeam}`)
         .map((r, key) => {
             const records = _.sortBy(r,'date')
-            const present = records.filter(r => r.state && (r.state.toLowerCase() === 'present'))
-            const presentAndLeave = records.filter(r => r.state && (r.state.toLowerCase() === 'present'||r.state.toLowerCase() === 'leave'))
-            let restDays = 0
-            if(presentAndLeave&&presentAndLeave.length>2) {
-                const startDate = presentAndLeave[0].date
-                const endDate = presentAndLeave[presentAndLeave.length -1]&&presentAndLeave[presentAndLeave.length - 1].date
+            // console.log(r,key)
 
-                restDays =  (startDate && endDate && enumerateDaysBetweenDates(startDate,endDate).filter(d=>d.isRest).length)||0
-                // if(key.includes("5fe92da7e9803400176992b8")){
-                //     console.log("ddd",present,startDate,endDate,restDays)
-                // }
-            }
+            const present = records.filter(r => r.state && (r.state.toLowerCase() === 'present'))
+            // const presentAndLeave = records.filter(r => r.state && (r.state.toLowerCase() === 'present'||r.state.toLowerCase() === 'leave'))
+            // let restDays = 0
+            // if(presentAndLeave&&presentAndLeave.length>2) {
+            //     const startDate = presentAndLeave[0].date
+            //     const endDate = presentAndLeave[presentAndLeave.length -1]&&presentAndLeave[presentAndLeave.length - 1].date
+            //
+            //     restDays =  (startDate && endDate && enumerateDaysBetweenDates(startDate,endDate).filter(d=>d.isRest).length)||0
+            //     // if(key.includes("5fe92da7e9803400176992b8")){
+            //     //     console.log("ddd",present,startDate,endDate,restDays)
+            //     // }
+            // }
             const absentDays = records.filter(r => r.state && r.state.toLowerCase() === 'absent').length
-            const recordedRestDays = records.filter(r => r.state && r.state.toLowerCase() === 'rest').length
+            // const recordedRestDays = records.filter(r => r.state && r.state.toLowerCase() === 'rest').length
             // const recordedOffDays= records.filter(r => r.state && r.state.toLowerCase() === 'rest' && moment(r.date)).length
             //
             const leaveDays = records.filter(r => r.state && r.state.toLowerCase() === 'leave').reduce((sum, cv) => sum + (cv.duration ? cv.duration / 8 : 1), 0)
@@ -51,7 +54,7 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
                     // const defaultRestDays = 5;
 
 
-                transportPayableDays += restDays + (presentDays +  Math.ceil(decimalPart)) + 1 //hollyDay //- recordedRestDays
+                transportPayableDays += (presentDays +  Math.ceil(decimalPart)) //hollyDay //- recordedRestDays
                 // console.log({name:records[0].member.fullName,restDays,presentDays,recordedRestDays})
 
                 // if(records[0].member.mateId==="ashu@deweto") {
@@ -66,18 +69,20 @@ function timesheetGroupedByMemberTeam(timesheets,teams) {
                 currentTeam: records[0].currentTeam,
                 absentDays: absentDays || undefined,
                 leaveDays: leaveDays || undefined,
-                payableDays: (presentDays + Math.ceil(leaveDays)) || undefined,
+                payableDays: (presentDays + leaveDays) || undefined,
                 transportPayableDays,
-                //  overtimes: _.map(_.groupBy(records.filter(r => r.overtime).map(r => r.overtime), 'otType'), (o, otType) => { return { otType, hrs: _.sumBy(o, 'hrs') } })
                 overtimes,
-                restDays
+                restDays:0,
+                records
 
             }
         })
         .value()
 }
 function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, days) {
+    // console.log({members})
     const otPayableTeams = teams.filter(t=>t.benefits.extraOTAllowance).map(t=>t.code)
+
    const records =  _(timesheetGroupedByMemberTeam(timesheets, teams))
         .groupBy(x => x.member.id)
         .map((records, memberId) => {
@@ -88,6 +93,12 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
                     overtimes[type] = (overtimes[type] || 0) + (item[type] || 0)
                 })
             })
+
+
+            // if(memberId==='647746d5ca0c1d001d82109b') {
+            //     const x = records.flatMap((x) => x.records);
+            //     console.log({x,len:x.length})
+            // }
 
             let  transportPayableDays = _.sumBy(records, 'transportPayableDays') || 0
 
@@ -132,8 +143,8 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
                 mateId: member.mateId,
                 member,
                 status: member.status,
-                team: timesheetAtDate && timesheetAtDate.currentTeam,
-                currentTeam: records.length === 1 && records[0].currentTeam,
+                team: (timesheetAtDate && timesheetAtDate.currentTeam) || member.currentTeam,
+               // currentTeam: records.length === 1 && records[0].currentTeam,
                 leaveDays: _.sumBy(records, 'leaveDays') || undefined,
                 absentDays: _.sumBy(records, 'absentDays') || undefined,
                 payableDays: _.sumBy(records, 'payableDays') || undefined,
@@ -152,7 +163,8 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
        member:m,
        mateId: m.mateId,
        fullName: m.fullName,
-       team: 'Idle',
+       team: m.currentTeam || 'Idle',
+       idle: true,
        payableDays: 0,
        overtimes: {}
    }))
@@ -168,6 +180,133 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
    return records.concat(idle) //.concat(inActive)
 
 }
+
+
+
+function getSummeryTimesheet(timesheets,allocationSheet,members,teams,startDate,endDate,workCloseDays, absentNotPresentDays=true) {
+   // console.log({workCloseDays})
+    const lookUpMembers = _.groupBy(members,'id')
+    const totalDays  = moment(endDate).diff(moment(startDate),'days')+1
+    const otPayableTeams = teams.filter(t=>t.benefits.extraOTAllowance).map(t=>t.code)
+    const transportPayableTeams = teams.filter(t=>t.benefits.transportAllowance).map(t=>t.code)
+   return _(timesheets).groupBy(x => x.member.id).map((records, memberId) => {
+        let overtimes = getOvertime(records)
+       const member = lookUpMembers[memberId]&&lookUpMembers[memberId][0]
+
+       if(member) {
+
+
+            const allRecords = enumerateDaysBetweenRecords({member,startDate, endDate,records,workCloseDays})
+            const notPresentDays = allRecords.filter(r=>r.notPresent).length;
+            const absentDays = allRecords.filter(r=>r.state==='absent').length;
+           const leaveDays = allRecords.filter(r=>r.state==='leave').length;
+           const timesheetAtDate = allocationSheet.find(t =>  t.member && t.member.id === memberId)
+           const otPayableDays = allRecords.filter(r=>!r.inactive&&!r.notPresent&&r.state!=='absent'&&r.state!=='leave'&&otPayableTeams.includes(r.currentTeam)).length
+           let transportPayableDays = allRecords.filter(r=>!r.inactive&&!r.notPresent&&r.state!=='absent'&&r.state!=='leave'&&transportPayableTeams.includes(r.currentTeam)).length
+
+           if (member.extraOT) {
+               overtimes = {Other: member.fullOT? +member.extraOT : +(member.extraOT * otPayableDays / totalDays).toFixed(2)}
+
+
+           }
+
+           if(member.fullTransport){
+
+               transportPayableDays = totalDays - absentDays - leaveDays
+
+           }
+
+           return {
+               id: memberId,
+               fullName: member.fullName,
+               mateId: member.mateId,
+               member,
+               status: member.status,
+               team: (timesheetAtDate && timesheetAtDate.currentTeam) || member.currentTeam,
+               // currentTeam: records.length === 1 && records[0].currentTeam,
+               leaveDays,
+               absentDays: absentDays + (absentNotPresentDays&&!member.fullTransport)?notPresentDays:0,
+               otPayableDays,
+               payableDays: totalDays - absentDays - notPresentDays,
+               notPresentDays,
+               transportPayableDays,
+               overtimes,
+           }
+       }
+
+
+
+    }).filter(x=>x!==null)
+}
+
+function mergeWithIdleMembers(records,members,startDate,endDate) {
+   // const ids = records.map(r=>r.id.toString());
+    const r =  Object.fromEntries(records.map((r) => [r.id, r]))
+    // console.log(r)
+    const totalDays  = endDate.diff(startDate,'days')+1
+    const idle = members.filter(m=>m.status==="Active"&&!r[m._id]&&m.employmentType!=="Casual"&&((!m.startDate || moment(m.startDate) <= endDate) && (!m.endDate || moment(m.endDate) >= startDate))).map(m=>({
+        id: m._id,
+        member:m,
+        mateId: m.mateId,
+        fullName: m.fullName,
+        team: m.currentTeam || 'Idle',
+        idle: true,
+        leaveDays: m.currentTeam === 'leave'? totalDays:0,
+        absentDays: m.currentTeam !== 'leave'? totalDays:0,
+        payableDays: 0,
+        notPresentDays: totalDays,
+        transportPayableDays:0,
+        overtimes: {}
+    }))
+
+    return records.concat(idle)
+
+}
+function getOvertime (records) {
+    const draftOts = _.mapValues(_.groupBy(records.filter(r => r.overtime&&(r.state && (r.state.toLowerCase() === 'present'))).map(r => r.overtime), 'otType'), ots => _.sumBy(ots, 'hrs'))
+    // console.log({draftOts})
+    let overtimes = {}
+
+
+    _.each(['Afterwork', 'Sunday', 'Night', 'HollyDay', 'Other'], function (type) {
+if(draftOts&&draftOts[type]) {
+    overtimes[type] = (overtimes[type] || 0) + (draftOts[type])
+}
+    })
+
+
+    return overtimes
+}
+function enumerateDaysBetweenRecords ({member, startDate, endDate, records, workCloseDays}) {
+    const now = moment(startDate);
+    const dates = []
+    // const mEndDate = moment(endDate)
+
+    while (now.isSameOrBefore(endDate)) {
+        // dates.push(now.format('M/D/YYYY'));
+        const r = records.find(t => moment(t.date).format('M/D/YYYY') === now.format('M/D/YYYY'))
+
+        if (!r) {
+
+            const inactive = (member && member.endDate && moment(member.endDate) <= now) || (member && member.startDate && moment(member.startDate) > now)
+
+            const rest =  now.get('d') === 0
+            dates.push({
+                date: now.toDate(),
+                currentTeam: member.currentTeam,
+                notPresent: !inactive && (!rest && now.isBefore(new Date(), 'days') && !workCloseDays.includes(now.format('M/D/YYYY'))),
+                rest,
+                inactive,
+             })
+        }
+
+        now.add(1, 'days')
+    }
+    const x = records.concat(dates)
+
+    return _.orderBy(x,'date','asc')
+}
+
 
 router.get('/', (ctx, next) => {
     ctx.body = 'Hello World!';
@@ -269,7 +408,8 @@ router.get('/members', async(ctx, res) => {
 router.get('/timesheet',async (ctx,res)=>{
     const {atDate,startDate, endDate} = ctx.request.query
 
-
+    const {data} = await getWorkCloseDays()
+    const {workCloseDays} = data
 
     // const timesheetInPeriod =  ctx.model('Timesheet').find({ date: { $gte: new Date(startDate), $lte:new Date(endDate)} }).exec()
     // const timesheetAtDate =  ctx.model('Timesheet').find({ date: { $gte: moment(new Date(atDate)).startOf('day'), $lte: new moment(new Date(atDate)).endOf('day')} }).exec()
@@ -278,10 +418,10 @@ router.get('/timesheet',async (ctx,res)=>{
 // console.log(moment(endDate).endOf('day'))
 //     console.log(moment(startDate).startOf('day'))
     const calls = [
-        ctx.model('Timesheet').find({ date: { $gte: moment(startDate).startOf('day'), $lte:moment(endDate).endOf('day')} }).exec(),
+        ctx.model('Timesheet').find({state:{$ne:null}, status:"approved", date: { $gte: moment(startDate).startOf('day'), $lte:moment(endDate).endOf('day')} }).exec(),
         ctx.model('Timesheet').find({ date: { $gte: moment(atDate).startOf('day'), $lte: new moment(atDate).endOf('day')} }).exec(),
-        ctx.model('Member').find({}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT status fullTransport').exec(),
-        ctx.model('Team').find({}).exec()
+        ctx.model('Member').find({status:'Active'}).select('_id name fatherName gFatherName fullName mateId employmentType extraOT status fullTransport fullOT currentTeam startDate endDate').exec(),
+        ctx.model('Team').find({status:'Active'}).exec()
     ]
     const [timesheetInPeriod,timesheetAtDate,members,teams] = await Promise.all(calls)
     // const {data:hours=[]} = await  getFinalHours({startDate, endDate})
@@ -289,29 +429,29 @@ router.get('/timesheet',async (ctx,res)=>{
    // console.log(hours)
     // const members = await  ctx.model('Timesheet')
     // console.log(timesheetAtDate)
-    const groupedTimesheet =  groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams, moment(endDate).diff(moment(startDate),'days')+1 )
+    const groupedTimesheet = getSummeryTimesheet(timesheetInPeriod, timesheetAtDate, members, teams,startDate,endDate,workCloseDays)//  groupedByMemberTimesheet(timesheetInPeriod, timesheetAtDate, members, teams, moment(endDate).diff(moment(startDate),'days')+1 )
 
-    groupedTimesheet.map(m=>{
-        const   d = hours.find(h=>h.mateId.toLowerCase()===m.mateId.toLowerCase())
-        if (d) {
-            // m.hoursWorked = +hour.adustedFullPayHours.toFixed(2)
-            m.monthlyHours = +d.fullExpectedHrs.toFixed(2)
-            m.actualHoursWorked=+d.workHrs.toFixed(2)
-            m.hoursWorked=+(d.adjustedFullPayHours||d.fullPayHours||d.payHrs||0).toFixed(2)
-
-            // m.timeData = hour
-        }
-        return m
-    })
-    ctx.body = groupedTimesheet
+    // groupedTimesheet.map(m=>{
+    //     const   d = hours.find(h=>h.mateId.toLowerCase()===m.mateId.toLowerCase())
+    //     if (d) {
+    //         // m.hoursWorked = +hour.adustedFullPayHours.toFixed(2)
+    //         m.monthlyHours = +d.fullExpectedHrs.toFixed(2)
+    //         m.actualHoursWorked=+d.workHrs.toFixed(2)
+    //         m.hoursWorked=+(d.adjustedFullPayHours||d.fullPayHours||d.payHrs||0).toFixed(2)
+    //
+    //         // m.timeData = hour
+    //     }
+    //     return m
+    // })
+    ctx.body =  mergeWithIdleMembers(groupedTimesheet,members,moment(startDate),moment(endDate))
 
 })
 
 router.get('/payrollMembers',async (ctx,res)=>{
     const {startDate,endDate} = ctx.request.query
 
-   const newMembers = await ctx.model('MemberJoinRequest').find({joinType: {$in: ["Employment", "ReEmployment"]},requestStatus:'Approved', payrollStatus:'Pending', startDate:{$gte:moment(startDate).add(-5,'days')}, endDate:{$gte:startDate} }).exec();
-    const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', leftType:'EndEmployment', payrollStatus:'Pending', effectiveDate:{$gte:moment(startDate).add(-5,'days'),$lte:moment(endDate).add(5,'days')}, }).exec();
+   const newMembers = await ctx.model('MemberJoinRequest').find({joinType: {$in: ["Employment", "ReEmployment"]},requestStatus:'Approved', payrollStatus:'Pending', startDate:{$lte:moment(endDate),$gte:moment(startDate)}, endDate:{$gte:startDate} }).exec();
+    const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', leftType:'EndEmployment', payrollStatus:'Pending', effectiveDate:{$gte:moment(startDate),$lte:moment(endDate)}, }).exec();
     ctx.body = {newMembers,inactiveMembers}
 })
 

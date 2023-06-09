@@ -62,6 +62,7 @@ const MemberSchema = new Schema({
         index: true
     },
     fullTransport:Boolean,
+    fullOT: Boolean,
     leaveInfo: {
         remainingDays:Number,
         daysTaken:Number,
