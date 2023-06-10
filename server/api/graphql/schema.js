@@ -104,6 +104,7 @@ const ApproveMemberJoinTC = schemaComposer.createObjectTC({
         _id: 'String!',
         addMember: 'Boolean!',
         addPayroll: 'Boolean!',
+        approvedBy: 'String'
 
     }
 });
@@ -114,6 +115,7 @@ const ApproveMemberLeftTC = schemaComposer.createObjectTC({
         _id: 'String!',
         setInactive: 'Boolean!',
         removeFromPayroll: 'Boolean!',
+        approvedBy: 'String'
 
     }
 });
@@ -125,16 +127,18 @@ MemberJoinRequestTC.addResolver({
     args: {input:toInputObjectType(ApproveMemberJoinTC)},
     // args: toInputObjectType(LoginInputTC),
     resolve: async ({ source, args, context, info }) => {
-        const {_id, addMember, addPayroll} = args.input
+        const {_id, addMember, addPayroll, approvedBy} = args.input
         const Model = mongoose.model("MemberJoinRequest")
         const request = await Model.findOne({_id}).exec()
         if(request.requestStatus!=="Approved")
         {
             request.requestStatus= 'Approved'
+            request.approvedBy = approvedBy
+            request.approvedOn = new Date()
 
             if(addMember)
             {
-                const member = _.omit(request, ['memberId', '_id', 'joinLetter', 'requestStatus' , 'requestDate'])
+                const member = _.omit(request, ['memberId', '_id', 'joinLetter', 'requestStatus' , 'requestDate', 'approvedOn', 'approvedBy', 'createdBy'])
 
                 member.joinRequests = [...(member.joinRequests||[]),request._id]
               //  console.log( member.joinRequests)

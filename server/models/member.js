@@ -123,6 +123,7 @@ set(function(v) {
 
 MemberSchema.pre('save', async function(next){
     this.currentTeam =  this.currentTeam || this.joinTeam
+    this.mateId = this.mateId? this.mateId.toLowerCase().replace(/\s+/g, '') : this.mateId
 })
 
 module.exports = mongoose.model('Member', MemberSchema);

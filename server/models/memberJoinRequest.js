@@ -83,6 +83,9 @@ const MemberJoinRequestSchema = new Schema({
         enum : ['FixedTerm','Permanent','Piecework'],
         default: 'FixedTerm'
     },
+    approvedOn: Date,
+    approvedBy: String,
+    createdBy : String
 },{    timestamps: true})
 
 const enumerateDaysBetweenDates = function(startDate, endDate) {
@@ -95,67 +98,69 @@ const enumerateDaysBetweenDates = function(startDate, endDate) {
     return dates
 }
 
-MemberJoinRequestSchema.pre('save', async function(next){
-
-    // console.log(this)
-    if(this.joinTeam&&this.requestStatus==="Approved")
-     {
-        this.fullName = `${this.name || ''} ${this.fatherName || ''}`
-        const member = {...this.toObject()}
-       // console.log(member)
-        member.fullName = `${this.name || ''} ${this.fatherName || ''}`
-        // console.log(member)
-        member.id = this.memberId || this._id
-        if (!this.memberId) {
-            member.status = "new"
-        }
-
-        const startDate = moment.utc(member.startDate || '1990/1/1')
-        const endDate = moment.utc(member.endDate)
-        const sd = moment.max(startDate, moment(this.payMonth).startOf('month'))
-        const ed = moment.min(endDate, moment(this.payMonth).endOf('month').add(1, 'day'))
-
-        const dates = enumerateDaysBetweenDates(sd, ed)
-         //console.log(sd,ed)
-        const timesheet = []
-        dates.map(d => {
-            timesheet.push({
-                member: _.pick(member, ['id', 'fullName', 'mateId', 'employmentType']),
-                code: `${d.format('DD/MM/YY')}$${member.id}`,
-                date: d,
-                state: d.get('day') !== 0 ? 'present' : 'rest',
-                currentTeam: this.joinTeam
-            })
-        })
-
-        // console.log(timesheet)
-        await mongoose.model('Timesheet').insertMany(timesheet)
-    }
-    //
-  // //  member.daysWorked = ed.diff(sd,'days') + 1
-  //    const month = moment(this.startDate).startOf('month').format('yyyy-MM-DD')
-  //       const OrganizeRequest = await mongoose.model('TeamOrganiseRequest').findOne({periodType: 'month', team: this.team, periodStartDate: month})
-  //   //console.log(OrganizeRequest)
-  //   if(OrganizeRequest)
-  //       {
-  //           OrganizeRequest.members = [...OrganizeRequest.members, member]
-  //           OrganizeRequest.status= "ready";
-  //           await OrganizeRequest.save();
-  //       }
-  //       else {
-  //           const members = await mongoose.model('Member').find({currentTeam: this.team}).lean();
-  //
-  //           const request = {status:"ready", periodType: 'month', team: this.team, periodStartDate: month, members:[...members.map(m=>({...m,id:m._id, fullName:`${m.name||''} ${m.fatherName||''}`})),member]}
-  //           await mongoose.model('TeamOrganiseRequest').create(request)
-  //
-  //
-  //       }
-
-
-
-
-    next()
-})
-
+// MemberJoinRequestSchema.pre('save', async function(next){
+//
+//     // console.log(this)
+//     // if(this.joinTeam&&this.requestStatus==="Approved")
+//     //  {
+//     //     this.approvedOn = new Date()
+//     //      // this.approvedBy = todo
+//     //     this.fullName = `${this.name || ''} ${this.fatherName || ''}`
+//     //     const member = {...this.toObject()}
+//     //    // console.log(member)
+//     //     member.fullName = `${this.name || ''} ${this.fatherName || ''}`
+//     //     // console.log(member)
+//     //     // member.id = this.memberId || this._id
+//     //     // if (!this.memberId) {
+//     //     //     member.status = "new"
+//     //     // }
+//     //
+//     //     // const startDate = moment.utc(member.startDate || '1990/1/1')
+//     //     // const endDate = moment.utc(member.endDate)
+//     //     // const sd = moment.max(startDate, moment(this.payMonth).startOf('month'))
+//     //     // const ed = moment.min(endDate, moment(this.payMonth).endOf('month').add(1, 'day'))
+//     //     //
+//     //     // const dates = enumerateDaysBetweenDates(sd, ed)
+//     //     //  //console.log(sd,ed)
+//     //     // const timesheet = []
+//     //     // dates.map(d => {
+//     //     //     timesheet.push({
+//     //     //         member: _.pick(member, ['id', 'fullName', 'mateId', 'employmentType']),
+//     //     //         code: `${d.format('DD/MM/YY')}$${member.id}`,
+//     //     //         date: d,
+//     //     //         state: d.get('day') !== 0 ? 'present' : 'rest',
+//     //     //         currentTeam: this.joinTeam
+//     //     //     })
+//     //     // })
+//     //     //
+//     //     // // console.log(timesheet)
+//     //     // await mongoose.model('Timesheet').insertMany(timesheet)
+//     // }
+//     //
+//   // //  member.daysWorked = ed.diff(sd,'days') + 1
+//   //    const month = moment(this.startDate).startOf('month').format('yyyy-MM-DD')
+//   //       const OrganizeRequest = await mongoose.model('TeamOrganiseRequest').findOne({periodType: 'month', team: this.team, periodStartDate: month})
+//   //   //console.log(OrganizeRequest)
+//   //   if(OrganizeRequest)
+//   //       {
+//   //           OrganizeRequest.members = [...OrganizeRequest.members, member]
+//   //           OrganizeRequest.status= "ready";
+//   //           await OrganizeRequest.save();
+//   //       }
+//   //       else {
+//   //           const members = await mongoose.model('Member').find({currentTeam: this.team}).lean();
+//   //
+//   //           const request = {status:"ready", periodType: 'month', team: this.team, periodStartDate: month, members:[...members.map(m=>({...m,id:m._id, fullName:`${m.name||''} ${m.fatherName||''}`})),member]}
+//   //           await mongoose.model('TeamOrganiseRequest').create(request)
+//   //
+//   //
+//   //       }
+//
+//
+//
+//
+//     next()
+// })
+//
 
 module.exports = mongoose.model('MemberJoinRequest', MemberJoinRequestSchema);
