@@ -184,7 +184,7 @@ function groupedByMemberTimesheet(timesheets,momentTimesheet, members, teams, da
 
 
 function getSummeryTimesheet(timesheets,allocationSheet,members,teams,startDate,endDate,workCloseDays, absentNotPresentDays=true) {
-   // console.log({workCloseDays})
+
     const lookUpMembers = _.groupBy(members,'id')
     const totalDays  = moment(endDate).diff(moment(startDate),'days')+1
     const otPayableTeams = teams.filter(t=>t.benefits.extraOTAllowance).map(t=>t.code)
@@ -197,6 +197,10 @@ function getSummeryTimesheet(timesheets,allocationSheet,members,teams,startDate,
 
 
             const allRecords = enumerateDaysBetweenRecords({member,startDate, endDate,records,workCloseDays})
+           // if(memberId==='647746d5ca0c1d001d82107e'){
+           //     console.log({workCloseDays})
+           //     console.log(allRecords.filter(r=>r.notPresent))
+           // }
             const notPresentDays = allRecords.filter(r=>r.notPresent).length;
             const absentDays = allRecords.filter(r=>r.state==='absent').length;
            const leaveDays = allRecords.filter(r=>r.state==='leave').length;
@@ -236,11 +240,12 @@ function getSummeryTimesheet(timesheets,allocationSheet,members,teams,startDate,
 
 
 
-    }).filter(x=>x!==null)
+    }).filter(x=>x)
 }
 
 function mergeWithIdleMembers(records,members,startDate,endDate) {
    // const ids = records.map(r=>r.id.toString());
+   //  console.log(records.filter(r=>!r))
     const r =  Object.fromEntries(records.map((r) => [r.id, r]))
     // console.log(r)
     const totalDays  = endDate.diff(startDate,'days')+1
