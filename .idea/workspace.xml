@@ -21,9 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/member.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/memberJoinRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberJoinRequest.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,14 +214,9 @@
       <workItem from="1686120095875" duration="289000" />
       <workItem from="1686120917392" duration="776000" />
       <workItem from="1686127787016" duration="6898000" />
-      <workItem from="1686207941663" duration="31731000" />
-    </task>
-    <task id="LOCAL-00009" summary="Ot Detail 1">
-      <created>1611402568962</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1611402568962</updated>
+      <workItem from="1686207941663" duration="33577000" />
+      <workItem from="1686638453853" duration="606000" />
+      <workItem from="1688532631449" duration="1003000" />
     </task>
     <task id="LOCAL-00010" summary="confirm button">
       <created>1611581118332</created>
@@ -562,7 +554,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686293385452</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="ready 2">
+      <created>1686374209598</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1686374209598</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +592,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="payday integration 1" />
     <MESSAGE value="updates" />
     <MESSAGE value="updates 2" />
     <MESSAGE value="updates extra ot" />
@@ -618,41 +616,42 @@
     <MESSAGE value="new hire requests approval before they are on timesheet" />
     <MESSAGE value="mfix 4" />
     <MESSAGE value="ready 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="ready 1" />
+    <MESSAGE value="ready 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="ready 2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1686293383534">
+    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1686374208110">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1686293383534" />
-    <state width="618" height="156" key="GridCell.Tab.0.bottom" timestamp="1686292388591">
+    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1686374208110" />
+    <state width="618" height="156" key="GridCell.Tab.0.bottom" timestamp="1686634322561">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="618" height="156" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1686292388591" />
-    <state width="618" height="156" key="GridCell.Tab.0.center" timestamp="1686292388590">
+    <state width="618" height="156" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1686634322561" />
+    <state width="618" height="156" key="GridCell.Tab.0.center" timestamp="1686634322561">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="618" height="156" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1686292388590" />
-    <state width="618" height="156" key="GridCell.Tab.0.left" timestamp="1686292388586">
+    <state width="618" height="156" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1686634322561" />
+    <state width="618" height="156" key="GridCell.Tab.0.left" timestamp="1686634322561">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="618" height="156" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1686292388586" />
-    <state width="618" height="156" key="GridCell.Tab.0.right" timestamp="1686292388590">
+    <state width="618" height="156" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1686634322561" />
+    <state width="618" height="156" key="GridCell.Tab.0.right" timestamp="1686634322561">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state width="618" height="156" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1686292388590" />
-    <state x="234" y="65" key="Vcs.Push.Dialog.v2" timestamp="1686294357869">
+    <state width="618" height="156" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1686634322561" />
+    <state x="234" y="65" key="Vcs.Push.Dialog.v2" timestamp="1686374211318">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="234" y="65" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1686294357869" />
+    <state x="234" y="65" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1686374211318" />
     <state x="350" y="78" width="581" height="534" key="find.popup" timestamp="1686278935292">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
     <state x="350" y="78" width="581" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1686278935292" />
-    <state x="430" y="237" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1685437180346">
+    <state x="430" y="237" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1686638463983">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
-    <state x="430" y="237" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.690@0.0.1280.690" timestamp="1685437180346" />
+    <state x="430" y="237" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.690@0.0.1280.690" timestamp="1686638463983" />
     <state x="298" y="154" key="run.anything.popup" timestamp="1686279851630">
       <screen x="0" y="0" width="1280" height="690" />
     </state>
