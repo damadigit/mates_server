@@ -15,6 +15,7 @@ const MemberLeftRequestSchema = new Schema({
         jobTitle: String,
         endDate:Date,
         photo: String,
+        status: String,
         earning:Object,
         annualLeaveBalance: Number,
         joinType: {
@@ -22,6 +23,10 @@ const MemberLeftRequestSchema = new Schema({
             enum : ['Transfer','ReEmployment','Employment'],
             default: 'Transfer'
         },
+        currentTeam: String,
+        joinTeam: String,
+        extraOT: String,
+        fullTransport: String
     },
         effectiveDate: Date,
     lastWorkDate: Date,
