@@ -204,6 +204,7 @@ function getSummeryTimesheet(timesheets,allocationSheet,members,teams,startDate,
             const notPresentDays = allRecords.filter(r=>r.notPresent).length;
             const absentDays = allRecords.filter(r=>r.state==='absent').length;
            const leaveDays = allRecords.filter(r=>r.state==='leave').length;
+
            const timesheetAtDate = allocationSheet.find(t =>  t.member && t.member.id === memberId)
            const otPayableDays = allRecords.filter(r=>!r.inactive&&!r.notPresent&&r.state!=='absent'&&r.state!=='leave'&&otPayableTeams.includes(r.currentTeam)).length
            let transportPayableDays = allRecords.filter(r=>!r.inactive&&!r.notPresent&&r.state!=='absent'&&r.state!=='leave'&&transportPayableTeams.includes(r.currentTeam)).length
@@ -229,7 +230,7 @@ function getSummeryTimesheet(timesheets,allocationSheet,members,teams,startDate,
                team: (timesheetAtDate && timesheetAtDate.currentTeam) || member.currentTeam,
                // currentTeam: records.length === 1 && records[0].currentTeam,
                leaveDays,
-               absentDays: absentDays + (absentNotPresentDays&&!member.fullTransport)?notPresentDays:0,
+               absentDays: absentDays + ((absentNotPresentDays&&!member.fullTransport)?notPresentDays:0),
                otPayableDays,
                payableDays: totalDays - absentDays - notPresentDays,
                notPresentDays,
@@ -244,6 +245,8 @@ function getSummeryTimesheet(timesheets,allocationSheet,members,teams,startDate,
 }
 
 function mergeWithIdleMembers(records,members,startDate,endDate) {
+    // const x = records.filter(r=>r.id==="64c8e87c6022be001ccae0d7")
+
    // const ids = records.map(r=>r.id.toString());
    //  console.log(records.filter(r=>!r))
     const r =  Object.fromEntries(records.map((r) => [r.id, r]))
@@ -455,8 +458,9 @@ router.get('/timesheet',async (ctx,res)=>{
 
 router.get('/payrollMembers',async (ctx,res)=>{
     const {startDate,endDate} = ctx.request.query
+    // console.log({startDate,endDate})
 
-   const newMembers = await ctx.model('MemberJoinRequest').find({joinType: {$in: ["Employment", "ReEmployment"]},requestStatus:'Approved', payrollStatus:'Pending', startDate:{$lte:moment(endDate),$gte:moment(startDate)}, endDate:{$gte:startDate} }).exec();
+   const newMembers = await ctx.model('MemberJoinRequest').find({joinType: {$in: ["Employment", "ReEmployment"]},requestStatus:'Approved', payrollStatus:'Pending', endDate:{$gte:startDate} }).exec();
     const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', leftType:'EndEmployment', payrollStatus:'Pending', effectiveDate:{$gte:moment(startDate),$lte:moment(endDate)}, }).exec();
     ctx.body = {newMembers,inactiveMembers}
 })
