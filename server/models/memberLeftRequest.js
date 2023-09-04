@@ -1,34 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const moment = require('moment')
-
+const memberModel = require('member')
 const MemberLeftRequestSchema = new Schema({
 
-    member: {
-        id: String,
-        fullName:String,
-        name:String,
-        fatherName:String,
-        gFatherName:String,
-        mateId:String,
-        startDate: String,
-        jobTitle: String,
-        endDate:Date,
-        photo: String,
-        status: String,
-        earning:Object,
-        annualLeaveBalance: Number,
-        joinType: {
-            type: String,
-            enum : ['Transfer','ReEmployment','Employment'],
-            default: 'Transfer'
-        },
-        currentTeam: String,
-        joinTeam: String,
-        extraOT: String,
-        fullTransport: String
-    },
-        effectiveDate: Date,
+    member: memberModel.schema,
+    effectiveDate: Date,
     lastWorkDate: Date,
     noticeDate: Date,
     leaveCompensation: Number,

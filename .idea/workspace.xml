@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/rest/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/memberLeftRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberLeftRequest.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -226,6 +226,9 @@
       <workItem from="1693316891392" duration="505000" />
       <workItem from="1693347526019" duration="18000" />
       <workItem from="1693353760276" duration="3830000" />
+      <workItem from="1693384059609" duration="1184000" />
+      <workItem from="1693468968419" duration="643000" />
+      <workItem from="1693829681228" duration="254000" />
     </task>
     <task id="LOCAL-00012" summary="new member join beta 2">
       <created>1611716870446</created>
