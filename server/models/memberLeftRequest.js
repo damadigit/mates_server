@@ -4,7 +4,97 @@ const moment = require('moment')
 const memberModel = require('./member')
 const MemberLeftRequestSchema = new Schema({
 
-    member: memberModel.schema.add({id:String, fullName:String}),
+    member: {
+        id: String,
+        fullName: String,
+        mateId: {
+            type: String,
+            unique:true
+        },
+        name: String,
+        orgId:String,
+        fatherName: String,
+        gFatherName: String,
+        gender: String,
+        birthDate: Date,
+        placeOfBirth: String,
+        photo: String,
+        createdDate: {
+            type: Date,
+            default: Date.now
+        },
+        tinNo:String,
+        pensionNo:String,
+        bankAccounts: [{
+            type:{type:String},
+            value: String
+        }],
+        joinTeam: String,
+        currentTeam: String,
+        employmentType: {
+            type: String,
+            enum : ['Casual','PartTime','FullTime'],
+            index: true,
+            default: 'FullTime'
+        },
+        contractType: {
+            type: String,
+            enum : ['FixedTerm','Permanent','Piecework'],
+            default: 'FixedTerm'
+        },
+        startDate: Date,
+        endDate:Date,
+        duration: Number,
+        period: String,
+        position:String,
+        joinRemark: String,
+        citizenship:String,
+        extraOT: {
+            type: Number,
+            index: true
+        },
+        fullTransport:Boolean,
+        fullOT: Boolean,
+        leaveInfo: {
+            remainingDays:Number,
+            daysTaken:Number,
+            totalDaysTaken:Number,
+
+        },
+        jobTitle: String,
+        earning: {
+            rate: Number,
+            period: {
+                type: String,
+                enum : ['day','week','month'],
+                default: 'month'
+            },
+            additionalEarnings: [{
+                type:{type:String},
+                name:String,
+                value:Number
+            }]
+        },
+        joinType: {
+            type: String,
+            enum : ['Transfer','ReEmployment','Employment'],
+            default: 'Employment'
+        },
+        martialStatus: String,
+        status: {
+            type: String,
+            enum : ['Active','Resigned', 'ContractEnded', 'Dismissed','Retired', 'LaidOff', 'Excluded','Exempt'],
+            default: 'Active'
+        },
+        annualLeaveBalance: Number,
+        motherName: String,
+        joinRequests: [ { type: Schema.Types.ObjectId, ref: 'MemberJoinRequest' }],
+        payrollStatus:  {
+            type:String,
+            enum : ['Pending','Applied','Avoided'],
+            default: 'Pending'
+        }
+    },
         effectiveDate: Date,
     lastWorkDate: Date,
     noticeDate: Date,
