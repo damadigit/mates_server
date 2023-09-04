@@ -7,6 +7,7 @@ const {EducationSchema, FamilySchema,AddressSchema} = require('./schemas.js')
 
 
 const MemberSchema = new Schema({
+    id: String,
     mateId: {
         type: String,
         unique:true
