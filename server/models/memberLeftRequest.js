@@ -4,8 +4,8 @@ const moment = require('moment')
 const memberModel = require('./member')
 const MemberLeftRequestSchema = new Schema({
 
-    member: memberModel.schema,
-    effectiveDate: Date,
+    member: memberModel.schema.add({id:String, fullName:String}),
+        effectiveDate: Date,
     lastWorkDate: Date,
     noticeDate: Date,
     leaveCompensation: Number,
