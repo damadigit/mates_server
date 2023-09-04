@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const moment = require('moment')
-const memberModel = require('member')
+const memberModel = require('./member')
 const MemberLeftRequestSchema = new Schema({
 
     member: memberModel.schema,
