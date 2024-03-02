@@ -462,7 +462,10 @@ router.get('/payrollMembers',async (ctx,res)=>{
 
    const newMembers = await ctx.model('MemberJoinRequest').find({joinType: {$in: ["Employment", "ReEmployment"]},requestStatus:'Approved', payrollStatus:'Pending', endDate:{$gte:startDate} }).exec();
     const inactiveMembers = await ctx.model('MemberLeftRequest').find({requestStatus:'Approved', leftType:'EndEmployment', payrollStatus:'Pending', effectiveDate:{$gte:moment(startDate),$lte:moment(endDate)}, }).exec();
-    ctx.body = {newMembers,inactiveMembers}
+    const updatedMembers = await ctx.model('MemberUpdateRequest').find({requestStatus:'Approved', payrollStatus:'Pending' }).exec();
+
+
+    ctx.body = {newMembers,inactiveMembers, updatedMembers}
 })
 
 router.post('/syncIndex', async (ctx,res)=>{
@@ -534,7 +537,8 @@ router.post('/checkContractDateAndNotify', async (ctx,res)=>{
 
 })
 router.post('/acknowledgePayroll', async (ctx,res)=> {
-    const {newMembers,inactiveMembers} = ctx.request.body
+    const {newMembers,inactiveMembers, updatedEmployees} = ctx.request.body
+    console.log(updatedEmployees)
     if(newMembers&&newMembers.length)
     {
         const updates = newMembers.map(n=>({
@@ -567,6 +571,25 @@ router.post('/acknowledgePayroll', async (ctx,res)=> {
         await ctx.model('Member').bulkWrite(memberUpdate)
     }
 
+    if(updatedEmployees&&updatedEmployees.length)
+    {
+        const updates = updatedEmployees.map(n=>({
+            updateOne:{
+                filter: { _id: n._id },
+                update: {payrollStatus:n.payrollStatus}
+            }
+        }))
+
+       const res=  await ctx.model('MemberUpdateRequest').bulkWrite(updates)
+        console.log(res)
+        const memberUpdate = updatedEmployees.map(n=>({
+            updateOne:{
+                filter: { _id: n.memberId },
+                update: {payrollStatus:'Updated'}
+            }
+        }))
+        await ctx.model('Member').bulkWrite(memberUpdate)
+    }
     ctx.body = {status:'done'}
 
 })

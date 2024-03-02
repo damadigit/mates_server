@@ -15,6 +15,7 @@ buildSchema('Template',schemaComposer)
 
 const {ModelTC:MemberJoinRequestTC} = buildSchema('MemberJoinRequest',schemaComposer)
 const {ModelTC:MemberLeftRequestTC} = buildSchema('MemberLeftRequest',schemaComposer)
+const {ModelTC:MemberUpdateRequestTC} = buildSchema('MemberUpdateRequest',schemaComposer)
 const {ModelTC:OvertimeDetailModelTC} = buildSchema('OvertimeDetail',schemaComposer)
 buildSchema('AbsenceDetail',schemaComposer)
 
@@ -104,6 +105,17 @@ const ApproveMemberJoinTC = schemaComposer.createObjectTC({
         _id: 'String!',
         addMember: 'Boolean!',
         addPayroll: 'Boolean!',
+        approvedBy: 'String'
+
+    }
+});
+
+const ApproveMemberUpdateTC = schemaComposer.createObjectTC({
+    name: 'ApproveMemberUpdate',
+    fields: {
+        _id: 'String!',
+        updateMember: 'Boolean!',
+        updatePayroll: 'Boolean!',
         approvedBy: 'String'
 
     }
@@ -210,6 +222,63 @@ MemberLeftRequestTC.addResolver({
     },
 });
 
+
+MemberUpdateRequestTC.addResolver({
+    name: `approve`,
+    kind: 'mutation',
+    type: MemberUpdateRequestTC,
+    args: {input:toInputObjectType(ApproveMemberUpdateTC)},
+    // args: toInputObjectType(LoginInputTC),
+    resolve: async ({ source, args, context, info }) => {
+        const {_id, updateMember, updatePayroll, approvedBy} = args.input
+        const Model = mongoose.model("MemberUpdateRequest")
+        const request = await Model.findOne({_id}).exec()
+        if(request.requestStatus!=="Approved")
+        {
+            request.requestStatus= 'Approved'
+            request.approvedBy = approvedBy
+            request.approvedOn = new Date()
+
+            if(updateMember)
+            {
+                const member = await mongoose.model('Member').findById(request.memberId).exec()
+
+                if(member) {
+                   if(request.updateTypes.includes('salary'))  {
+                       member.earning.rate = request.salary;
+                   }
+                    if(request.updateTypes.includes('position'))  {
+                        member.jobTitle = request.jobTitle;
+                    }
+                    if(request.updateTypes.includes('contractDate'))  {
+                        member.endDate = request.contractEndDate;
+                    }
+
+                    if(request.updateTypes.includes('allowance'))  {
+                        member.earning.additionalEarnings = request.additionalEarnings;
+                    }
+                    await member.save();
+
+
+                }
+
+
+            }
+            if(!updatePayroll) {
+                request.payrollStatus = 'Avoided'
+
+            }
+
+            return  await request.save();
+        }
+
+
+
+
+    },
+});
+
+
 const BulkWriteInputTC = schemaComposer.createObjectTC({
     name: 'BulkWriteInput',
     fields: {
@@ -261,6 +330,7 @@ schemaComposer.Mutation.addFields({
     [`bulkWrite`]: TimesheetModelTC.getResolver('bulkWrite'),
     [`approveMemberJoin`]: MemberJoinRequestTC.getResolver('approve'),
     [`approveMemberLeft`]: MemberLeftRequestTC.getResolver('approve'),
+    [`approveMemberUpdate`]: MemberUpdateRequestTC.getResolver('approve'),
 })
 
 // schemaComposer.Mutation.addFields({

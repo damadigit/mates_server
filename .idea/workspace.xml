@@ -20,8 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/server/models/memberUpdateRequest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/memberLeftRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberLeftRequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/rest/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/member.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/schemas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/schemas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,8 +49,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/api" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/models" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -62,6 +68,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/server/models" />
       <recent name="D:\Project\Workcon\mates\mates_server\server\api" />
       <recent name="D:\Project\Workcon\mates\mates_server\server\models" />
       <recent name="D:\Project\Workcon\mates\mates_server" />
@@ -79,7 +86,10 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="" />
@@ -228,14 +238,26 @@
       <workItem from="1693353760276" duration="3830000" />
       <workItem from="1693384059609" duration="1184000" />
       <workItem from="1693468968419" duration="643000" />
-      <workItem from="1693829681228" duration="2705000" />
-    </task>
-    <task id="LOCAL-00016" summary="march release">
-      <created>1616825885842</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1616825885842</updated>
+      <workItem from="1693829681228" duration="3319000" />
+      <workItem from="1693858810306" duration="180000" />
+      <workItem from="1696584761708" duration="624000" />
+      <workItem from="1705471225691" duration="3641000" />
+      <workItem from="1705901627495" duration="702000" />
+      <workItem from="1705921883817" duration="703000" />
+      <workItem from="1705946129300" duration="715000" />
+      <workItem from="1705975896274" duration="648000" />
+      <workItem from="1706059404805" duration="1112000" />
+      <workItem from="1706593744551" duration="1080000" />
+      <workItem from="1707182792709" duration="637000" />
+      <workItem from="1708068034421" duration="736000" />
+      <workItem from="1708106045326" duration="1197000" />
+      <workItem from="1708151961421" duration="1851000" />
+      <workItem from="1709086545818" duration="202000" />
+      <workItem from="1709172727146" duration="8397000" />
+      <workItem from="1709274472073" duration="796000" />
+      <workItem from="1709278714058" duration="4886000" />
+      <workItem from="1709318344153" duration="599000" />
+      <workItem from="1709355230192" duration="4179000" />
     </task>
     <task id="LOCAL-00017" summary="march release">
       <created>1617171452977</created>
@@ -573,11 +595,18 @@
       <option name="project" value="LOCAL" />
       <updated>1693831041560</updated>
     </task>
-    <option name="localTasksCounter" value="65" />
+    <task id="LOCAL-00065" summary="fix endEmployment 5">
+      <created>1693834939933</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1693834939933</updated>
+    </task>
+    <option name="localTasksCounter" value="66" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.History.Properties">
     <option name="COLUMN_ORDER">
@@ -604,7 +633,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="updates start and end time fix timezone" />
     <MESSAGE value="updates active members idel" />
     <MESSAGE value="updates ot fix" />
     <MESSAGE value="updates idel fix" />
@@ -629,44 +657,33 @@
     <MESSAGE value="fix endEmployment 2" />
     <MESSAGE value="fix endEmployment 3" />
     <MESSAGE value="fix endEmployment 4" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix endEmployment 4" />
+    <MESSAGE value="fix endEmployment 5" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix endEmployment 5" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="265" y="0" key="CommitChangelistDialog2" timestamp="1693831040095">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl" timestamp="1707184076380">
+      <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="265" y="0" key="CommitChangelistDialog2/0.0.1280.690@0.0.1280.690" timestamp="1693831040095" />
-    <state width="877" height="202" key="GridCell.Tab.0.bottom" timestamp="1693834623532">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl/0.32.1366.736@0.32.1366.736" timestamp="1707184076380" />
+    <state width="1343" height="171" key="GridCell.Tab.0.bottom" timestamp="1709173956464">
+      <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="877" height="202" key="GridCell.Tab.0.bottom/0.0.1280.690@0.0.1280.690" timestamp="1693834623532" />
-    <state width="877" height="202" key="GridCell.Tab.0.center" timestamp="1693834623532">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state width="1343" height="171" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1709173956464" />
+    <state width="1343" height="171" key="GridCell.Tab.0.center" timestamp="1709173956463">
+      <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="877" height="202" key="GridCell.Tab.0.center/0.0.1280.690@0.0.1280.690" timestamp="1693834623532" />
-    <state width="877" height="202" key="GridCell.Tab.0.left" timestamp="1693834623532">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state width="1343" height="171" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1709173956463" />
+    <state width="1343" height="171" key="GridCell.Tab.0.left" timestamp="1709173956463">
+      <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="877" height="202" key="GridCell.Tab.0.left/0.0.1280.690@0.0.1280.690" timestamp="1693834623532" />
-    <state width="877" height="202" key="GridCell.Tab.0.right" timestamp="1693834623532">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state width="1343" height="171" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1709173956463" />
+    <state width="1343" height="171" key="GridCell.Tab.0.right" timestamp="1709173956463">
+      <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="877" height="202" key="GridCell.Tab.0.right/0.0.1280.690@0.0.1280.690" timestamp="1693834623532" />
-    <state x="234" y="65" key="Vcs.Push.Dialog.v2" timestamp="1693831086455">
-      <screen x="0" y="0" width="1280" height="690" />
+    <state width="1343" height="171" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1709173956463" />
+    <state x="377" y="152" width="611" height="532" key="find.popup" timestamp="1709301572536">
+      <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="234" y="65" key="Vcs.Push.Dialog.v2/0.0.1280.690@0.0.1280.690" timestamp="1693831086455" />
-    <state x="350" y="78" width="581" height="534" key="find.popup" timestamp="1686278935292">
-      <screen x="0" y="0" width="1280" height="690" />
-    </state>
-    <state x="350" y="78" width="581" height="534" key="find.popup/0.0.1280.690@0.0.1280.690" timestamp="1686278935292" />
-    <state x="430" y="237" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1686638463983">
-      <screen x="0" y="0" width="1280" height="690" />
-    </state>
-    <state x="430" y="237" key="git4idea.remote.GitConfigureRemotesDialog/0.0.1280.690@0.0.1280.690" timestamp="1686638463983" />
-    <state x="298" y="154" key="run.anything.popup" timestamp="1693358424032">
-      <screen x="0" y="0" width="1280" height="690" />
-    </state>
-    <state x="298" y="154" key="run.anything.popup/0.0.1280.690@0.0.1280.690" timestamp="1693358424032" />
+    <state x="377" y="152" width="611" height="532" key="find.popup/0.32.1366.736@0.32.1366.736" timestamp="1709301572536" />
   </component>
 </project>
