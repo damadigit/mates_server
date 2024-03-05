@@ -3,10 +3,10 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const {MemberSchema} = require('./schemas.js')
+//const {EducationSchema,FamilySchema,AddressSchema} = require('./schemas.js')
+const {MemberSchema : Ms} = require('./schemas.js')
 
-
-
+const MemberSchema = new Schema (Ms)
 
 // ApplicationSchema.
 
