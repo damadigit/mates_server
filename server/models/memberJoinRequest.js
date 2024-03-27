@@ -83,9 +83,15 @@ const MemberJoinRequestSchema = new Schema({
         enum : ['FixedTerm','Permanent','Piecework'],
         default: 'FixedTerm'
     },
+    attendance: {
+        attendanceType: String,
+        devices: [{deviceSN: String, inDeviceId: String}],
+        schedules: [Object],
+        newMemberRequestId: Number
+    },
     approvedOn: Date,
     approvedBy: String,
-    createdBy : String
+    createdBy : String,
 },{    timestamps: true})
 
 const enumerateDaysBetweenDates = function(startDate, endDate) {

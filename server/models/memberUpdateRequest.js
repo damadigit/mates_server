@@ -11,6 +11,8 @@ const MemberUpdateRequestSchema = new Schema({
     jobTitle: String,
     remark: String,
     contractEndDate: Date,
+    extendedPeriod: String,
+    extendedDuration: Number,
     adjustmentPercent: Number,
     updateTypes: [String],
     additionalEarnings: [{

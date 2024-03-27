@@ -253,9 +253,14 @@ const MemberSchema = new Schema({
         enum : ['Pending','Applied','Avoided', 'Updated'],
         default: 'Pending'
     },
+    attendance: {
+        attendanceType: String,
+        devices: [{deviceSN: String, inDeviceId: String}],
+        schedules: [Object]
+    },
     updateRequests: [ { type: Schema.Types.ObjectId, ref: 'MemberUpdateRequest' }],
 
-}, {timestamps:true});
+}, {timestamps:true, excludeIndexes: true});
 
 
 module.exports = {MemberSchema, EducationSchema, FamilySchema,PlaceSchema,AddressSchema,StorySchema,SponsorSchema, FileSchema,OvertimeRecordSchema, AbsenceRecordSchema}

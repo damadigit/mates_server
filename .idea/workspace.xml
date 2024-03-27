@@ -19,9 +19,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="member update request">
+    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="member update request fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/member.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/member.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/api/rest/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/memberJoinRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberJoinRequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/memberUpdateRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberUpdateRequest.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/schemas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/schemas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +63,7 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.gutterIcons" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.1\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -257,14 +261,15 @@
       <workItem from="1709371505718" duration="911000" />
       <workItem from="1709427669045" duration="601000" />
       <workItem from="1709519771450" duration="1800000" />
-      <workItem from="1709623315732" duration="2566000" />
-    </task>
-    <task id="LOCAL-00018" summary="fix new id on casusal">
-      <created>1617445585689</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1617445585689</updated>
+      <workItem from="1709623315732" duration="3237000" />
+      <workItem from="1709728720774" duration="29000" />
+      <workItem from="1709729462358" duration="601000" />
+      <workItem from="1709793158399" duration="280000" />
+      <workItem from="1710324829815" duration="1205000" />
+      <workItem from="1710461997411" duration="6118000" />
+      <workItem from="1710495751156" duration="599000" />
+      <workItem from="1710512137584" duration="3368000" />
+      <workItem from="1711459376979" duration="7898000" />
     </task>
     <task id="LOCAL-00019" summary="timesheet feature">
       <created>1619408962810</created>
@@ -602,7 +607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709370923100</updated>
     </task>
-    <option name="localTasksCounter" value="67" />
+    <task id="LOCAL-00067" summary="member update request fix">
+      <created>1709628714647</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1709628714651</updated>
+    </task>
+    <option name="localTasksCounter" value="68" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -633,7 +645,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="updates ot fix" />
     <MESSAGE value="updates idel fix" />
     <MESSAGE value="fix joinrequest" />
     <MESSAGE value="fix member not found (timesheet vs new member)" />
@@ -658,37 +669,38 @@
     <MESSAGE value="fix endEmployment 4" />
     <MESSAGE value="fix endEmployment 5" />
     <MESSAGE value="member update request" />
-    <option name="LAST_COMMIT_MESSAGE" value="member update request" />
+    <MESSAGE value="member update request fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="member update request fix" />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl" timestamp="1707184076380">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl/0.32.1366.736@0.32.1366.736" timestamp="1707184076380" />
-    <state width="1343" height="171" key="GridCell.Tab.0.bottom" timestamp="1709371471754">
+    <state width="1343" height="169" key="GridCell.Tab.0.bottom" timestamp="1711464365868">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="171" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1709371471754" />
-    <state width="1343" height="171" key="GridCell.Tab.0.center" timestamp="1709371471751">
+    <state width="1343" height="169" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1711464365868" />
+    <state width="1343" height="169" key="GridCell.Tab.0.center" timestamp="1711464365867">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="171" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1709371471751" />
-    <state width="1343" height="171" key="GridCell.Tab.0.left" timestamp="1709371471751">
+    <state width="1343" height="169" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1711464365867" />
+    <state width="1343" height="169" key="GridCell.Tab.0.left" timestamp="1711464365866">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="171" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1709371471751" />
-    <state width="1343" height="171" key="GridCell.Tab.0.right" timestamp="1709371471751">
+    <state width="1343" height="169" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1711464365866" />
+    <state width="1343" height="169" key="GridCell.Tab.0.right" timestamp="1711464365867">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="171" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1709371471751" />
-    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2" timestamp="1709372400540">
+    <state width="1343" height="169" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1711464365867" />
+    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2" timestamp="1709628716383">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1709372400540" />
-    <state x="377" y="152" width="611" height="532" key="find.popup" timestamp="1709301572536">
+    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1709628716383" />
+    <state x="380" y="236" width="611" height="532" key="find.popup" timestamp="1711504786463">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="377" y="152" width="611" height="532" key="find.popup/0.32.1366.736@0.32.1366.736" timestamp="1709301572536" />
+    <state x="380" y="236" width="611" height="532" key="find.popup/0.32.1366.736@0.32.1366.736" timestamp="1711504786463" />
     <state x="412" y="453" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1709372391842">
       <screen x="0" y="32" width="1366" height="736" />
     </state>

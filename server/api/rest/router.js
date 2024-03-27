@@ -594,4 +594,8 @@ router.post('/acknowledgePayroll', async (ctx,res)=> {
 
 })
 
+router.post('/syncMemberIndex', async (ctx) => {
+    await ctx.model('Member').syncIndexes()
+    await ctx.model('MemberJoinRequest').syncIndexes()
+})
     module.exports = router

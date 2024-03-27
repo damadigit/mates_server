@@ -150,8 +150,8 @@ MemberJoinRequestTC.addResolver({
 
             if(addMember)
             {
-                const member = _.omit(request, ['memberId', '_id', 'joinLetter', 'requestStatus' , 'requestDate', 'approvedOn', 'approvedBy', 'createdBy'])
-
+                const member = _.omit(request.toObject(), ['memberId', '_id', 'joinLetter', 'requestStatus' , 'requestDate', 'approvedOn', 'approvedBy', 'createdBy'])
+               // console.log("m1",{member})
                 member.joinRequests = [...(member.joinRequests||[]),request._id]
               //  console.log( member.joinRequests)
                 if(!request.memberId)
@@ -164,7 +164,9 @@ MemberJoinRequestTC.addResolver({
                      request.memberId = res._id
                 } else
                 {
-                    const res = await mongoose.model('Member').findByIdAndUpdate(request.memberId,member)
+
+                   // console.log({member})
+                    const res = await mongoose.model('Member').findByIdAndUpdate(request.memberId, {...member, status:'Active'})
                 }
 
             }
