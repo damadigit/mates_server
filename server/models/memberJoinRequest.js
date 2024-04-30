@@ -32,6 +32,7 @@ const MemberJoinRequestSchema = new Schema({
     },
     startDate: Date,
     endDate: Date,
+    status: String,
     duration: Number,
     period: String,
     jobTitle: String,

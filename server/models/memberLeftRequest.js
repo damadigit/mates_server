@@ -98,6 +98,7 @@ const MemberLeftRequestSchema = new Schema({
         effectiveDate: Date,
     lastWorkDate: Date,
     noticeDate: Date,
+    status: String,
     leaveCompensation: Number,
     remainingLeaveDays: Number,
     serviceYears: Number,

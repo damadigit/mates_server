@@ -19,13 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="member update request fix">
+    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="fix reemployment">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/graphql/schema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/graphql/schema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/api/rest/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/api/rest/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/memberJoinRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberJoinRequest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/memberUpdateRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberUpdateRequest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/schemas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/schemas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/memberLeftRequest.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/memberLeftRequest.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,14 +266,11 @@
       <workItem from="1710461997411" duration="6118000" />
       <workItem from="1710495751156" duration="599000" />
       <workItem from="1710512137584" duration="3368000" />
-      <workItem from="1711459376979" duration="7898000" />
-    </task>
-    <task id="LOCAL-00019" summary="timesheet feature">
-      <created>1619408962810</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1619408962810</updated>
+      <workItem from="1711459376979" duration="8026000" />
+      <workItem from="1711525333056" duration="79000" />
+      <workItem from="1711946022898" duration="121000" />
+      <workItem from="1711952847646" duration="610000" />
+      <workItem from="1714477122542" duration="263000" />
     </task>
     <task id="LOCAL-00020" summary="timesheet feature">
       <created>1619415196600</created>
@@ -614,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709628714651</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="fix reemployment">
+      <created>1711510336826</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1711510336826</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +646,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="updates idel fix" />
     <MESSAGE value="fix joinrequest" />
     <MESSAGE value="fix member not found (timesheet vs new member)" />
     <MESSAGE value="fix new hire date on another(next) month" />
@@ -670,33 +670,34 @@
     <MESSAGE value="fix endEmployment 5" />
     <MESSAGE value="member update request" />
     <MESSAGE value="member update request fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="member update request fix" />
+    <MESSAGE value="fix reemployment" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix reemployment" />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl" timestamp="1707184076380">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl/0.32.1366.736@0.32.1366.736" timestamp="1707184076380" />
-    <state width="1343" height="169" key="GridCell.Tab.0.bottom" timestamp="1711464365868">
+    <state width="1343" height="169" key="GridCell.Tab.0.bottom" timestamp="1711510449482">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="169" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1711464365868" />
-    <state width="1343" height="169" key="GridCell.Tab.0.center" timestamp="1711464365867">
+    <state width="1343" height="169" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1711510449482" />
+    <state width="1343" height="169" key="GridCell.Tab.0.center" timestamp="1711510449480">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="169" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1711464365867" />
-    <state width="1343" height="169" key="GridCell.Tab.0.left" timestamp="1711464365866">
+    <state width="1343" height="169" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1711510449480" />
+    <state width="1343" height="169" key="GridCell.Tab.0.left" timestamp="1711510449480">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="169" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1711464365866" />
-    <state width="1343" height="169" key="GridCell.Tab.0.right" timestamp="1711464365867">
+    <state width="1343" height="169" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1711510449480" />
+    <state width="1343" height="169" key="GridCell.Tab.0.right" timestamp="1711510449481">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="169" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1711464365867" />
-    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2" timestamp="1709628716383">
+    <state width="1343" height="169" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1711510449481" />
+    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2" timestamp="1711510338960">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1709628716383" />
+    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1711510338960" />
     <state x="380" y="236" width="611" height="532" key="find.popup" timestamp="1711504786463">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
