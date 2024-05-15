@@ -19,9 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="first deploy try">
+    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="node 16">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,6 +37,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="REMOTE">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="origin/main" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1jgPk1ss7JoAxaysYhwYuf2MTr3" />
@@ -71,7 +85,7 @@
       <recent name="D:\Project\Workcon\mates\mates_server" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.start">
     <configuration name="dev" type="js.build_tools.npm" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -82,6 +96,21 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="npm.start" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
   <component name="SvnConfiguration">
@@ -271,14 +300,7 @@
       <workItem from="1711946022898" duration="121000" />
       <workItem from="1711952847646" duration="610000" />
       <workItem from="1714477122542" duration="915000" />
-      <workItem from="1715721728919" duration="2712000" />
-    </task>
-    <task id="LOCAL-00022" summary="week 0 done">
-      <created>1621847713894</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1621847713894</updated>
+      <workItem from="1715721728919" duration="3343000" />
     </task>
     <task id="LOCAL-00023" summary="payday integration 1">
       <created>1622016605368</created>
@@ -616,7 +638,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715724687308</updated>
     </task>
-    <option name="localTasksCounter" value="71" />
+    <task id="LOCAL-00071" summary="node 16">
+      <created>1715735144768</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1715735144768</updated>
+    </task>
+    <option name="localTasksCounter" value="72" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -677,7 +706,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix new hire date on another(next) month" />
     <MESSAGE value="cheat numberofrestdays" />
     <MESSAGE value="ot skip when fixed" />
     <MESSAGE value="change tik server" />
@@ -702,40 +730,45 @@
     <MESSAGE value="fix reemployment" />
     <MESSAGE value="fix reemployment add status" />
     <MESSAGE value="first deploy try" />
-    <option name="LAST_COMMIT_MESSAGE" value="first deploy try" />
+    <MESSAGE value="node 16" />
+    <option name="LAST_COMMIT_MESSAGE" value="node 16" />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl" timestamp="1707184076380">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl/0.32.1366.736@0.32.1366.736" timestamp="1707184076380" />
-    <state width="1343" height="169" key="GridCell.Tab.0.bottom" timestamp="1715721865925">
+    <state width="1343" height="169" key="GridCell.Tab.0.bottom" timestamp="1715735677211">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="169" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1715721865925" />
-    <state width="1343" height="169" key="GridCell.Tab.0.center" timestamp="1715721865924">
+    <state width="1343" height="169" key="GridCell.Tab.0.bottom/0.32.1366.736@0.32.1366.736" timestamp="1715735677211" />
+    <state width="1343" height="169" key="GridCell.Tab.0.center" timestamp="1715735677211">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="169" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1715721865924" />
-    <state width="1343" height="169" key="GridCell.Tab.0.left" timestamp="1715721865923">
+    <state width="1343" height="169" key="GridCell.Tab.0.center/0.32.1366.736@0.32.1366.736" timestamp="1715735677211" />
+    <state width="1343" height="169" key="GridCell.Tab.0.left" timestamp="1715735677210">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="169" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1715721865923" />
-    <state width="1343" height="169" key="GridCell.Tab.0.right" timestamp="1715721865924">
+    <state width="1343" height="169" key="GridCell.Tab.0.left/0.32.1366.736@0.32.1366.736" timestamp="1715735677210" />
+    <state width="1343" height="169" key="GridCell.Tab.0.right" timestamp="1715735677211">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state width="1343" height="169" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1715721865924" />
-    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2" timestamp="1715724751222">
+    <state width="1343" height="169" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1715735677211" />
+    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2" timestamp="1715735261706">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1715724751222" />
+    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1715735261706" />
+    <state x="0" y="69" width="450" height="699" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1715735758115">
+      <screen x="0" y="32" width="1366" height="736" />
+    </state>
+    <state x="0" y="69" width="450" height="699" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.32.1366.736@0.32.1366.736" timestamp="1715735758115" />
     <state x="380" y="236" width="611" height="532" key="find.popup" timestamp="1711504786463">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="380" y="236" width="611" height="532" key="find.popup/0.32.1366.736@0.32.1366.736" timestamp="1711504786463" />
-    <state x="412" y="527" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1715724714415">
+    <state x="412" y="564" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1715735271823">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="412" y="527" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog/0.32.1366.736@0.32.1366.736" timestamp="1715724714415" />
+    <state x="412" y="564" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog/0.32.1366.736@0.32.1366.736" timestamp="1715735271823" />
   </component>
 </project>

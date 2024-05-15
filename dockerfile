@@ -16,5 +16,5 @@ RUN yarn install
 # Bundle app source
 COPY . .
 
-EXPOSE 5000
-CMD [ "node", "index.js" ]
+EXPOSE 40018
+CMD [ "yarn", "start" ]
