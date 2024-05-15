@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="fix reemployment add status">
-      <change afterPath="$PROJECT_DIR$/.gitlab-ci.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
+    <list default="true" id="28176709-6645-44e0-af9c-f6c13b21816c" name="Default Changelist" comment="first deploy try">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,14 +271,7 @@
       <workItem from="1711946022898" duration="121000" />
       <workItem from="1711952847646" duration="610000" />
       <workItem from="1714477122542" duration="915000" />
-      <workItem from="1715721728919" duration="1961000" />
-    </task>
-    <task id="LOCAL-00021" summary="timesheet report">
-      <created>1620108529912</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1620108529912</updated>
+      <workItem from="1715721728919" duration="2712000" />
     </task>
     <task id="LOCAL-00022" summary="week 0 done">
       <created>1621847713894</created>
@@ -617,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714477437165</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="first deploy try">
+      <created>1715724687307</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1715724687308</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -678,7 +677,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="fix member not found (timesheet vs new member)" />
     <MESSAGE value="fix new hire date on another(next) month" />
     <MESSAGE value="cheat numberofrestdays" />
     <MESSAGE value="ot skip when fixed" />
@@ -703,7 +701,8 @@
     <MESSAGE value="member update request fix" />
     <MESSAGE value="fix reemployment" />
     <MESSAGE value="fix reemployment add status" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix reemployment add status" />
+    <MESSAGE value="first deploy try" />
+    <option name="LAST_COMMIT_MESSAGE" value="first deploy try" />
   </component>
   <component name="WindowStateProjectService">
     <state x="466" y="250" width="424" height="454" key="FileChooserDialogImpl" timestamp="1707184076380">
@@ -726,17 +725,17 @@
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state width="1343" height="169" key="GridCell.Tab.0.right/0.32.1366.736@0.32.1366.736" timestamp="1715721865924" />
-    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2" timestamp="1714477438735">
+    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2" timestamp="1715724751222">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1714477438735" />
+    <state x="278" y="241" width="800" height="527" key="Vcs.Push.Dialog.v2/0.32.1366.736@0.32.1366.736" timestamp="1715724751222" />
     <state x="380" y="236" width="611" height="532" key="find.popup" timestamp="1711504786463">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
     <state x="380" y="236" width="611" height="532" key="find.popup/0.32.1366.736@0.32.1366.736" timestamp="1711504786463" />
-    <state x="412" y="490" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1715722473835">
+    <state x="412" y="527" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog" timestamp="1715724714415">
       <screen x="0" y="32" width="1366" height="736" />
     </state>
-    <state x="412" y="490" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog/0.32.1366.736@0.32.1366.736" timestamp="1715722473835" />
+    <state x="412" y="527" width="532" height="196" key="git4idea.remote.GitConfigureRemotesDialog/0.32.1366.736@0.32.1366.736" timestamp="1715724714415" />
   </component>
 </project>
